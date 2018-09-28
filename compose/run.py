@@ -1,0 +1,58 @@
+#! /usr/bin/env python
+
+import subprocess
+from sys import argv
+from pathlib import Path
+
+help_text = '''
+Roda comandos docker-compose usando as configurações de múltiplos repositórios.
+O primeiro parâmetro deve ser 'dev' ou 'prod', os seguintes serão passados
+diretamente para o docker-compose. Ex.:
+./run.py dev up
+'''
+
+this_folder = Path(__file__).parent
+env_file = this_folder / '.env'
+
+configs = {
+    'dev': [
+        '${FRONTEND_PATH}/docker-compose.yml',
+        '${BACKEND_PATH}/docker-compose.yml',
+        '${BACKEND_PATH}/docker-compose.override.yml'
+    ],
+    'prod': [
+        '${FRONTEND_PATH}/docker_extra/prod.yml',
+        '${BACKEND_PATH}/docker-compose.yml',
+        '${BACKEND_PATH}/deploy/prod.yml'
+    ]
+}
+
+# Verifica argumentos e sai se estiverem incorretos
+if len(argv) < 2 or argv[1] not in configs.keys():
+    print(help_text)
+    exit()
+
+# Prepara variáveis de ambiente
+with open(env_file, 'r') as f:
+    envs = ''.join([f'export {l}' for l in f.readlines() if l[0] is not '#'])
+
+# Prepara parâmetros com arquivos compose usados
+files = ''.join([
+    f' -f {this_folder / f}'
+    for f in ['docker-compose.yml'] + configs[argv[1]]
+])
+
+# Parâmetros passados para o docker-compose
+compose_args = ' '.join(argv[2:])
+
+# Prepara comando completo
+cmd = f'{envs}\ndocker-compose {files} {compose_args}'
+
+# Inicia o comando
+process = subprocess.Popen(cmd, shell=True, executable='/bin/bash')
+# Aguarda comando terminar permitindo enviar múltiplos Ctrl+c a ele
+while process.poll() is None:
+    try:
+        process.wait()
+    except KeyboardInterrupt:
+        pass
