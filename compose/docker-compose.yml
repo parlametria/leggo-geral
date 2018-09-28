@@ -1,4 +1,4 @@
 # This file is needed to avoid this problem:
 # https://github.com/docker/compose/issues/3874
 
-version: '3'
+version: '3.5'
