@@ -14,11 +14,11 @@ Dependendo da posição desses outros repositórios pode ser necessário ajustar
 
 Desenvolvimento:
 ```
-./run.sh dev up
+./run dev up
 ```
 Produção:
 ```
-./run.sh prod up
+./run prod up
 ```
 
 ### Sem helper
