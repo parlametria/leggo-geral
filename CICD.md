@@ -19,6 +19,8 @@ Atualmente estamos usando Gitlab e [Portainer](https://github.com/portainer/port
 Como os runners compartilhados do Gitlab são lentos, instalamos um no nosso próprio servidor.
 Assim o Gitlab pode passar as tarefas de CI/CD para ele.
 
+Estamos usando o [docker-in-docker executor](https://docs.gitlab.com/ce/ci/docker/using_docker_build.html#use-docker-in-docker-executor), pois o shell executor, apesar de ser mais rápido (o CI acessava as imagens direto da cache do Docker do servidor), não isolava o ambiente de CI/CD (CI/CD rodava direto no servidor, dependências tinham que ser instaladas diretamente nele e arquivos produzidos pelo CI podiam acabar ficando como usuário root e gerando problemas na hora de limpar a build).
+
 O fato do Runner estar rodando na nossa núvem permite que ele acesse o Portainer (também na nossa núvem) sem que esse último precise ser exposto para a internet.
 
 ### Portainer
