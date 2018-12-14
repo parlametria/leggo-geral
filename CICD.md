@@ -19,24 +19,16 @@ O runner do nosso projeto está no nosso próprio servidor, o que permite que se
 
 Toda vez que um commit é feito no projeto, o *gitlab runner* faz um build da imagem docker de produção e a testa, se o commit tiver sido no master, o runner irá também executar o passo de deploy. Para fazer o deploy, o *gitlab runner* ativa o webhook do serviço(stack) no Portainer, que é o orquestrador do nosso serviço, ele baixa a nova imagem de produção e assim faz o deploy dela.
 
+## Gitlab Runner
 
-## Passos
+Gitlab Runner é usado para rodar os *Jobs*, sendo usado em conjunto com o *Gitlab CI*, podendo ser rodado dentro de containers ou no nosso próprio servidor.
 
-A seguir são listados os passos usados para configurar o sistema de CI/CD usado.
-Eles podem ser úteis para reinstalar todo o sistema ou para adicionar um novo repositório à plataforma.
+Para configurar, segue os passos:
 
-Os passos estão prescedidos de um identificador do local onde ele deve ser executado, facilitando visualizar quais passos precisam ser refeitos caso um dos módulos precise ser reinstalado ou configurado.
-
-Identificadores:
-
-- servidor: servidor usado para instalar o runner e hospedar a plataforma (incluindo o portainer); o runner pode estar em uma máquina diferente da plataforma
-- gitlab/projeto: página do projeto no Gitlab
-- local: máquina local da pessoa fazendo a configuração
-
-### Gitlab Runner
-
-- servidor: [instalar](https://docs.gitlab.com/runner/install/index.html) e [registrar](https://docs.gitlab.com/runner/register/index.html)
-- gitlab/projeto: desativar runners compartilhados (os compartilhados são mais lentos e podem estar configurados diferente do nosso runner, fazendo o CI/CD se comportar de maneira não consistente)
+1. [Instalar](https://docs.gitlab.com/runner/install/index.html) no nosso servidor
+2. [Registrar](https://docs.gitlab.com/runner/register/index.html) no gitlab
+3. Desativar runners compartilhados, pois são mais lentos e são configurados de maneira diferente do nosos Runner.
+4. Depois é só definir os Jobs no `.gitlab-ci.yml` 
 
 ## Portainer
 
@@ -49,7 +41,6 @@ Nesse modo há 3 conceitos importantes:
 - **Stacks**: definido por um `docker-compose.yml`, agrega um conjunto de services.
 - **Service**: um item service descrito no `docker-compose.yml`, é uma container mais suas configurações, com volumes, nome da imagem, do container etc.
 - **Container**: o container em si, que roda cada aplicação.
-
 
 ### Servidor
 ```sh
