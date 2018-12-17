@@ -27,7 +27,7 @@ Para configurar, segue os passos:
 
 1. [Instalar](https://docs.gitlab.com/runner/install/index.html) no nosso servidor
 2. [Registrar](https://docs.gitlab.com/runner/register/index.html) no gitlab
-3. Desativar runners compartilhados, pois são mais lentos e são configurados de maneira diferente do nosos Runner.
+3. Desativar runners compartilhados, pois são mais lentos e são configurados de maneira diferente do nosso Runner.
 4. Depois é só definir os Jobs no `.gitlab-ci.yml` 
 
 ## Portainer
