@@ -23,7 +23,7 @@ Toda vez que um commit é feito no projeto, o *gitlab runner* faz um build da im
 
 Gitlab Runner é usado para rodar os *Jobs*, sendo usado em conjunto com o *Gitlab CI*, podendo ser rodado dentro de containers ou no nosso próprio servidor.
 
-Para configurar, segue os passos:
+Para configurar:
 
 1. [Instalar](https://docs.gitlab.com/runner/install/index.html) no nosso servidor
 2. [Registrar](https://docs.gitlab.com/runner/register/index.html) no gitlab
