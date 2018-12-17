@@ -32,6 +32,15 @@ Produção:
 docker-compose -f docker-compose.yml -f ../agora-digital-web/deploy/prod.yml -f ../agora-digital-backend/docker-compose.yml -f ../agora-digital-backend/deploy/prod.yml up
 ```
 
+## Portainer
+Para ajudar a gerenciar os containers rodados, você pode usar o Portainer e sua interface Web para gerenciar tudo do docker na sua máquina.
+
+Para usá-lo:
+```sh
+docker run -d -p 9000:9000 --name portainer --restart always -v /var/run/docker.sock:/var/run/docker.sock portainer/portainer
+```
+Após isso acesse http://localhost:9000 
+
 ## Limitações
 
 **Build a partir desse compose não foi testado. É possível que não leve em consideração os `.dockerignore`, logo não seria recomendado.**
