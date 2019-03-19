@@ -1,4 +1,4 @@
-# Ágora Digital - Gerais
+# Leggo - Documentação geral
 
 Repositórios para documentações e ferramentas para uso geral do projeto.
 
