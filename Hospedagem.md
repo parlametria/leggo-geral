@@ -15,6 +15,7 @@ Até daria para hospedar o site em produção simplesmente fazendo isso, mas, co
 ### 1 - Docker
 
 Para automatizar o processo de instalação das dependências e ter um ambiente padronizado, botamos o código em um Docker.
+Mas isso certamente não resolve os problemas anteriores.
 
 ### 2 - Melhorando a execução do código
 
@@ -55,7 +56,7 @@ Na maioria dos casos você não vai querer assustar as pessoas, então usará um
 A mais usada atualmente, por ser gratuita, sem fins lucrativos e com certificação automatizável, é a Let's Encrypt.
 Existem vários clientes que implementam o protocolo deles permitindo automatizar a emissão dos certificados.
 Isso é importante porque os certificados precisam ser renovados a cada 3 meses.
-O cliente oficial é esse: https://certbot.eff.org/
+O cliente oficial é o [certbot](https://certbot.eff.org).
 Dependendo da sua configuração, com um comando você consegue que ele emita o certificado e configure o seu servidor HTTP para usá-lo.
 Um comando precisa ser adicionado ao cron para renovar o certificado periodicamente e reiniciar o servidor de HTTP para usar o novo certificado.
 
@@ -83,20 +84,55 @@ Tendo em vista que estamos usando docker, poderíamos usar o [nginx-proxy](https
 E ainda o [docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion), que cuida de gerar os certificados para cada domínio usando o Let's Encrypt, configurar o HTTPS e renovar quando necessário.
 
 No nosso caso acabamos optando por experimentar o [Traefik](https://traefik.io).
-Ele é um servidor de HTTP, como o Nginx, só que já vem embutido com as funcionalidades descritas acima.
-Logo, desde que suas aplicações estejam rodando via Docker, o Traefik é tudo que você precisa para elas serem servidas em seus respectivos domínios e via HTTPS.
+
+### Traefik
+
+O Traefik foi feito para servir de meio de campo entre a internet e os múltiplos 
+serviços/containers rodando no servidor.
+Ele é um servidor de HTTP, como o Nginx, só que já vem embutido com as funcionalidades 
+descritas acima (proxy e HTTPS automático).
+Logo, desde que suas aplicações estejam rodando via Docker, o Traefik é tudo que você 
+precisa para elas serem servidas em seus respectivos domínios e via HTTPS.
 O Traefik também é rodado via Docker.
 
-Para dizer qual domínio deve servir qual container, se usam "labels" no próprio docker-compose.
-Por exemplo, `traefik.frontend.rule=Host:api.exemplo.com`, faz com que o que chegar ao domínio `api.exemplo.com` seja mandado para o container em que esse label foi definido.
+Essa [página](https://docs.traefik.io/basics) na documentação possui dois diagramas
+que ajudam bastante a entender o funcionamento dele.
+Que possui 3 elementos básicos:
+
+- entrypoints: que seriam as portas
+- frontends: que seriam os domínios
+- backends: os containers que vão processar as requisições
+
+Para dizer qual domínio deve servir qual container, se usam "labels" na descrição
+dos serviços no próprio docker-compose/stack.
+Por exemplo, `traefik.frontend.rule=Host:api.exemplo.com`, faz com que o que chegar ao 
+domínio `api.exemplo.com` seja mandado para o container em que esse label foi definido.
+
+A configuração dele é feita pelo arquivo `traefik.toml` e o certificado fica, geralmente 
+no `acme.json`.
 
 ## Arquitetura Atual
 
+O digrama abaixo representa a arquitetura atual, com todos os Containers do Docker usados.
+O Github deve estar mostrando como um PNG, mas quando clicado deve abrir um SVG,
+onde os links (em azul) estarão clicáveis.
+
 ![diagrama com arquitetura](http://www.plantuml.com/plantuml/proxy?fmt=svg&src=https://raw.githubusercontent.com/analytics-ufcg/leggo-geral/master/diagrama.puml)
 
-Portainer só está gerenciando os fronts e o back, não o leggor
-leggor roda via script
-nem todos os volumes estão representados
+(*[código fonte do diagrama](https://github.com/analytics-ufcg/leggo-geral/blob/master/diagrama.puml)*)
 
-## Traefik
+Cada quadradinho amarelo dentro do quadrado maior `Docker` é um Container do Docker.
+A maioria roda permanentemente é gerenciada pelo Portainer.
+A exceção é o `leggor` que é ativado pelo `cron`, atualiza os dados, e depois volta 
+a ficar inativo.
 
+Os retângulos avermelhados, Stacks, são os Stacks do Docker, 
+cada um descrito por um `docker-compose.yml` e que pode conter 
+múltiplos Services do Docker.
+Cada Service usa um Container.
+
+Os "cilindros" cinzas são volumes Docker.
+O `statics` é usado para o `proxy` em Nginx conseguir servir os arquivos estáticos 
+diretamente, uma vez que ele é muito mais eficiente para isso do que o uWSGI.
+O `nginx config` para substituir as configurações padrões do Nginx na imagem do Nginx 
+sem precisar gerar uma nova imagem.

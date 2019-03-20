@@ -1,43 +1,69 @@
-'Diagrama descrito na linguagem PlantUML
+/'
+Esse diagrama está descrito na linguagem PlantUML
+http://plantuml.com
+
+A imagem correspondente pode ser gerada usando o próprio servidor oficial
+do PlantUML através de um link como esse:
+http://www.plantuml.com/plantuml/proxy?fmt=svg&src=https://raw.githubusercontent.com/analytics-ufcg/leggo-geral/master/diagrama.puml
+
+Caso adicione esse link em um arquivo markdown do Github, e depois altere esse
+código fonte, pode ser que demore para atualizar por conta da cache que o Github
+usa para imagens. Uma forma de tentar forçar a atualização da imagem é colocar
+algum parâmetro irrelevante na url.
+https://stackoverflow.com/questions/32203610/how-to-integrate-uml-diagrams-into-gitlab-or-github/32771815#32771815
+'/
 
 @startuml
 
 skinparam componentStyle uml2
 
+skinparam database {
+  BackgroundColor gainsboro
+}
+
 package "VM" #antiquewhite {
   (**cron**) as cron
-  package "Docker" #white {
-    package "Traefik Stack" {
+  package "Docker" as docker_front #white {
+    package "Traefik Stack" #mistyrose {
       [**traefik**] as traefik
     }
     [**portainer**] as portainer
     [**leggor**] as leggor
-    package "Frontend Prod Stack" as frontprodser {
+    package "Frontend Prod Stack" as frontprodser #mistyrose {
       [**frontend prod**\nnginx] as frontend_prod
     }
-    package "Frontend Dev Stack" as frontdevser {
+    package "Frontend Dev Stack" as frontdevser #mistyrose {
       [**frontend dev**\nnginx] as frontend_dev
     }
-    package "Backend API Stack" as backser {
+    package "Backend API Stack" as backser #mistyrose {
       [**proxy**\nnginx] as backproxy
       [**api**\npython] as api
       [**db**\npostgres] as db
+    database "**statics**" as statics_vol
+    database "**socket**\nuwsgi" as socket_vol
+    database "**nginx config**" as nginx_config_vol
+    database "**db**" as db_vol
     }
-    database "**Volume Docker**\ncom CSVs" as vol {
-    }
+    database "**CSVs**" as csvs
   }
 }
 "**navegador web**" as navegador
 
 cron --> leggor : Roda [[https://github.com/analytics-ufcg/leggo-geral/blob/master/update.sh update.sh]], que atualiza o código do leggor,\nrecria sua imagem docker e a executa, atualizando os dados.
-leggor -> vol
-vol --> api
-api <--> backproxy
+leggor -> csvs
+csvs --> api
 db <-> api
-backproxy <-> traefik
-frontend_dev <--> traefik
-frontend_prod <--> traefik
-traefik <--- navegador : "**porta 80 (HTTP)**\nredirecionada\npelo traefik"
-traefik <---> navegador : "**porta 443 (HTTPS)**"
+db_vol <-> db
+backproxy -> traefik
+frontend_dev --> traefik
+frontend_prod --> traefik
+traefik ~~~> navegador : "**porta 80 (HTTP)**\nredirecionada\npelo traefik\npara a 443"
+traefik ---> navegador : "**porta 443 (HTTPS)**"
+api -- statics_vol
+statics_vol --> backproxy
+api ->socket_vol
+socket_vol ---> backproxy
+nginx_config_vol -u- api
+nginx_config_vol --> backproxy
 
 @enduml
