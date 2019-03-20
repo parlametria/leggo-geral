@@ -89,3 +89,14 @@ O Traefik também é rodado via Docker.
 
 Para dizer qual domínio deve servir qual container, se usam "labels" no próprio docker-compose.
 Por exemplo, `traefik.frontend.rule=Host:api.exemplo.com`, faz com que o que chegar ao domínio `api.exemplo.com` seja mandado para o container em que esse label foi definido.
+
+## Arquitetura Atual
+
+![diagrama com arquitetura](https://plantuml-server.kkeisuke.app/svg/UDfrLCjksp0GlFCh5keb4MohQ7CeWY98sw1e3mMCsl35COgLk9O9IwHAKexTmb-LJ-YFTId9ift7GH2vixCpNAvqwpnQNvU546wjT8KMIyXCMHbDsa_yhY1Wz9qG5MPhp0cYsOy8tg3swdTD3olb2VuAW8iupgpHSNm9w20iETXpxaos9iky8-44dLgafLh3n7Cawb20UHpx5edZHQZQxHfuBxgKobYFIfFjalhz8Q6WF3S7jDsSotzbivwqXB4ryc22SvSXNd7CaJqrjJpa1ooExxNEbTukUWf3lm9qulEvrXrjdaf9shocnD0hGeoyfFEP5u7uQVpzH2RbnHC9DhhTdTSEMKtuc8ML2ZdLpg-CRf8uSeHbsg36-ToIQt2PdjYIw355nxxYU6QAkYHe9oBGUDhWosJc6eSRKtJk0dClze8f6ZUKepGM7eYLciG-9aGODXWERxhBXMluQIJ2VBxoldBNIP8hlwhJ4GibgB7OUPMvORtCygHX37EoM2HfOTAaHEV99dN5bcdaLj2l5ei1yCG3-XeBzGV1GFRlKQhSW3ITzE1UMygiGd0rWYhvAaf6mqc1cK1RocgFWxw8PghXPl51t4Xq_laat0OHMX5E5JhD3tmCc-FTo9GZBTe7cyZXApaTaPRy30bJUWvrxn0S7dlCBOswBmq-l8MBRzFf-3BSdIMf-CJAQ9J84q25EPIApchTl5piwkfzMst2vI8XRjaL_sx-0sOqUue0.svg)
+
+Portainer só está gerenciando os fronts e o back, não o leggor
+leggor roda via script
+nem todos os volumes estão representados
+
+## Traefik
+
