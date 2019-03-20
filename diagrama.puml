@@ -1,0 +1,43 @@
+'Diagrama descrito na linguagem PlantUML
+
+@startuml
+
+skinparam componentStyle uml2
+
+package "VM" #antiquewhite {
+  (**cron**) as cron
+  package "Docker" #white {
+    package "Traefik Stack" {
+      [**traefik**] as traefik
+    }
+    [**portainer**] as portainer
+    [**leggor**] as leggor
+    package "Frontend Prod Stack" as frontprodser {
+      [**frontend prod**\nnginx] as frontend_prod
+    }
+    package "Frontend Dev Stack" as frontdevser {
+      [**frontend dev**\nnginx] as frontend_dev
+    }
+    package "Backend API Stack" as backser {
+      [**proxy**\nnginx] as backproxy
+      [**api**\npython] as api
+      [**db**\npostgres] as db
+    }
+    database "**Volume Docker**\ncom CSVs" as vol {
+    }
+  }
+}
+"**navegador web**" as navegador
+
+cron --> leggor : Roda [[https://github.com/analytics-ufcg/leggo-geral/blob/master/update.sh update.sh]], que atualiza o código do leggor,\nrecria sua imagem docker e a executa, atualizando os dados.
+leggor -> vol
+vol --> api
+api <--> backproxy
+db <-> api
+backproxy <-> traefik
+frontend_dev <--> traefik
+frontend_prod <--> traefik
+traefik <--- navegador : "**porta 80 (HTTP)**\nredirecionada\npelo traefik"
+traefik <---> navegador : "**porta 443 (HTTPS)**"
+
+@enduml
