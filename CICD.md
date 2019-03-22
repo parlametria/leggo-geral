@@ -68,3 +68,5 @@ Atualizações no compose (stack) no Portainer precisam ser feitas manualmente (
 O LeggoR não está usando esse processo descrito acima.
 Ele é testado pelo Gitlab, mas não é feita nem a geração de uma imagem Docker nova nem o deploy dela.
 Esses dois passos são feitos pelo [script de atualização](https://github.com/analytics-ufcg/agora-digital-geral/blob/master/update.sh) dos dados.
+
+Já o RCongresso está com um fluxo mais diferente ainda, nem usa o Gitlab e é testado pelo Travis.
