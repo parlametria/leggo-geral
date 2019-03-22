@@ -21,6 +21,10 @@ skinparam database {
   BackgroundColor gainsboro
 }
 
+skinparam hyperlink {
+  Color maroon
+}
+
 package "VM" #antiquewhite {
   (**cron**) as cron
   package "Docker" as docker_front #white {
