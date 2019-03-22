@@ -1,0 +1,20 @@
+# Compose used for production
+
+version: '3.5'
+
+services:
+
+  frontend_development:
+    image: registry.gitlab.com/analytics-ufcg/agora-digital-frontend:release-dev
+    networks:
+      - traefik_web
+    labels:
+      - "traefik.backend=leggo_frontend_dev"
+      - "traefik.docker.network=traefik_web"
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:front.dev.leggo.org.br"
+      - "traefik.port=80"
+
+networks:
+  traefik_web:
+    external: true

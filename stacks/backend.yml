@@ -1,0 +1,60 @@
+version: '3.5'
+
+services:    
+
+  db:
+    image: postgres:10.5-alpine
+    container_name: dbapi
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      
+  httpapi:
+    image: nginx:1.15-alpine
+    container_name: httpapi
+    restart: always
+    volumes:
+      - app_static:/app_static
+      - app_sockets:/sockets
+      - type: volume
+        source: app_deploy_config
+        target: /etc/nginx/conf.d
+        volume:
+          nocopy: true
+    depends_on:
+      - api
+    networks:
+      - traefik_web
+      - default
+    labels:
+      - "traefik.backend=leggo_backend_nginx"
+      - "traefik.docker.network=traefik_web"
+      - "traefik.enable=true"
+      - "traefik.frontend.rule=Host:api.leggo.org.br"
+      - "traefik.port=80"
+
+  api:
+    image: registry.gitlab.com/analytics-ufcg/agora-digital-backend:gitlab-ci
+    container_name: agorapi
+    environment:
+      - DEBUG=False
+      - SECRET_KEY=${SECRET_KEY:-segredo}
+    restart: always
+    volumes:
+      - app_sockets:/sockets
+      - app_static:/agora-digital-backend/static
+      - app_deploy_config:/nginx_config
+      - proposicoes_data:/agora-digital-backend/data
+    depends_on:
+      - db
+      
+
+volumes:
+  postgres_data:
+  app_sockets:
+  app_static:
+  app_deploy_config:
+  proposicoes_data:
+
+networks:
+  traefik_web:
+    external: true
