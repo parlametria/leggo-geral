@@ -83,12 +83,12 @@ Tendo em vista que estamos usando docker, poderíamos usar o [nginx-proxy](https
 
 E ainda o [docker-letsencrypt-nginx-proxy-companion](https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion), que cuida de gerar os certificados para cada domínio usando o Let's Encrypt, configurar o HTTPS e renovar quando necessário.
 
-No nosso caso acabamos optando por experimentar o [Traefik](https://traefik.io).
+No nosso caso acabamos optando por experimentar o Traefik.
 
 ### Traefik
 
-O Traefik foi feito para servir de meio de campo entre a internet e os múltiplos 
-serviços/containers rodando no servidor.
+O [Traefik](https://traefik.io) foi feito para servir de meio de campo entre a internet e os múltiplos 
+services/containers rodando no servidor.
 Ele é um servidor de HTTP, como o Nginx, só que já vem embutido com as funcionalidades 
 descritas acima (proxy e HTTPS automático).
 Logo, desde que suas aplicações estejam rodando via Docker, o Traefik é tudo que você 
@@ -113,7 +113,7 @@ no `acme.json`.
 
 ## Arquitetura Atual
 
-O digrama abaixo representa a arquitetura atual, com todos os Containers do Docker usados.
+O digrama abaixo representa a arquitetura atual, com todos os containers do Docker usados.
 O Github deve estar mostrando como um PNG, mas quando clicado deve abrir um SVG,
 onde os links (em vermelho escuro e sublinhados) estarão clicáveis.
 
@@ -121,15 +121,15 @@ onde os links (em vermelho escuro e sublinhados) estarão clicáveis.
 
 (*[código fonte do diagrama](https://github.com/analytics-ufcg/leggo-geral/blob/master/diagrama.puml)*)
 
-Cada quadradinho amarelo dentro do quadrado maior `Docker` é um Container do Docker.
-A maioria roda permanentemente é gerenciada pelo Portainer.
+Cada quadradinho amarelo dentro do quadrado maior `Docker` é um container do Docker.
+A maioria roda permanentemente e é gerenciada pelo Portainer.
 A exceção é o `leggor` que é ativado pelo `cron`, atualiza os dados, e depois volta 
 a ficar inativo.
 
 Os retângulos avermelhados, Stacks, são os Stacks do Docker, 
 cada um descrito por um `docker-compose.yml` e que pode conter 
-múltiplos Services do Docker.
-Cada Service usa um Container.
+múltiplos services do Docker.
+Cada service usa um container.
 
 Os "cilindros" cinzas são volumes Docker.
 O `statics` é usado para o `proxy` em Nginx conseguir servir os arquivos estáticos 
