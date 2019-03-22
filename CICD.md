@@ -65,3 +65,6 @@ Em cada stack terá uma **WEBHOOK**, é essa que usaremos na configuração do *
 
 Atualizações no compose (stack) no Portainer precisam ser feitas manualmente (talvez seja possível usar a API dele para automatizar isso?).
 
+O LeggoR não está usando esse processo descrito acima.
+Ele é testado pelo Gitlab, mas não é feita nem a geração de uma imagem Docker nova nem o deploy dela.
+Esses dois passos são feitos pelo [script de atualização](https://github.com/analytics-ufcg/agora-digital-geral/blob/master/update.sh) dos dados.
