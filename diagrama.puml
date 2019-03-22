@@ -24,18 +24,18 @@ skinparam database {
 package "VM" #antiquewhite {
   (**cron**) as cron
   package "Docker" as docker_front #white {
-    package "Traefik Stack" #mistyrose {
+    package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/traefik.yml Traefik Stack]]" #mistyrose {
       [**traefik**] as traefik
     }
     [**portainer**] as portainer
-    [**leggor**] as leggor
-    package "Frontend Prod Stack" as frontprodser #mistyrose {
+    component "[[https://github.com/analytics-ufcg/leggoR leggor]]" as leggor
+    package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/frontend-production.yml Frontend Prod Stack]]" as frontprodser #mistyrose {
       [**frontend prod**\nnginx] as frontend_prod
     }
-    package "Frontend Dev Stack" as frontdevser #mistyrose {
+    package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/frontend-development.yml Frontend Dev Stack]]" as frontdevser #mistyrose {
       [**frontend dev**\nnginx] as frontend_dev
     }
-    package "Backend API Stack" as backser #mistyrose {
+    package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/backend.yml Backend API Stack]]" as backser #mistyrose {
       [**proxy**\nnginx] as backproxy
       [**api**\npython] as api
       [**db**\npostgres] as db
