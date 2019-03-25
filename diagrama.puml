@@ -42,9 +42,9 @@ package "VM agorafrontend" #antiquewhite {
   (**cron**) as cron
   package "Docker" as docker_front #white {
     package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/traefik.yml Traefik Stack]]" #mistyrose {
-      [**traefik**] as traefik
+      compontent "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/CICD.md#traefik traefik]]" as traefik
     }
-    [**portainer**] as portainer
+    component "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/CICD.md#portainer portainer]]" as portainer
     component "[[https://github.com/analytics-ufcg/leggoR leggor]]" as leggor
     package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/frontend-production.yml Frontend Prod Stack]]" as frontprodstack #mistyrose {
       [**frontend prod**\nnginx] as frontend_prod
@@ -90,7 +90,7 @@ Repositórios, CI/CD
 
 package "VM agorabackend" #antiquewhite {
   package "Docker" as docker_back #white {
-    [gitlab runner] as glrunner
+    component "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/CICD.md#gitlab-runner gitlab runner]]" as glrunner
   }
 }
 
