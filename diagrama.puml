@@ -42,7 +42,7 @@ package "VM agorafrontend" #antiquewhite {
   (**cron**) as cron
   package "Docker" as docker_front #white {
     package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/traefik.yml Traefik Stack]]" #mistyrose {
-      compontent "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/CICD.md#traefik traefik]]" as traefik
+      component "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/CICD.md#traefik traefik]]" as traefik
     }
     component "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/CICD.md#portainer portainer]]" as portainer
     component "[[https://github.com/analytics-ufcg/leggoR leggor]]" as leggor
