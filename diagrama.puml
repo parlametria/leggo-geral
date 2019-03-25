@@ -24,8 +24,9 @@ skinparam database {
 }
 
 skinparam hyperlink {
-  Color maroon
+  Color #505
 }
+skinparam ArrowColor black
 
 !definelong repository(name, id, link, content = "")
   rectangle "[[link name]]" as id #dfd {
