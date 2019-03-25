@@ -24,7 +24,7 @@ skinparam database {
 }
 
 skinparam hyperlink {
-  Color #505
+  Color blue
 }
 skinparam ArrowColor black
 
