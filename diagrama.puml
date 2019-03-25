@@ -42,9 +42,9 @@ package "VM agorafrontend" #antiquewhite {
   (**cron**) as cron
   package "Docker" as docker_front #white {
     package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/traefik.yml Traefik Stack]]" #mistyrose {
-      component "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/CICD.md#traefik traefik]]" as traefik
+      component "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/arquitetura.md#traefik traefik]]" as traefik
     }
-    component "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/CICD.md#portainer portainer]]" as portainer
+    component "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/arquitetura.md#portainer portainer]]" as portainer
     component "[[https://github.com/analytics-ufcg/leggoR leggor]]" as leggor
     package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/frontend-production.yml Frontend Prod Stack]]" as frontprodstack #mistyrose {
       [**frontend prod**\nnginx] as frontend_prod
@@ -90,7 +90,7 @@ Repositórios, CI/CD
 
 package "VM agorabackend" #antiquewhite {
   package "Docker" as docker_back #white {
-    component "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/CICD.md#gitlab-runner gitlab runner]]" as glrunner
+    component "[[https://github.com/analytics-ufcg/leggo-geral/blob/master/arquitetura.md#gitlab-runner gitlab runner]]" as glrunner
   }
 }
 
@@ -115,10 +115,10 @@ commits ---> rcongresso
 package "Gitlab" as gl #antiquewhite {
   package "[[https://gitlab.com/analytics-ufcg analytics-ufcg]]" as glanalytics #fafffa {
     rectangle "[[https://gitlab.com/analytics-ufcg/agora-digital-frontend agora-digital-frontend]]" as glfront #dfd {
-      database "[[https://gitlab.com/analytics-ufcg/agora-digital-frontend/container_registry front registry]]" as frontregistry
+      database "[[https://gitlab.com/analytics-ufcg/agora-digital-frontend/container_registry front registry]]" as frontregistry #afa
     }
     rectangle "[[https://gitlab.com/analytics-ufcg/agora-digital-backend agora-digital-backend]]" as glback #dfd {
-      database "[[https://gitlab.com/analytics-ufcg/agora-digital-backend/container_registry back registry]]" as backregistry
+      database "[[https://gitlab.com/analytics-ufcg/agora-digital-backend/container_registry back registry]]" as backregistry #afa
     }
     repository("agora-digital", glr, "https://gitlab.com/analytics-ufcg/agora-digital")
     component "gitlab shared runners" as glsharunner

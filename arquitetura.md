@@ -1,8 +1,31 @@
-# Continuos Integration / Continuos Deploy (CI/CD)
+# Arquitetura
+
+O digrama abaixo representa a arquitetura atual desde que um commit é feito em um repositório até o seu deploy.
+O Github deve estar mostrando como um PNG, mas quando clicado deve abrir um SVG, onde os links (em azul sublinhado) estarão clicáveis.
+
+![diagrama com arquitetura](http://www.plantuml.com/plantuml/proxy?fmt=svg&src=https://raw.githubusercontent.com/analytics-ufcg/leggo-geral/master/diagrama.puml?cachebuster=9)
+
+(*[código fonte do diagrama](https://github.com/analytics-ufcg/leggo-geral/blob/master/diagrama.puml)*)
+
+Os retângulos verde claro são repositórios.
+E os cilindros verdes, dentro de um deles, é um registro para armazenamento de imagens Docker.
+
+Cada quadradinho amarelo dentro de um quadrado branco maior com título `Docker` é um container do Docker.
+A maioria roda permanentemente e é gerenciada pelo Portainer.
+A exceção é o `leggor` que é ativado pelo `cron`, atualiza os dados, e depois volta a ficar inativo.
+
+Os retângulos avermelhados, Stacks, são os Stacks do Docker, cada um descrito por um `docker-compose.yml` e que pode conter múltiplos services do Docker.
+Cada service usa um container.
+
+Os cilindros cinzas são volumes Docker.
+O `statics` é usado para o `proxy` em Nginx conseguir servir os arquivos estáticos diretamente, uma vez que ele é muito mais eficiente para isso do que o uWSGI.
+O `nginx config` para substituir as configurações padrões do Nginx na imagem do Nginx sem precisar gerar uma nova imagem.
+
+## Continuos Integration / Continuos Deploy (CI/CD)
 
 Atualmente estamos usando Gitlab e [Portainer](https://github.com/portainer/portainer), em uma estrutura baseada nesse [artigo](https://medium.com/lucjuggery/even-the-smallest-side-project-deserves-its-ci-cd-pipeline-281f80f39fdf).
 
-## Fluxo
+### Fluxo
 
 1. Um commit é feito no Gitlab ou Github
 2. Gitlab detecta o commit e passa para o runner fazer os testes
@@ -12,14 +35,14 @@ Atualmente estamos usando Gitlab e [Portainer](https://github.com/portainer/port
     1. Ativa webhook do serviço no Portainer
     2. Portainer baixa a nova imagem de produção e faz o deploy dela
 
-## Como funciona
+### Como funciona
 Para utilizar o serviço de Continuos Integration do *Gitlab*, criamos um `.gitlab-ci.yml` que define o que deve ser feito e configuramos para que o projeto utilize um Runner, que é o que irá os passos ditos no `.gitlab-ci.yml`. No `.gitlab-ci.yml` de cada projeto, geralmente terá definido os passos build, test e deploy.
 
 O runner do nosso projeto está no nosso próprio servidor, o que permite que seja mais rápido para executar as tarefas e também para que possa acessar o Portainer direto sem precisar ser exposto pela internet. Para isso é usado o [docker-in-docker executor](https://docs.gitlab.com/ce/ci/docker/using_docker_build.html#use-docker-in-docker-executor) para isolar o ambiente *CI/CD* do ambiente do servidor.
 
 Toda vez que um commit é feito no projeto, o *gitlab runner* faz um build da imagem docker de produção e a testa, se o commit tiver sido no master, o runner irá também executar o passo de deploy. Para fazer o deploy, o *gitlab runner* ativa o webhook do serviço(stack) no Portainer, que é o orquestrador do nosso serviço, ele baixa a nova imagem de produção e assim faz o deploy dela.
 
-## Gitlab Runner
+### Gitlab Runner
 
 Gitlab Runner é usado para rodar os *Jobs*, sendo usado em conjunto com o *Gitlab CI*, podendo ser rodado dentro de containers ou no nosso próprio servidor.
 
@@ -30,7 +53,7 @@ Para configurar:
 3. Desativar runners compartilhados, pois são mais lentos e são configurados de maneira diferente do nosso Runner.
 4. Depois é só definir os Jobs no `.gitlab-ci.yml` 
 
-## Portainer
+### Portainer
 
 O Portainer é útil por disponibilizar webhooks para atualizar as imagens e fazer o deploy delas.
 Além disso ele permite listar os deploys feitos e revertê-los, além de permitir gerenciar quase tudo relativo ao Docker atráves de uma interface web. Inclusive acessar os containers via SSH pela própria interface web.
@@ -42,7 +65,7 @@ Nesse modo há 3 conceitos importantes:
 - **Service**: um item service descrito no `docker-compose.yml`, é uma container mais suas configurações, com volumes, nome da imagem, do container etc.
 - **Container**: o container em si, que roda cada aplicação.
 
-### Servidor
+#### Servidor
 Rondando o Portainer no servidor:
 
 ```sh
@@ -50,20 +73,20 @@ $ sudo docker swarm init
 ```
 > https://portainer.readthedocs.io/en/latest/deployment.html#inside-a-swarm-cluster
 
-### Local
+#### Local
 Para acessar o Portainer da sua máquina local e visualizar os serviços, você deve fazer um *ssh tunnel* com a máquina remota e direcionar para a porta para a máquina local, da seguinte maneira:
 ```
 $ ssh -L 8888:localhost:9000 <hostname> <porta>
 ```
 Após isso, acesse http://localhost:8888 e coloque o usuário e a senha correta.
 
-### Uso
+#### Uso
 
 Para disponibiizar o front e back, é preciso criar stacks e colocar manualmente os compose, adiciona variáveis de ambiente se preciso.
 
 Em cada stack terá uma **WEBHOOK**, é essa que usaremos na configuração do *CI/CD* do projeto para atualizar os stacks (lembrar de ver qual o IP:porta real que será usado pelo gitlab runner para acessar o Portainer).
 
-## Limitações
+### Limitações
 
 Atualizações no compose (stack) no Portainer precisam ser feitas manualmente (talvez seja possível usar a API dele para automatizar isso?).
 
@@ -185,29 +208,3 @@ domínio `api.exemplo.com` seja mandado para o container em que esse label foi d
 
 A configuração dele é feita pelo arquivo `traefik.toml` e o certificado fica, geralmente 
 no `acme.json`.
-
-### Arquitetura Atual
-
-O digrama abaixo representa a arquitetura atual, com todos os containers do Docker usados.
-O Github deve estar mostrando como um PNG, mas quando clicado deve abrir um SVG,
-onde os links (sublinhados) estarão clicáveis.
-
-![diagrama com arquitetura](http://www.plantuml.com/plantuml/proxy?fmt=svg&src=https://raw.githubusercontent.com/analytics-ufcg/leggo-geral/master/diagrama.puml?cachebuster=8)
-
-(*[código fonte do diagrama](https://github.com/analytics-ufcg/leggo-geral/blob/master/diagrama.puml)*)
-
-Cada quadradinho amarelo dentro do quadrado maior `Docker` é um container do Docker.
-A maioria roda permanentemente e é gerenciada pelo Portainer.
-A exceção é o `leggor` que é ativado pelo `cron`, atualiza os dados, e depois volta 
-a ficar inativo.
-
-Os retângulos avermelhados, Stacks, são os Stacks do Docker, 
-cada um descrito por um `docker-compose.yml` e que pode conter 
-múltiplos services do Docker.
-Cada service usa um container.
-
-Os "cilindros" cinzas são volumes Docker.
-O `statics` é usado para o `proxy` em Nginx conseguir servir os arquivos estáticos 
-diretamente, uma vez que ele é muito mais eficiente para isso do que o uWSGI.
-O `nginx config` para substituir as configurações padrões do Nginx na imagem do Nginx 
-sem precisar gerar uma nova imagem.
