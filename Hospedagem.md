@@ -117,7 +117,7 @@ O digrama abaixo representa a arquitetura atual, com todos os containers do Dock
 O Github deve estar mostrando como um PNG, mas quando clicado deve abrir um SVG,
 onde os links (em vermelho escuro e sublinhados) estarão clicáveis.
 
-![diagrama com arquitetura](http://www.plantuml.com/plantuml/proxy?fmt=svg&src=https://raw.githubusercontent.com/analytics-ufcg/leggo-geral/master/diagrama.puml?cachebuster=2)
+![diagrama com arquitetura](http://www.plantuml.com/plantuml/proxy?fmt=svg&src=https://raw.githubusercontent.com/analytics-ufcg/leggo-geral/master/diagrama.puml?cachebuster=3)
 
 (*[código fonte do diagrama](https://github.com/analytics-ufcg/leggo-geral/blob/master/diagrama.puml)*)
 

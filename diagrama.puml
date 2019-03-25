@@ -16,6 +16,8 @@ https://stackoverflow.com/questions/32203610/how-to-integrate-uml-diagrams-into-
 @startuml
 
 skinparam componentStyle uml2
+skinparam maxMessageSize 100
+skinparam wrapWidth 100
 
 skinparam database {
   BackgroundColor gainsboro
@@ -25,7 +27,17 @@ skinparam hyperlink {
   Color maroon
 }
 
-package "VM" #antiquewhite {
+!definelong repository(name, id, link, content = "")
+  rectangle "[[link name]]" as id #dfd {
+    content
+  }
+!enddefinelong
+
+/'
+Hospedagem
+'/
+
+package "VM agorafrontend" #antiquewhite {
   (**cron**) as cron
   package "Docker" as docker_front #white {
     package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/traefik.yml Traefik Stack]]" #mistyrose {
@@ -33,13 +45,13 @@ package "VM" #antiquewhite {
     }
     [**portainer**] as portainer
     component "[[https://github.com/analytics-ufcg/leggoR leggor]]" as leggor
-    package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/frontend-production.yml Frontend Prod Stack]]" as frontprodser #mistyrose {
+    package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/frontend-production.yml Frontend Prod Stack]]" as frontprodstack #mistyrose {
       [**frontend prod**\nnginx] as frontend_prod
     }
-    package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/frontend-development.yml Frontend Dev Stack]]" as frontdevser #mistyrose {
+    package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/frontend-development.yml Frontend Dev Stack]]" as frontdevstack #mistyrose {
       [**frontend dev**\nnginx] as frontend_dev
     }
-    package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/backend.yml Backend API Stack]]" as backser #mistyrose {
+    package "[[https://github.com/analytics-ufcg/agora-digital-geral/blob/master/stacks/backend.yml Backend API Stack]]" as backstack #mistyrose {
       [**proxy**\nnginx] as backproxy
       [**api**\npython] as api
       [**db**\npostgres] as db
@@ -53,15 +65,15 @@ package "VM" #antiquewhite {
 }
 "**navegador web**" as navegador
 
-cron --> leggor : Roda [[https://github.com/analytics-ufcg/leggo-geral/blob/master/update.sh update.sh]], que atualiza o código do leggor,\nrecria sua imagem docker e a executa, atualizando os dados.
+cron --> leggor : Roda [[https://github.com/analytics-ufcg/leggo-geral/blob/master/update.sh update.sh]] que atualiza o código do leggor, recria sua imagem docker e a executa, atualizando os dados.
 leggor -> csvs
 csvs --> api
-db <-> api
-db_vol <-> db
+api <-> db
+db <-> db_vol
 backproxy -> traefik
 frontend_dev --> traefik
 frontend_prod --> traefik
-traefik ~~~> navegador : "**porta 80 (HTTP)**\nredirecionada\npelo traefik\npara a 443"
+traefik ~~~> navegador : "**porta 80 (HTTP)** redirecionada pelo traefik para a 443"
 traefik ---> navegador : "**porta 443 (HTTPS)**"
 api -- statics_vol
 statics_vol --> backproxy
@@ -69,5 +81,69 @@ api ->socket_vol
 socket_vol ---> backproxy
 nginx_config_vol -u- api
 nginx_config_vol --> backproxy
+
+
+/'
+Repositórios, CI/CD
+'/
+
+package "VM agorabackend" #antiquewhite {
+  package "Docker" as docker_back #white {
+    [gitlab runner] as glrunner
+  }
+}
+
+package "Github" as gh #antiquewhite {
+  package "[[https://github.com/analytics-ufcg analytics-ufcg]]" as ghanalytics #fafffa {
+    repository("leggo-frontend", ghfront, "https://github.com/analytics-ufcg/leggo-frontend")
+    repository("leggo-backend", ghback, "https://github.com/analytics-ufcg/leggo-backend")
+    repository("leggor", ghr, "https://github.com/analytics-ufcg/leggor")
+    repository("rcongresso", rcongresso, "https://github.com/analytics-ufcg/rcongresso")
+  }
+}
+rectangle "Travis" as travis #antiquewhite
+
+
+'Commits -> Github
+commits ---> ghfront
+commits ---> ghback
+commits ---> ghr
+commits ---> rcongresso
+
+
+package "Gitlab" as gl #antiquewhite {
+  package "[[https://gitlab.com/analytics-ufcg analytics-ufcg]]" as glanalytics #fafffa {
+    rectangle "[[https://gitlab.com/analytics-ufcg/agora-digital-frontend agora-digital-frontend]]" as glfront #dfd {
+      database "[[https://gitlab.com/analytics-ufcg/agora-digital-frontend/container_registry front registry]]" as frontregistry
+    }
+    rectangle "[[https://gitlab.com/analytics-ufcg/agora-digital-backend agora-digital-backend]]" as glback #dfd {
+      database "[[https://gitlab.com/analytics-ufcg/agora-digital-backend/container_registry back registry]]" as backregistry
+    }
+    repository("agora-digital", glr, "https://gitlab.com/analytics-ufcg/agora-digital")
+    component "gitlab shared runners" as glsharunner
+  }
+}
+
+'Github -> Gitlab
+ghfront ---> glfront : sincronização automática
+ghback ---> glback : sincronização automática
+ghr ---> glr : sincronização automática
+rcongresso -- travis : "[[https://github.com/analytics-ufcg/rcongresso/blob/master/.travis.yml .travis.yml]] testa"
+
+'Gitlab CI via Runner
+glfront ---> glrunner : "[[https://github.com/analytics-ufcg/leggo-frontend/blob/master/.gitlab-ci.yml .gitlab-ci.yml]] faz build da imagem e testa"
+glback ---> glrunner : "[[https://github.com/analytics-ufcg/leggo-backend/blob/master/.gitlab-ci.yml .gitlab-ci.yml]] faz build da imagem e testa"
+glr -> glsharunner : "[[https://github.com/analytics-ufcg/leggor/blob/master/.gitlab-ci.yml .gitlab-ci.yml]] testa"
+
+'Guarda imagens
+glrunner ---> frontregistry : caso passe nos testes, salva imagem do front
+glrunner ---> backregistry : caso passe nos testes, salva imagem do back
+
+'Atualiza Stacks
+glrunner ----> portainer : webhook de atualização das imagens
+
+frontregistry ------> frontprodstack : **portainer** puxa imagem para atualizar a stack
+frontregistry ------> frontdevstack : **portainer** puxa imagem para atualizar a stack
+backregistry ------> backstack : **portainer** puxa imagem para atualizar a stack
 
 @enduml
