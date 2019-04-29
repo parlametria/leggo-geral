@@ -1,0 +1,98 @@
+EMENDA No 25 - PLEN
+
+(ao PLS nº 559 de 2013)
+
+
+
+Inclua-se, no inciso XX do artigo 5º do Projeto de Lei do Senado nº
+
+559, de 2013, a expressão “observado o seguinte” em seu caput e as alíneas
+
+“a”, “b” e “c”, dando-lhe a redação abaixo:
+
+“Art.5º..........................................................................................................
+
+.....................................................................................................................
+
+XX - empreitada por preço global: contratação da execução da obra ou do serviço por preço certo e total, observado o seguinte: a) pagamento com custo de mobilização e desmobilização previsto em separado; b) preço licitado pelo total, com pagamento parcelado associado a etapas; c) prévia aprovação do projeto executivo.
+
+...................................................................................................................” (NR) JUSTIFICAÇÃO
+
+Inicialmente, é importante destacar que tanto a doutrina especializada quanto a jurisprudência defendem a importância de maior definição da obra como requisito para a contratação em regimes de empreitada por preço global. A propósito, o entendimento de Cravalho e Pini:
+
+“(...) Assim, o regime de preço global (mais favorável ao contratante) deveria ser adotado, em situações de elevado grau de definição da obra.
+
+(...) Há que se considerar também a incompatibilidade de regimes de contratação com os graus de definição do que se quer executar. Executar uma obra por regime de preço global, com muitas indefinições, implicará conflito
+
+entre
+
+as
+
+partes.
+
+O
+
+preço
+
+estará
+
+subdimensionado, sob a óptica do construtor, para suportar os diversos serviços presumíveis, os quais o contratante supostamente julgaria estarem considerados no preço ofertado. Sob a óptica do contratante, o preço terá uma onerosidade excessiva porque o construtor tende a abranger, no preço ofertado, valores para cobrir presumibilidades que possam ocorrer ao longo do
+
+processo de execução da obra” - (CARVALHO, Luiz F. e PINI, Mario S., Como remunerar fatos
+
+presumíveis?Artigo
+
+obtido
+
+em:
+
+http://www.infraestruturaurbana.com.br/solucoes-
+
+tecnicas/14/artigo256272-2.asp em 10/10/2012)
+
+Carl Vicente Limmer, em sua obra “Planejamento, Orçamentação e Controle de Projetos e Obras” (1997, Editora LTC, p. 158), na contratação por preço global (contrato de preço fixo, com valor imutável em moeda constante), pressupõe-se uma definição minuciosa de todos os componentes da obra, de modo que seus custos possam ser estimados com uma margem mínima de incerteza.
+
+Assim, conclui-se que, para a adoção do regime de empreitada por preço global, pressupõe-se uma maior precisão dos projetos, com o adequado dimensionamento dos quantitativos.
+
+Nesse exato sentido o posicionamento do Tribunal de Contas da União:
+
+“(...) 9.1.3. a empreitada por preço global, em regra, em razão de a liquidação de despesas não envolver, necessariamente, a medição unitária dos quantitativos de cada serviço na planilha orçamentária, nos termos do art. 6º, inciso VIII, alínea 'a', da Lei 8.666/93, deve ser adotada quando for possível definir previamente no projeto, com boa margem de precisão, as quantidades dos serviços a serem posteriormente executados na fase contratual; enquanto que a empreitada por preço unitário deve ser preferida nos casos em que os objetos, por sua natureza, possuam uma imprecisão inerente de quantitativos em seus itens orçamentários, como são os casos de reformas de edificação, obras com grandes movimentações de terra e interferências, obras de manutenção rodoviária, dentre outras; (...)” – Tribunal de Contas da União, Acórdão nº 1977/2013, Plenário, Relator: Ministro Valmir Campelo.
+
+A solução mais adequada para assegurar a precisão de projeto demandada pela adoção do regime de empreitada por preço global é, sem sombra de dúvida, exigir-se a aprovação prévia do projeto executivo.
+
+Além disso, na empreitada por preço global o contratado obriga-se à execução do objeto por um preço total; logo, a própria natureza dessa modalidade de contratação a torna incompatível com a execução fracionada em unidades.
+
+Nessa linha de raciocínio, convém mencionar que Maçahico Tisaka, em seu livro “Orçamento na Construção Civil” (2000, Editora Pini, p.28), deixa clara essa idéia ao afirmar que, na empreitada por preço global, “a medição no campo dos serviços realizados normalmente se faz pela determinação do percentual executado de cada serviço, até o limite do valor proposto” .
+
+Portanto, mostra-se necessário evidenciar que, nessa modalidade de contratação, os a medição e pagamentos deverão estar vinculados ao percentual de avanço físico dos serviços, ou, em outras etapas palavras, às etapas das obras.
+
+Não há como se cogitar em medição e pagamento com base em planilha de preços unitários, que se mostra adequada ao regime de empreitada por preços unitários.
+
+Nesse tocante, vale lembrar a clássica lição de Hely Lopes Meirelles, que, ao distinguir empreitada por preço global e empreitada por preço unitário, assim se manifestou:
+
+“(...) O que tipifica a empreitada por preço global é a fixação antecipada do custo da obra
+
+para a sua totalidade, diversamente do que
+
+ocorre na empreitada por preço unitário, em que o custo resulta do que for realizado e medido, para pagamento na base da unidade
+
+contratada (...) enquanto na empreitada por
+
+preço global fixa-se antecipadamente o seu
+
+custo final, na empreitada por preço unitário o
+
+custo final resulta do que for realizado, medido
+
+e pago na base do preço unitário contratado (...)” – Licitação e Contrato Administrativo, São Paulo, RT, 1991, 10 ed., pp. 267/268.
+
+Em face do que está exposto acima, a emenda ora proposta se justifica, pois, tem a nítida finalidade de adequar a redação do texto legal à natureza e às características do regime de empreitada por preço global.
+
+Sala das Sessões,
+
+Senador FRANCISCO DORNELLES
+
+
+
+
+

@@ -1,0 +1,1078 @@
+SENADO FEDERAL
+
+
+
+
+PROJETO DE LEI DO SENADO
+
+Nº 168, DE 2018
+
+Regulamenta o licenciamento ambiental previsto no inciso IV do § 1º do art. 225 da Constituição Federal e dispõe sobre a avaliação ambiental estratégica.
+
+AUTORIA: Senador Acir Gurgacz (PDT/RO) DESPACHO: Às Comissões de Constituição, Justiça e Cidadania; e de Meio Ambiente, cabendo à última decisão terminativa
+
+Página da matéria
+
+Página 1 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+
+
+Gabinete Senador ACIR GURGACZ
+
+
+
+PROJETO DE LEI DO SENADO Nº , DE 2018
+
+Regulamenta
+
+o
+
+licenciamento
+
+ambiental previsto no inciso IV do § 1º
+
+do art. 225 da Constituição Federal e
+
+SF/18114.07075-08
+
+dispõe sobre a avaliação ambiental
+
+estratégica.
+
+O CONGRESSO NACIONAL decreta:
+
+
+
+CAPÍTULO I
+
+DISPOSIÇÕES PRELIMINARES
+
+Art. 1º Esta Lei, denominada Lei Geral de Licenciamento Ambiental, estabelece normas gerais para o licenciamento de atividades ou empreendimentos utilizadores de recursos ambientais, efetiva ou potencialmente poluidores ou capazes, sob qualquer forma, de causar degradação do meio ambiente, previsto no art. 10 da Lei nº 6.938, de 31 de agosto de 1981, e institui a avaliação ambiental estratégica (AAE).
+
+§ 1º As disposições desta Lei aplicam-se: I – ao licenciamento ambiental realizado perante os órgãos e entidades da União, dos estados, do Distrito Federal e dos municípios integrantes do Sistema Nacional do Meio Ambiente (Sisnama), observadas as atribuições estabelecidas na Lei Complementar nº 140, de 8 de dezembro de 2011;
+
+
+
+
+
+Página 2 de 32
+
+
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+Senado Federal – Praça dos Três Poderes – Ala Senador Dinarte Mariz – Gabinete 5 - CEP 70165-900 – Brasília DF
+
+Telefone: +55 (61) 3303-3131
+
+
+
+
+
+2
+
+
+
+II – à AAE realizada pelos órgãos e entidades da União, dos estados, do Distrito Federal e dos municípios responsáveis pela formulação de políticas, planos ou programas governamentais.
+
+§ 2º O licenciamento ambiental deve prezar pela participação pública, transparência e controle social, pela preponderância do interesse público, pela celeridade e economia processual, pela prevenção do dano ambiental e pela análise integrada dos impactos ambientais.
+
+
+
+Art. 2º Para os efeitos desta Lei, entende-se por: SF/18114.07075-08
+
+I – área diretamente afetada (ADA): área necessária para a implantação, manutenção e operação de atividades ou empreendimentos; II – área de influência: área que sofre os impactos ambientais diretos da construção, instalação, ampliação e operação de atividades ou empreendimentos, conforme delimitação apontada no estudo ambiental e aprovada pela autoridade licenciadora;
+
+III – autoridade envolvida: órgão ou entidade da administração pública que, nos casos previstos nesta Lei, pode se manifestar no licenciamento ambiental sobre os temas de sua competência, compreendendo:
+
+a)
+
+Fundação Nacional do Índio – Funai;
+
+b)
+
+Fundação Cultural Palmares – FCP;
+
+c)
+
+Instituto do Patrimônio Histórico e Artístico Nacional –
+
+IPHAN e demais autoridades responsáveis pelo patrimônio histórico e cultural; e
+
+d)
+
+órgãos executores do Sistema Nacional de Unidades de Conservação – SNUC;
+
+IV – autoridade licenciadora: órgão ou entidade da administração pública, integrante do Sisnama, competente pelo licenciamento ambiental na forma da Lei Complementar nº 140, de 8 de dezembro de 2011, que detém o poder decisório e responde pela emissão e renovação das licenças ambientais;
+
+V – avaliação ambiental estratégica (AAE): instrumento de apoio à tomada de decisão, que subsidia opções estratégicas de longo prazo, promove e facilita a integração dos aspectos ambientais com os aspectos Página 3 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+3
+
+
+
+socioeconômicos, territoriais e políticos nos processos de planejamento e formulação de políticas, planos e programas governamentais; VI – condicionantes ambientais: medidas, condições ou restrições sob responsabilidade do empreendedor, estabelecidas no âmbito das licenças ambientais pela autoridade licenciadora, com vistas a evitar, mitigar ou compensar os impactos ambientais negativos identificados nos estudos ambientais, observados os requisitos estabelecidos nesta Lei; VII – empreendedor: pessoa física ou jurídica, de direito público ou privado, responsável por atividades ou empreendimentos sujeitos ao SF/18114.07075-08
+
+licenciamento ambiental;
+
+VIII – estudo ambiental: estudo relativo aos aspectos e impactos ambientais de atividade ou empreendimento, apresentado pelo empreendedor como subsídio no âmbito do procedimento de licenciamento ambiental;
+
+IX – estudo prévio de impacto ambiental (EIA): estudo ambiental de atividade ou empreendimento utilizador de recursos ambientais, efetiva ou potencialmente causador de significativa poluição ou outra forma de significativa degradação do meio ambiente, a ser realizado previamente para a análise da sua viabilidade ambiental;
+
+X – licença ambiental: ato administrativo por meio do qual a autoridade licenciadora autoriza a localização, a construção, a instalação, a ampliação, a modificação ou a operação de atividade ou empreendimento sujeito ao licenciamento ambiental e estabelece as condicionantes ambientais cabíveis;
+
+XI – licença ambiental por adesão e compromisso (LAC): licença que autoriza a instalação e a operação de atividade ou empreendimento, mediante declaração de adesão e compromisso do empreendedor aos critérios, pré-condições, requisitos e condicionantes ambientais estabelecidos pela autoridade licenciadora, desde que se conheçam previamente os impactos ambientais da atividade ou empreendimento, as características ambientais da área de implantação e as condições de sua instalação e operação;
+
+XII – licença ambiental única (LAU): licença que autoriza a instalação e a operação de atividade ou empreendimento, aprova as ações de controle e monitoramento ambiental e estabelece condicionantes ambientais Página 4 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+4
+
+
+
+para a sua instalação e operação e, quando necessário, para a sua desativação, em uma única etapa;
+
+XIII – licença de instalação (LI): licença que autoriza a instalação de atividade ou empreendimento, aprova os planos, programas e projetos de prevenção, mitigação ou compensação dos impactos ambientais negativos e de maximização dos impactos positivos e estabelece condicionantes ambientais;
+
+XIV – licença de operação (LO): licença que autoriza a operação de atividade ou empreendimento, aprova as ações de controle e SF/18114.07075-08
+
+monitoramento ambiental e estabelece condicionantes ambientais para operação e, quando necessário, para a sua desativação; XV – licença de operação corretiva (LOC): ato administrativo que regulariza atividade ou empreendimento que opera sem licença ambiental, por meio da fixação de condicionantes e outras medidas que viabilizam sua continuidade e conformidade com as normas ambientais; XVI – licença prévia (LP): licença que atesta, na fase de planejamento, a viabilidade ambiental de atividade ou empreendimento quanto à sua concepção e localização, e estabelece requisitos e condicionantes ambientais;
+
+XVII – licenciamento ambiental: procedimento administrativo destinado a licenciar atividade ou empreendimento utilizador de recursos ambientais, efetiva ou potencialmente causador de poluição ou outra forma de degradação do meio ambiente;
+
+XVIII – órgãos executores do Sistema Nacional de Unidade de Conservação- SNUC: o Instituto Chico Mendes de Conservação da Biodiversidade e o Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis, em caráter supletivo, os órgãos estaduais, municipais e distrital, com a função de implementar o SNUC, subsidiar as propostas de criação e administrar as unidades de conservação federais, estaduais, municipais e distrital, nas respectivas esferas de atuação; XIX – relatório de caracterização do empreendimento (RCE): documento a ser apresentado no procedimento de licenciamento ambiental por adesão e compromisso, com informações técnicas sobre a instalação e operação de atividade ou empreendimento e a identificação e caracterização Página 5 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+5
+
+
+
+dos impactos ambientais e das medidas preventivas, mitigadoras e compensatórias;
+
+XX – relatório de controle ambiental (RCA): documento exigido no procedimento de licenciamento ambiental corretivo contendo dados, informações, identificação dos passivos e dos impactos ambientais de atividade ou empreendimento em operação e, quando couber, medidas mitigadoras, de controle e de monitoramento ambiental; XXI – relatório de impacto ambiental (Rima): documento que SF/18114.07075-08
+
+reflete as conclusões do EIA, apresentado de forma objetiva e com informações em linguagem acessível ao público em geral, de modo que se possam entender as vantagens e desvantagens da atividade ou empreendimento, bem como as consequências ambientais de sua implantação, com o conteúdo mínimo previsto nesta Lei; e XXII – termo de referência (TR): documento único emitido pela autoridade licenciadora, que estabelece o conteúdo dos estudos a serem apresentados pelo empreendedor no licenciamento ambiental para avaliação dos impactos ambientais decorrentes da atividade ou empreendimento.
+
+
+
+CAPÍTULO II
+
+
+
+
+
+DO LICENCIAMENTO AMBIENTAL
+
+
+Seção 1
+
+Disposições Gerais sobre o Licenciamento Ambiental Art. 3º A construção, a instalação, a ampliação e a operação de atividade ou empreendimento utilizador de recursos ambientais, efetiva ou potencialmente causador de poluição ou outra forma de degradação do meio ambiente, estão sujeitas a prévio licenciamento ambiental perante a autoridade licenciadora integrante do Sisnama, sem prejuízo das demais licenças e autorizações exigíveis.
+
+Página 6 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+6
+
+
+
+§ 1º Os entes federativos definirão as tipologias de atividades ou empreendimentos sujeitos ao licenciamento ambiental, respeitadas as atribuições previstas na Lei Complementar nº 140, de 2011.
+
+
+
+
+
+§ 2º Até que sejam definidas as tipologias conforme o § 1º, cabe à autoridade licenciadora adotar o procedimento em vigor até a data da publicação desta lei .
+
+§ 3º A lista das tipologias de atividades ou empreendimentos sujeitos ao licenciamento ambiental referida no § 1º deverá ser atualizada SF/18114.07075-08
+
+sempre que necessário.
+
+Art. 4º O licenciamento ambiental poderá resultar nos seguintes tipos de licenças ambientais:
+
+I – licença prévia (LP);
+
+II – licença de instalação (LI);
+
+III – licença de operação (LO);
+
+IV – licença ambiental única (LAU);
+
+V – licença por adesão e compromisso (LAC); e VI – licença de operação corretiva (LOC).
+
+§ 1º São subsídios para a emissão das licenças ambientais: I – EIA ou demais estudos ambientais, conforme TR definido pela autoridade licenciadora, para a LP;
+
+II – projeto básico ambiental ou similar, acompanhado dos elementos de projeto de engenharia e relatório de cumprimento das condicionantes ambientais, conforme cronograma físico, para a LI; III – relatório de cumprimento das condicionantes ambientais, conforme cronograma físico, para a LO;
+
+IV – estudo ambiental e elementos de projeto de engenharia, para a LAU;
+
+V – RCE, para a LAC; ou
+
+VI – RCA, para a LOC.
+
+Página 7 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+7
+
+
+
+§ 2º A LI poderá autorizar teste operacional ou teste de avaliação prévia dos sistemas de controle de poluição da atividade ou empreendimento.
+
+§ 3º Excepcionalmente, tendo em vista a natureza, características e peculiaridades da atividade ou empreendimento, poderão ser definidas licenças específicas por ato normativo da autoridade competente.
+
+Art. 5o As licenças ambientais devem ser emitidas observados os seguintes prazos de validade:
+
+I – o prazo de validade da LP será de no mínimo 3 (três) anos e no SF/18114.07075-08
+
+máximo 6 (seis) anos, considerando o estabelecido pelo cronograma de elaboração dos planos, programas e projetos relativos à atividade ou empreendimento, aprovado pela autoridade licenciadora; II – o prazo de validade da LI e da LP aglutinada à LI do procedimento bifásico (LP/LI) será de no mínimo 3 (três) anos e no máximo 6 (seis) anos, considerando o estabelecido pelo cronograma de instalação da atividade ou empreendimento, aprovado pela autoridade licenciadora; e III – o prazo de validade da LAU, da LO, da LI aglutinada à LO
+
+do procedimento bifásico (LI/LO) e da LOC considerará os planos de controle ambiental e será de, no mínimo, 5 (cinco) anos.
+
+§ 1º Os prazos previstos no inciso III do caput serão ajustados pela autoridade licenciadora se a atividade ou empreendimento tiver tempo de finalização inferior a eles.
+
+§ 2º Os prazos máximos de validade das licenças previstas no inciso III serão determinadas pela autoridade licenciadora, de forma justificada, e não poderão ser emitidas por período indeterminado.
+
+Art. 6º A renovação de licenças ambientais deve ser requerida com antecedência mínima de 120 (cento e vinte) dias da expiração de seu prazo de validade, fixado na respectiva licença, ficando este automaticamente prorrogado até a manifestação definitiva da autoridade licenciadora.
+
+§ 1º As licenças ambientais podem ser renovadas sucessivamente, respeitados em cada renovação os prazos máximos previstos no art. 5º.
+
+§ 2º As renovações das licenças devem observar as seguintes condições:
+
+Página 8 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+8
+
+
+
+I – a renovação da LP e da LI é precedida de análise sobre a manutenção ou não das condições que lhe deram origem; e II – a renovação da LO é precedida de análise da efetividade das ações de controle e monitoramento adotadas, determinando-se os devidos ajustes, se necessários.
+
+§ 3º A LO poderá ser renovada automaticamente, por igual período, a partir de declaração do empreendedor, em formulário disponibilizado na internet, desde que atendidas simultaneamente as seguintes condições:
+
+SF/18114.07075-08
+
+I – as características e o porte da atividade ou empreendimento não tenham sido alterados;
+
+II – a legislação ambiental aplicável à atividade ou empreendimento não tenha sido alterada; e III – as condicionantes aplicáveis tenham sido cumpridas.
+
+§ 4º Na renovação da LAU, da LP/LI e da LI/LO, aplicam-se em tudo o que couber as disposições dos §§ 1º a 3º.
+
+Art. 7º Não estão sujeitos ao licenciamento ambiental as seguintes atividades ou empreendimentos:
+
+I – cultivo de espécies de interesse agrícola, temporárias, semiperenes e perenes, e pecuária extensiva, realizados em áreas de uso alternativo do solo, desde que o imóvel, propriedade ou posse rural estejam regulares ou em regularização, observado o disposto no art.42 desta Lei; II – silvicultura de florestas plantadas, sem prejuízo do licenciamento de acessos e estruturas de apoio, quando couber; III – pesquisa de natureza agropecuária, que não implique em risco biológico, desde que haja autorização prévia dos órgãos competentes e ressalvado o disposto na Lei nº 11.105, de 24 de março de 2005; e IV – de caráter militar previstos no preparo e emprego das Forças Armadas, conforme disposto na Lei Complementar nº 97, de 9 de junho de 1999, nos termos de ato do Poder Executivo; Página 9 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+9
+
+
+
+V – serviços e obras de melhoria, modernização, manutenção e ampliação de capacidade em instalações pré-existentes ou em faixas de domínio e de servidão de atividades ou empreendimentos já licenciados com essa previsão, inclusive dragagens de manutenção; VI - que não se incluam na lista de atividades ou empreendimentos qualificados como potencialmente causadores de poluição ou outra forma de degradação do meio ambiente, estabelecida na forma dos §§ 1º a 3º do art.
+
+3º.
+
+SF/18114.07075-08
+
+§ 1º O licenciamento ambiental do manejo e exploração de florestas nativas e formações sucessoras será realizado nos termos da Lei nº
+
+12.651, de 25 de maio de 2012, e demais legislações aplicáveis.
+
+§ 2º As atividades ou empreendimentos de que tratam os incisos I, II e V do caput deste artigo deverão cumprir as normas ambientais aplicáveis à execução dos respetivos plantios compensatórios respeitando-se a esfera de competência.
+
+§ 3º O licenciamento das estruturas de apoio relacionadas ao inciso I do caput deste artigo, quando licenciáveis, serão feitas conforme disposições estaduais e municipais.
+
+§ 4º A dispensa prevista no inciso V do caput deste artigo estende-se aos mesmos serviços e obras inclusos em atividades ou empreendimentos objeto de termo de compromisso de processo de licenciamento corretivo.
+
+§ 5º As não sujeições ao licenciamento ambiental não eximem o empreendedor da obtenção de autorização de supressão de vegetação, nos casos previstos em lei.
+
+§ 6 As atividades e serviços de manutenção de que trata o inciso V do caput deste artigo ficam dispensados de autorização de supressão de vegetação como exceção relativa ao disposto no § 5º do caput deste artigo.
+
+§ 7º Nos licenciamentos de competência municipal ou distrital, a aprovação do projeto deve ocorrer mediante a emissão de licença urbanística e ambiental integrada do empreendimento, não se exigindo outra licença da autoridade prevista no inciso IV do art. 2º desta lei, nos seguintes casos: Página 10 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+10
+
+
+
+I – regularização fundiária ou urbanização de núcleos urbanos informais;
+
+II – parcelamento de solo urbano;
+
+III – instalações necessárias ao abastecimento público de água potável, desde a captação até as ligações prediais; e IV – instalações operacionais de coleta, transporte e tratamento dos esgotos sanitários.
+
+SF/18114.07075-08
+
+§ 8º O empreendedor poderá solicitar declaração da autoridade licenciadora de não sujeição ao licenciamento, nos termos deste artigo.
+
+Art. 8o O gerenciamento dos impactos ambientais e a fixação de condicionantes das licenças ambientais devem atender à seguinte ordem de prioridade, aplicando-se em todos os casos a diretriz de maximização dos impactos positivos da atividade ou empreendimento: I – evitar os impactos ambientais negativos; II – minimizar os impactos ambientais negativos; e III – compensar os impactos ambientais negativos não mitigáveis, na impossibilidade de evitá-los.
+
+§ 1º As condicionantes ambientais devem ter fundamentação técnica que aponte a relação direta com os impactos ambientais da atividade ou empreendimento identificados nos estudos requeridos no processo de licenciamento ambiental, considerando os meios físico, biótico e socioeconômico, bem como ser proporcionais à magnitude desses impactos.
+
+§ 2º Atividades ou empreendimentos com áreas de influência sobrepostas total ou parcialmente podem, a critério da autoridade licenciadora, ter as condicionantes ambientais executadas de forma integrada, desde que definidas as responsabilidades por seu cumprimento.
+
+§ 3º As condicionantes estabelecidas na forma do caput não poderão obrigar o empreendedor a operar serviços públicos.
+
+§ 4º O empreendedor poderá solicitar, de forma fundamentada, a revisão das condicionantes ambientais ou a prorrogação do seu prazo, pedido que deve ser respondido de forma motivada e fundamentada pela autoridade Página 11 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+11
+
+
+
+licenciadora, a qual poderá readequar seus parâmetros de execução, suspendê-las ou cancelá-las.
+
+§ 5º O descumprimento de condicionantes das licenças ambientais, sem a devida justificativa técnica, sujeitará o empreendedor à aplicação das sanções penais e administrativas previstas na Lei nº 9.605, de 12 de fevereiro de 1998, e seu regulamento ou legislação estadual ou municipal correlata, sem prejuízo da obrigação de reparar os danos causados.
+
+Art. 9º Sem prejuízo da exigência de EIA nos termos desta Lei, caso sejam adotadas, pelo empreendedor, novas tecnologias, programas SF/18114.07075-08
+
+voluntários de gestão ambiental ou outras medidas que comprovadamente permitam alcançar resultados mais rigorosos do que os padrões e critérios estabelecidos pela legislação ambiental, a autoridade licenciadora deverá, motivadamente, estabelecer condições especiais no processo de licenciamento ambiental, incluindo:
+
+I – redução de prazos de análise;
+
+II – dilação de prazos de renovação da LO, LI/LO ou LAU; ou III - outras medidas cabíveis, a critério do órgão colegiado deliberativo do Sisnama.
+
+Parágrafo único. As medidas previstas no caput poderão ser estendidas, com justificativa técnica, para atividades ou empreendimentos que:
+
+I – possuam seguros, garantias ou fianças ambientais quando do requerimento das licenças ambientais previstas no art. 4º; ou II – assegurem melhoria das condições de saneamento ambiental.
+
+Art. 10. A autoridade licenciadora, mediante decisão motivada, poderá suspender ou cancelar uma licença expedida, quando ocorrer: I – omissão ou falsa descrição de informações determinantes para a emissão da licença;
+
+II – superveniência de graves riscos ambientais e de saúde; ou III – acidentes com significativo dano ambiental ou recorrentes.
+
+Página 12 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+12
+
+
+
+§ 1º O disposto no caput deste artigo será aplicado sem prejuízo da possibilidade de suspensão ou cancelamento de licença como sanção restritiva de direito, por decorrência do previsto no § 5º do art. 8º, respeitada a devida gradação das penalidades.
+
+§ 2º As condicionantes ambientais e medidas de controle poderão ser modificadas pela autoridade licenciadora nas seguintes hipóteses: I – na ocorrência de impactos negativos imprevistos; II – quando caracterizada a não efetividade técnica da SF/18114.07075-08
+
+condicionante;
+
+III – na renovação da LO, LI/LO ou LAU em razão de alterações na legislação ambiental; ou
+
+IV – a pedido do empreendedor, conforme § 5º do art. 8º.
+
+Art. 11 O licenciamento ambiental independe da emissão da certidão de uso, parcelamento e ocupação do solo urbano emitida pelos municípios, bem como autorizações e outorgas de órgãos não integrantes do Sisnama, sem prejuízo do atendimento, pelo empreendedor, da legislação aplicável a esses atos administrativos.
+
+Parágrafo único. A aplicação do caput não desobriga o empreendedor do atendimento da legislação aplicável aos referidos atos administrativos, nem de os estudos referentes ao licenciamento ambiental levarem em consideração o Plano Diretor municipal referido no art. 182, §
+
+1º, da Constituição ou legislação equivalente.
+
+Seção 2
+
+Dos Procedimentos de Licenciamento Ambiental Art. 12. O licenciamento ambiental poderá ocorrer pelo procedimento trifásico ou simplificado.
+
+§ 1º O procedimento de licenciamento ambiental a ser empregado e o estudo ambiental a ser exigido serão definidos pelos entes federativos, no âmbito das competências definidas na Lei Complementar nº 140, de 8 de dezembro de 2011, por meio do enquadramento do empreendimento ou atividade de acordo com os critérios de natureza, porte e potencial poluidor.
+
+Página 13 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+13
+
+
+
+§2º O procedimento de licenciamento ambiental deverá ser compatibilizado com as etapas de planejamento, implantação e operação dos empreendimentos, considerando, quando couber, os instrumentos de planejamento territorial disponíveis como os Zoneamentos Ecologicos-Econômico e a Avaliação Ambiental Estratégica.
+
+Art. 13. O licenciamento trifásico envolverá a emissão sequencial de LP, LI e LO.
+
+§ 1º No caso de atividade ou empreendimento potencialmente causador de significativa poluição ou outra forma de degradação do meio SF/18114.07075-08
+
+ambiente, o licenciamento trifásico exigirá EIA na fase de LP.
+
+§ 2º Poderá ser exigido EIA, independentemente da localização, para atividades ou empreendimentos cuja natureza e porte caracterizem, por si só, potencial de significativa poluição ou outra forma de degradação do meio ambiente, consoante definição dos órgãos colegiados deliberativos do Sisnama.
+
+§ 3º Excepcionalmente, poderão ser aplicáveis duas licenças no procedimento com EIA, quando:
+
+I – a LP, LI ou LO, isoladamente, forem incompatíveis com a natureza da atividade ou empreendimento, nos termos de ato dos órgãos colegiados deliberativos do Sisnama; ou
+
+II – a atividade ou empreendimento estiver incluso em política, plano ou programa governamental que tenha sido objeto de AAE, previamente aprovada pelos órgãos central, seccionais ou locais do Sisnama, em suas respectivas esferas de competência.
+
+§ 4o Até que seja publicado o ato previsto no inciso I do § 3º, a autoridade licenciadora poderá, de forma motivada, decidir quanto à emissão concomitante de licenças.
+
+§ 5º Na hipótese prevista no inciso II do § 3º, as análises realizadas no âmbito da AAE poderão resultar na dispensa parcial do conteúdo do EIA, a critério da autoridade licenciadora .
+
+Art. 14. O licenciamento ambiental pelo procedimento simplificado, observado o disposto no parágrafo 1o do art. 12, poderá ser: I – bifásico;
+
+Página 14 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+14
+
+
+
+II – em fase única; ou
+
+III – por adesão e compromisso.
+
+Art. 15. O procedimento bifásico aglutina duas licenças em uma única licença e será aplicado nos casos em que as características da atividade ou empreendimento sejam compatíveis com esse procedimento, conforme avaliação da autoridade licenciadora.
+
+§ 1º A autoridade licenciadora definirá na emissão do TR as licenças que poderão ser aglutinadas, podendo ser a LP com a LI (LP/LI) ou SF/18114.07075-08
+
+a LI com a LO (LI/LO).
+
+§ 2º A autoridade licenciadora estabelecerá o estudo ambiental pertinente que subsidiará o licenciamento ambiental pelo procedimento bifásico.
+
+Art. 16. O procedimento em fase única avalia em uma única etapa a viabilidade ambiental e autoriza a instalação e operação da atividade ou empreendimento, com a emissão da LAU.
+
+Parágrafo único. A autoridade licenciadora definirá o estudo ambiental pertinente que subsidiará o licenciamento ambiental pelo procedimento em fase única.
+
+Art. 17. O procedimento por adesão e compromisso poderá ser aplicado desde que sejam conhecidas as características ambientais da área de implantação e as condições de instalação e operação da atividade ou empreendimento, sejam conhecidos e mensurados previamente os seus impactos ambientais, bem como definidas as medidas de controle dos impactos ambientais negativos.
+
+§ 1º Serão consideradas atividades e empreendimentos passíveis de licenciamento ambiental pelo procedimento por adesão e compromisso aqueles definidos em ato específico dos órgãos colegiados deliberativos do Sisnama.
+
+§ 2º A autoridade licenciadora estabelecerá previamente os requisitos e as condicionantes ambientais para aplicação do caput.
+
+§ 3º As informações apresentadas pelo empreendedor no RCE
+
+serão conferidas e analisadas pelo Poder Público competente.
+
+Página 15 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+15
+
+
+
+
+
+Seção 3
+
+
+
+
+
+Do Licenciamento Ambiental Corretivo
+
+
+Art. 18. O licenciamento ambiental corretivo voltado à regularização de atividades ou empreendimentos que iniciaram a operação SF/18114.07075-08
+
+até a data de publicação desta Lei sem licença ambiental ocorre pela expedição de LOC.
+
+§ 1º Caso haja manifestação favorável ao licenciamento ambiental corretivo pela autoridade licenciadora, deverá ser firmado termo de compromisso entre ela e o empreendedor anteriormente à emissão da LOC.
+
+§ 2º O termo de compromisso estabelecerá os critérios, os procedimentos e as responsabilidades de forma a promover o licenciamento ambiental corretivo.
+
+§ 3º A LOC define as condicionantes e outras medidas necessárias para a regularização ambiental e seus respectivos prazos, bem como as ações de controle e monitoramento ambiental para a continuidade da operação da atividade ou empreendimento, em conformidade com as normas ambientais.
+
+§ 4º Aplicam-se ao licenciamento ambiental corretivo, no que couber, as disposições do art. 79-A da Lei nº 9.605, de 12 de fevereiro de 1998.
+
+§ 5º A assinatura do termo de compromisso impede novas autuações fundamentadas na ausência da respectiva licença ambiental.
+
+§ 6º O disposto no § 5º não impede a aplicação de sanções administrativas pelo descumprimento do próprio termo de compromisso.
+
+§ 7º As disposições sobre renovação automática previstas no § 2º
+
+do art. 6º aplicam-se à LOC.
+
+§ 8º As atividades ou empreendimentos que já se encontram com processo de licenciamento ambiental corretivo em curso na data de publicação desta Lei poderão se adequar às disposições desta Seção.
+
+Página 16 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+16
+
+
+
+
+
+Seção 4
+
+Do EIA e demais Estudos Ambientais
+
+Art. 19. A autoridade licenciadora deverá elaborar Termo de Referência (TR) padrão para o EIA e demais estudos ambientais, específico SF/18114.07075-08
+
+para cada tipologia de atividade ou empreendimento, ouvidas as autoridades referidas no inciso III do art. 2o, quando couber.
+
+§ 1º A autoridade licenciadora, ouvido o empreendedor, poderá ajustar o TR, considerando as especificidades da atividade ou empreendimento e de sua área de influência.
+
+§ 2º Nos casos em que houver necessidade de ajustes no TR nos termos do § 1º, a autoridade licenciadora concederá prazo de 15 (quinze) dias para manifestação do empreendedor.
+
+§ 3º O TR será elaborado considerando o nexo de causalidade entre os elementos e atributos do meio ambiente e os potenciais impactos da atividade ou empreendimento.
+
+§ 4º A autoridade licenciadora terá o prazo máximo de 30 (trinta dias) dias para disponibilização do TR ao empreendedor, a contar da data do requerimento.
+
+Art. 20. O EIA deve ser elaborado de forma a contemplar: I – concepção e características principais da atividade ou empreendimento e identificação dos processos, serviços e produtos que o compõem, assim como identificação e análise das principais alternativas tecnológicas e locacionais, quando couber, confrontando-as entre si e com a hipótese de não implantação da atividade ou empreendimento; II – definição dos limites geográficos da área diretamente afetada pela atividade ou empreendimento (ADA) e de sua área de influência; III – diagnóstico ambiental da área de influência da atividade ou empreendimento, com a análise integrada dos elementos e atributos dos meios físico, biótico e socioeconômico que poderão ser afetados por ele; Página 17 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+17
+
+
+
+IV – análise dos impactos ambientais da atividade ou empreendimento e de suas alternativas, por meio da identificação, previsão da magnitude e interpretação da importância dos prováveis impactos relevantes, discriminando-os em negativos e positivos, de curto, médio e longo prazos, temporários e permanentes, considerando seu grau de reversibilidade e suas propriedades cumulativas e sinérgicas, bem como a distribuição dos ônus e benefícios sociais e a existência ou o planejamento de outras atividades ou empreendimentos na mesma área de influência; V – prognóstico do meio ambiente na ADA, bem como na área de SF/18114.07075-08
+
+influência da atividade ou empreendimento, nas hipóteses de sua implantação ou não;
+
+VI – definição das medidas para evitar, mitigar ou compensar os impactos ambientais negativos da atividade ou empreendimento, incluindo os decorrentes da sua desativação, e maximizar seus impactos ambientais positivos;
+
+VII – elaboração de programa de acompanhamento e monitoramento dos impactos positivos e negativos, indicando os fatores e parâmetros a serem considerados; e
+
+VIII – conclusão sobre a viabilidade ambiental da atividade ou empreendimento.
+
+Art. 21. Todo EIA deve gerar um Rima, com o seguinte conteúdo mínimo:
+
+I – objetivos e justificativas da atividade ou empreendimento, sua relação e compatibilidade com as políticas setoriais, planos e programas governamentais;
+
+II – descrição e características principais da atividade ou empreendimento, bem como de sua área de influência, com as conclusões do estudo comparativo entre suas principais alternativas tecnológicas e locacionais;
+
+III – síntese dos resultados dos estudos de diagnóstico ambiental da área de influência da atividade ou empreendimento; IV – descrição dos prováveis impactos ambientais da atividade ou empreendimento, considerando o projeto proposto, suas alternativas, os Página 18 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+18
+
+
+
+horizontes de tempo de incidência dos impactos e indicando os métodos, técnicas e critérios adotados para sua identificação, quantificação e interpretação;
+
+V – caracterização da qualidade ambiental futura da área de influência, comparando as diferentes situações da adoção da atividade ou empreendimento e suas alternativas, bem como com a hipótese de sua não realização;
+
+VI – descrição do efeito esperado das medidas previstas para evitar, mitigar ou compensar os impactos ambientais negativos da atividade SF/18114.07075-08
+
+ou empreendimento ou para maximizar seus impactos positivos; VII – programa de acompanhamento e monitoramento dos impactos; e
+
+VIII – recomendação quanto à alternativa mais favorável e conclusões.
+
+Art. 22. Nos casos de atividades ou empreendimentos localizados na mesma área de influência, a autoridade licenciadora poderá aceitar estudo ambiental para o conjunto, dispensando a elaboração de estudos específicos para cada atividade ou empreendimento, sem prejuízo das medidas de participação previstas na Seção 6.
+
+§1º Na hipótese prevista no caput, poderá ser emitida LP única para o conjunto de atividades ou empreendimentos, desde que identificado um responsável legal, mantida a necessidade de emissão das demais licenças específicas para cada atividade ou empreendimento.
+
+§ 2º Para atividades ou empreendimentos de pequeno porte e similares, poderá ser admitido um único processo de licenciamento ambiental, desde que definida a responsabilidade legal pelo conjunto de atividade ou empreendimento.
+
+Art. 23. Independentemente da titularidade do licenciamento, no caso de implantação de atividade ou empreendimento na área de influência de outro já licenciado, poderá ser aproveitado o diagnóstico ambiental constante no estudo ambiental anterior, desde que adequado à realidade da nova atividade ou empreendimento e resguardado o sigilo das informações previsto em lei.
+
+Página 19 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+19
+
+
+
+§ 1º Para atender ao disposto neste artigo, a autoridade licenciadora deve manter banco de dados, disponibilizado na internet, integrado ao Sistema Nacional de Informações sobre Meio Ambiente (Sinima).
+
+§ 2º Cabe à autoridade licenciadora estabelecer o prazo de validade dos dados disponibilizados para fins do disposto neste artigo.
+
+Art. 24. A elaboração de estudos ambientais deve ser confiada a equipe habilitada nas respectivas áreas de atuação e registrada no Cadastro Técnico Federal de Atividades e Instrumentos de Defesa Ambiental.
+
+SF/18114.07075-08
+
+
+
+Seção 5
+
+Da Disponibilização de Informações ao Público
+
+
+
+Art. 25. O pedido de licenciamento ambiental, sua aprovação, rejeição ou renovação serão publicados no jornal oficial, bem como em periódico regional ou local de grande circulação, ou em meio eletrônico de comunicação mantido pela autoridade licenciadora.
+
+§ 1º Em caso de aprovação ou renovação, deverão constar da publicação o prazo de validade e a indicação do endereço eletrônico no qual o documento integral da licença ambiental pode ser acessado.
+
+§ 2º A autoridade licenciadora deve disponibilizar, em meio eletrônico de comunicação de sua responsabilidade na internet, todos os documentos do licenciamento ambiental cuja digitalização seja viável.
+
+§ 3º O estudo ambiental rejeitado deve ser identificado em meio eletrônico de comunicação de responsabilidade da autoridade licenciadora e no Sinima, com a indicação dos motivos que ensejaram sua reprovação.
+
+Art. 26. O EIA e demais estudos e informações exigidos pela autoridade licenciadora no licenciamento ambiental são públicos, passando a compor o acervo da autoridade licenciadora, e devem integrar o Sinima.
+
+Art. 27. É assegurado no processo de licenciamento ambiental o sigilo de informações garantido por lei.
+
+Página 20 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+20
+
+
+
+Seção 6
+
+Da Participação Pública
+
+
+
+Art. 28. A atividade ou empreendimento sujeito ao licenciamento ambiental pelo procedimento com EIA deve ser objeto de processo de participação pública, com pelo menos 1 (uma) audiência pública presencial antes da decisão final sobre a emissão da LP.
+
+§ 1º Na audiência pública deverá ser apresentado à população da SF/18114.07075-08
+
+área de influência da atividade ou empreendimento o conteúdo da proposta em análise e do seu respectivo Rima, dirimindo dúvidas e recolhendo dos presentes as críticas e sugestões a respeito.
+
+§ 2º Antes da realização da reunião presencial prevista no caput, o empreendedor deve disponibilizar o Rima conforme definido pela autoridade licenciadora.
+
+§ 3º A decisão da autoridade licenciadora de realização de mais de uma reunião presencial deve ser motivada na inviabilidade de realização de um único evento, na complexidade da atividade ou empreendimento, na amplitude da distribuição geográfica da área de influência ou outro fator relevante devidamente justificado.
+
+§ 4º As conclusões e recomendações da audiência pública não vinculam a decisão da autoridade licenciadora e serão motivadamente rejeitadas ou acolhidas.
+
+§ 5º Além do previsto no caput e § 1º deste artigo, será viabilizada a participação publica por meio da internet:
+
+I – se houver requerimento do Ministério Público ou de 50
+
+(cinquenta) ou mais cidadãos, em até 10 (dez) dias após a realização das audiências públicas; e
+
+II – em outras situações que, motivadamente, a autoridade licenciadora julgar pertinentes.
+
+§ 6º A consulta pública prevista no § 5º deve durar, no mínimo, 15
+
+(quinze) dias e, no máximo, 30 (trinta) dias.
+
+Página 21 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+21
+
+
+
+§ 7º Sem prejuízo do disposto no § 5º, a autoridade licenciadora poderá prever a participação pública durante o processo de licenciamento ambiental em curso, via internet.
+
+§ 8º Sem prejuízo das reuniões e consultas previstas nesta Seção, a autoridade licenciadora poderá realizar reuniões participativas com especialistas e interessados.
+
+Art. 29. A autoridade licenciadora poderá, a seu critério, receber contribuições por meio de reuniões técnicas presenciais ou via internet nos casos de licenciamento ambiental pelo procedimento simplificado.
+
+SF/18114.07075-08
+
+
+
+Seção 7
+
+Da Participação das Autoridades Envolvidas
+
+
+
+Art. 30. A participação das autoridades envolvidas no licenciamento ambiental ocorrerá nas seguintes situações: I – Funai: quando na área de influência existir terra indígena homologada;
+
+II – FCP: quando na área de influência existir terra quilombola delimitada por portaria de reconhecimento da INCRA; e III – IPHAN e autoridades responsáveis pelo patrimônio histórico e cultural: quando na área de influência existirem bens culturais formalmente identificados e formalmente acautelados.
+
+IV – órgãos executores do Sistema Nacional de Unidades de Conservação: quando o empreendimento ou atividade afetar unidade de conservação específica ou sua zona de amortecimento;
+
+§ 1º A manifestação das autoridades envolvidas não vincula a decisão final da autoridade licenciadora quanto à licença ambiental.
+
+§ 2º A manifestação dos órgãos executores do Sistema Nacional de Unidade de Conservação a que se refere o inciso IV ocorrerá nos casos de licenciamento ambiental com EIA, sempre que na área de influência existir unidade de conservação, com exceção de Áreas de Proteção Ambiental.
+
+Página 22 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+22
+
+
+
+§ 3º As disposições do caput serão observadas sem prejuízo da legislação as normas específicas sobre os monumentos arqueológicos ou pré-
+
+históricos.
+
+§ 4º A manifestação dos órgãos previstos no inciso IV do caput deste artigo deve se restringir aos potenciais impactos da atividade ou empreendimento na Unidade de Conservação.
+
+Art. 31. A autoridade licenciadora deverá solicitar a manifestação das autoridades envolvidas no prazo máximo de 30 (trinta) dias do recebimento do estudo ambiental, planos, programas e projetos relacionados SF/18114.07075-08
+
+à licença ambiental.
+
+§ 1º A autoridade envolvida apresentará manifestação conclusiva para subsidiar a autoridade licenciadora no prazo máximo equivalente à metade do prazo concedido para a autoridade licenciadora, contado da data de recebimento da solicitação.
+
+§ 2º A ausência de manifestação da autoridade envolvida no prazo estabelecido no § 1º não obsta o andamento do processo de licenciamento, nem a expedição da licença ambiental.
+
+§ 3º No caso de a manifestação de autoridade envolvida incluir propostas de condicionantes, estas devem estar acompanhadas de justificativa técnica que demonstre sua necessidade para evitar, mitigar ou compensar impactos negativos da atividade ou empreendimento, cabendo à autoridade licenciadora rejeitar aquelas que não atendam a esse requisito.
+
+§ 4º As autoridades envolvidas deverão acompanhar a implementação das condicionantes incluídas nas licenças relacionadas a suas respectivas atribuições, informando a autoridade licenciadora nos casos de descumprimento ou inconformidade.
+
+
+
+Seção 8
+
+
+
+
+
+Dos Prazos Administrativos
+
+
+Art. 32. O processo de licenciamento ambiental respeitará os seguintes prazos máximos de análise para emissão da licença, contados a Página 23 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+23
+
+
+
+partir da entrega do estudo ambiental pertinente e demais informações ou documentos requeridos na forma desta Lei: I – 10 (dez) meses para a LP, quando o estudo ambiental exigido for o EIA;
+
+II – 6 (seis) meses para a LP, para os casos dos demais estudos; III – 4 (quatro) meses para a LI, LO, LOC e LAU; IV – 6 (seis) meses para as licenças do rito bifásico; e SF/18114.07075-08
+
+V – 30 (trinta) dias para a LAC.
+
+§ 1º Os prazos estipulados no caput poderão ser alterados em casos específicos, desde que formalmente solicitado pelo empreendedor e com a concordância da autoridade licenciadora.
+
+§ 2º O requerimento de licença não será admitido quando, no prazo de 15 (quinze) dias, a autoridade licenciadora identificar que o EIA ou demais estudo ambiental protocolado não apresente os itens listados no TR, gerando a necessidade de reapresentação do estudo, com reinício do procedimento e da contagem do prazo.
+
+§ 3º O decurso dos prazos máximos previstos no caput sem a emissão da licença ambiental não implica emissão tácita, nem autoriza a prática de ato que dela dependa ou decorra, mas instaura a competência supletiva de licenciamento, nos termos do § 3º do art. 14 da Lei Complementar nº 140, de 8 de dezembro de 2011.
+
+§ 4º Na instauração de competência supletiva prevista no § 3º, o prazo de análise será reiniciado e deverão ser aproveitados, sempre que possível, os elementos instrutórios no âmbito do licenciamento ambiental, sendo vedada a solicitação de estudos já apresentados e aceitos, ressalvados os casos de vício de legalidade.
+
+§ 5º Respeitados os prazos previstos neste artigo, as autoridades licenciadoras definirão em ato próprio os demais prazos procedimentais do licenciamento ambiental.
+
+Art. 33. As exigências de complementação oriundas da análise da atividade ou empreendimento devem ser comunicadas pela autoridade licenciadora de uma única vez ao empreendedor, ressalvadas aquelas Página 24 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+24
+
+
+
+decorrentes de fatos novos, nos termos do § 1º do art. 14 da Lei Complementar nº 140, de 8 de dezembro de 2011.
+
+§ 1º O empreendedor deverá atender às exigências de complementação no prazo máximo de 4 (quatro) meses, contado do recebimento da respectiva notificação, podendo esse prazo ser prorrogado, a critério da autoridade licenciadora, desde que justificado pelo empreendedor.
+
+§ 2º O descumprimento injustificado do prazo previsto no § 1º
+
+ensejará o arquivamento do processo de licenciamento ambiental.
+
+SF/18114.07075-08
+
+§ 3º O arquivamento do processo a que se refere o § 2º não impede novo protocolo com o mesmo teor, em processo sujeito a novo recolhimento de despesas de licenciamento, bem como à apresentação das complementações de informações, documentos ou estudos que forem julgadas necessárias pela autoridade licenciadora.
+
+§ 4º As exigências de complementação de informações, documentos ou estudos feitos pela autoridade licenciadora suspendem a contagem dos prazos previstos no art. 32, que continuam a fluir após o seu atendimento integral pelo empreendedor.
+
+Art. 34. O processo de licenciamento ambiental que ficar sem movimentação durante 2 (dois) anos sem justificativa formal, mediante notificação prévia ao empreendedor, poderá ser arquivado.
+
+Parágrafo único. Para o desarquivamento do processo, poderão ser exigidos novos estudos ou complementação dos anteriormente apresentados, bem como cobradas novas despesas relativas ao licenciamento ambiental.
+
+Art. 35. Os demais entes federativos interessados podem se manifestar à autoridade licenciadora responsável, de maneira não vinculante, respeitados os prazos e procedimentos do licenciamento ambiental, nos termos do § 1º do art. 13 da Lei Complementar nº 140, de 8 de dezembro de 2011, previamente à emissão da primeira licença da atividade ou empreendimento.
+
+Art. 36. As autorizações ou outorgas a cargo de órgão ou entidade integrante do Sisnama que se fizerem necessárias para o pleno exercício da licença ambiental devem ser emitidas previamente ou concomitantemente a ela, respeitados os prazos máximos previstos no art. 32.
+
+Página 25 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+25
+
+
+
+
+
+Seção 9
+
+Das Despesas do Licenciamento Ambiental Art. 37. Correrão às expensas do empreendedor as despesas relativas:
+
+I – à elaboração dos estudos ambientais requeridos no SF/18114.07075-08
+
+licenciamento ambiental;
+
+II – à realização de reunião presencial de audiência pública ou outras reuniões ou consultas realizadas no licenciamento ambiental; III – ao custeio de implantação, operação, monitoramento e eventual readequação das condicionantes ambientais, nelas considerados os planos, programas e projetos relacionados à licença ambiental expedida; IV – à publicação dos pedidos de licença ambiental ou sua renovação, inclusive nos casos de renovação automática previstos no art. 6º; V – às cobranças previstas no Anexo da Lei nº 6.938, de 31 de agosto de 1981, incluído pela Lei nº 9.960, de 28 de janeiro de 2000, naquilo que couber; e
+
+VI – às taxas e preços estabelecidos pelas legislações federal, estadual, distrital ou municipal.
+
+§ 1º Os valores alusivos às cobranças do poder público relativos ao licenciamento ambiental devem guardar relação de proporcionalidade com o custo e a complexidade dos serviços prestados e estar estritamente relacionados ao objeto da licença.
+
+§ 2º A autoridade licenciadora deverá publicar os itens de composição das cobranças referidas no § 1º.
+
+§ 3º Devem ser realizados de ofício pelos órgãos do Sisnama, independentemente de pagamento de taxas ou outras despesas, os atos necessários para a emissão de declaração de não sujeição ao licenciamento ambiental das atividades ou empreendimentos, nos termos do art. 7º.
+
+Página 26 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+26
+
+
+
+§ 4º É de competência dos órgãos intervenientes executar de forma direta a utilização dos recursos destinados às compensações ambientais repassados pelos empreendedores.
+
+
+
+CAPÍTULO III
+
+DA AVALIAÇÃO AMBIENTAL ESTRATÉGICA
+
+
+
+SF/18114.07075-08
+
+Art. 38. A Avaliação Ambiental Estratégica (AAE) tem como objetivos identificar as consequências, conflitos e oportunidades de propostas de políticas, planos e programas governamentais, considerando os aspectos ambientais, e assegurar a interação entre políticas setoriais, territoriais e de sustentabilidade ambiental no processo de tomada de decisão em tempo hábil.
+
+Parágrafo único. A AAE será realizada pelos órgãos responsáveis pela formulação e planejamento de políticas, planos e programas governamentais, ou conjuntos de projetos estruturantes, de desenvolvimento setorial ou territorial.
+
+Art. 39. A realização da AAE não exime os responsáveis de submeter as atividades ou empreendimentos que integram as políticas, planos ou programas ao licenciamento ambiental.
+
+§ 1º Os resultados da AAE poderão conter diretrizes para, se for o caso, orientar o licenciamento ambiental.
+
+§ 2º A AAE não poderá ser exigida como requisito para o licenciamento ambiental e sua inexistência não obstará ou dificultará o processo de licenciamento.
+
+§ 3º Instrumentos de planejamento e de políticas, planos e programas governamentais que contenham estudos com conteúdo equiparável à AAE, na forma do regulamento, poderão ser beneficiados com o previsto no inciso II do § 1º do art. 13.
+
+
+
+
+
+Página 27 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+27
+
+
+
+CAPÍTULO IV
+
+DISPOSIÇÕES COMPLEMENTARES E FINAIS
+
+
+
+Art. 40. Os estudos de viabilidade de uma atividade ou empreendimento poderão ser realizados em quaisquer categorias de unidades de conservação de domínio público prevista na Lei nº 9.985, de 18 de julho de 2000, mediante autorização prévia do órgão gestor da unidade.
+
+Parágrafo único. A interferência da realização dos estudos nos SF/18114.07075-08
+
+atributos da unidade de conservação deverá ser a menor possível, reversível e mitigável.
+
+Art. 41. A Funai deverá, quando couber, se manifestar sobre a autorização para a realização de estudos ambientais no interior de terra indígena no prazo de 30 (trinta) dias, a contar da data de apresentação do plano de trabalho pelo empreendedor.
+
+Parágrafo único O descumprimento do prazo estabelecido no caput autoriza o empreendedor a realizar o estudo ambiental com o uso de dados secundários.
+
+Art. 42 .Para fins do disposto no inciso I do art. 7º, considera-se: I - imóvel, propriedade ou posse rural regular: aquele que não possui pendência em relação ao cumprimento das obrigações previstas na Lei nº 12.651, de 2012;
+
+II - imóvel, propriedade ou posse rural em regularização: a) aquele cujo titular ou possuidor esteja cumprindo as obrigações assumidas no Termo de Compromisso perante o órgão competente integrante do Sisnama, nos termos da Lei nº 12.651, de 2012; ou b) aquele cujo titular ou possuidor tenha inscrição no CAR no prazo legal da Lei nº 12.651, de 2012, e tenha requerido ou finalizado a Proposta de Adesão ao Programa de Regularização Ambiental - PRA, com emissão de documento comprobatório pelo Sistema Nacional de Cadastro Ambiental Rural - SICAR.
+
+Página 28 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+28
+
+
+
+Art. 43. Em caso de situação de emergência ou estado de calamidade pública decretada por estados, municípios ou pelo Distrito Federal, as ações de resposta imediata ao desastre poderão ser executadas independentemente de licenciamento ambiental.
+
+§ 1º O executor deverá apresentar à autoridade licenciadora, no prazo máximo de 10 (dez) dias da data de conclusão de sua execução, informações sobre as ações de resposta empreendidas.
+
+§ 2º A autoridade licenciadora poderá definir orientações técnicas e medidas de caráter mitigatório ou compensatório às intervenções de que SF/18114.07075-08
+
+trata o caput.
+
+Art. 44. Aplica-se subsidiariamente a Lei nº 9.784, de 29 de janeiro de 1999, aos atos administrativos disciplinados por esta Lei.
+
+Art. 45. As regras desta Lei serão aplicadas sem prejuízo das disposições legais sobre:
+
+I – a exigência de EIA consoante a caracterização da vegetação como primária ou secundária em diferentes estágios de regeneração; e II – a ocupação e a exploração de apicuns e salgados.
+
+Art. 46. Após a entrada em vigor desta Lei, alterações no projeto original já licenciado e não previsto na licença que autorizou a operação da atividade ou empreendimento serão analisadas no âmbito do processo de licenciamento ambiental existente e, caso viáveis, serão autorizadas por meio de retificação.
+
+Art. 47. Após a emissão da licença que autorizou a operação da atividade ou empreendimento, poderá ser aberto prazo de 15 (quinze dias) para contestação, pelo empreendedor, das condicionantes constantes da licença, devendo a autoridade licenciadora se manifestar em até 30 (trinta) dias.
+
+Art. 48. Os profissionais que subscrevem os estudos ambientais necessários ao processo de licenciamento ambiental e os empreendedores são responsáveis pelas informações apresentadas, sujeitando-se às sanções administrativas, civis e penais.
+
+Art. 49. Esta Lei entra em vigor após decorridos 180 (cento e oitenta) dias de sua publicação oficial.
+
+Página 29 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+29
+
+
+
+Art. 50. Revogam-se o parágrafo único do art. 67 da Lei nº 9.605, de 12 de fevereiro de 1998, e o § 2º do art. 6º da Lei nº 7.661, de 16 de maio de 1988.
+
+Art. 51. Revoga-se o §3º, do Art. 36, da Lei nº 9.985, de 18 de julho de 2000.
+
+JUSTIFICAÇÃO
+
+SF/18114.07075-08
+
+Para assegurar o direito previsto no art. 225, da Constituição, que em seu caput determina aos brasileiros o direito ao meio ambiente ecologicamente equilibrado, bem de uso comum do povo e essencial à sadia qualidade de vida, impondo-se ao poder público e à coletividade o dever de defendê-lo e preservá-lo para as presentes e futuras gerações, previu o constituinte a exigência na forma da lei, de estudo prévio do impacto ambiental, para a instalação de obra ou atividade potencialmente causadora de significativa degradação do meio ambiente, sendo portanto dada ampla publicidade.
+
+A Lei nº 6.938, de 31 de agosto de 1981, que dispõe sobre a Política Nacional do Meio Ambiente, seus fins e mecanismos de formulação e aplicação, e que foi recepcionada pela Constituição de 1998, limita-se a prever a realização do processo de licenciamento no âmbito dos órgãos e entidades da União, dos estados, do Distrito Federal e dos municípios responsáveis pela proteção e melhoria da qualidade ambiental, não existindo legislação geral que regulamente o estudo prévio de impacto ambiental.
+
+Além disso, os tipos de licença exigíveis e o conteúdo do estudo de impacto ambiental são temas hoje encontrados apenas em resoluções do Conselho Nacional do Meio Ambiente (CONAMA), cuja legalidade é contestada em várias instâncias do judiciário. O fato de não existir uma legislação geral que regulamente o estudo prévio de impacto ambiental gera insegurança jurídica aos empreendedores.
+
+Desse modo, uma lei específica torna-se necessária para tornar o processo mais racional e aclarar as regras, assegurando dessa forma, um avanço na metodologia de avaliação de impacto ambiental no processo de elaboração das políticas públicas pelos órgãos do poder executivo, acompanhando a tendência mundial de considerações das questões ambientais nas ações de países tanto da Comunidade Europeia como dos Estados Unidos.
+
+Página 30 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+30
+
+
+
+Nesta linha, observamos que tanto o Banco Mundial (BM) quanto o Banco Interamericano de Desenvolvimento (BID) têm estimulado a implementação da Avaliação Ambiental Estratégica (AAE), que é um instrumento de planejamento e de apoio à tomada de decisão pela administração pública para a análise e avaliação de alternativas estratégicas que são realizadas no momento da elaboração dos programas e projetos públicos.
+
+Portanto, objetivando assegurar o arcabouço legal, adequar as normas ambientais às exigências contidas na Lei complementar 140, de 8 de dezembro de 2011, e estabelecer as referências conceituais para adoção da SF/18114.07075-08
+
+Avaliação Ambiental Estratégica no Brasil, apresentamos este Projeto de Lei do Senado, que institui a Lei Geral de Licenciamento Ambiental e dispõe sobre a avaliação ambiental estratégica. Pedimos o apoio das Senhoras e Senhores Senadores para sua aprovação.
+
+
+
+Sala das Sessões,
+
+
+
+Senador ACIR GURGACZ
+
+PDT/RONDÔNIA
+
+
+
+
+
+Página 31 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+LEGISLAÇÃO CITADA
+
+
+
+- Constituição de 1988 - 1988/88
+
+http://www.lexml.gov.br/urn/urn:lex:br:federal:constituicao:1988;1988
+
+- parágrafo 1º do artigo 182
+
+- artigo 225
+
+- inciso IV do parágrafo 1º do artigo 225
+
+- Lei Complementar nº 97, de 9 de Junho de 1999 - LCP-97-1999-06-09 - 97/99
+
+http://www.lexml.gov.br/urn/urn:lex:br:federal:lei.complementar:1999;97
+
+- Lei Complementar nº 140, de 8 de Dezembro de 2011 - LCP-140-2011-12-08 - 140/11
+
+http://www.lexml.gov.br/urn/urn:lex:br:federal:lei.complementar:2011;140
+
+- parágrafo 1º do artigo 13
+
+- parágrafo 1º do artigo 14
+
+- parágrafo 3º do artigo 14
+
+- Lei nº 6.938, de 31 de Agosto de 1981 - Lei da Política Nacional do Meio Ambiente -
+
+6938/81
+
+http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:1981;6938
+
+- artigo 10
+
+- Lei nº 7.661, de 16 de Maio de 1988 - Lei do Gerenciamento Costeiro - 7661/88
+
+http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:1988;7661
+
+- parágrafo 2º do artigo 6º
+
+- Lei nº 9.605, de 12 de Fevereiro de 1998 - Lei dos Crimes Ambientais; Lei da Natureza; Lei dos Crimes contra o Meio Ambiente - 9605/98
+
+http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:1998;9605
+
+- parágrafo 1º do artigo 67
+
+- artigo 79-
+
+- Lei nº 9.784, de 29 de Janeiro de 1999 - Lei Geral do Processo Administrativo; Lei do Processo Administrativo Federal - 9784/99
+
+http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:1999;9784
+
+- Lei nº 9.960, de 28 de Janeiro de 2000 - LEI-9960-2000-01-28 - 9960/00
+
+http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:2000;9960
+
+- Lei nº 9.985, de 18 de Julho de 2000 - Lei do SNUC - 9985/00
+
+http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:2000;9985
+
+- parágrafo 3º do artigo 36
+
+- Lei nº 11.105, de 24 de Março de 2005 - Lei de Biossegurança (2005); Lei de Engenharia Genética (2005) - 11105/05
+
+http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:2005;11105
+
+- Lei nº 12.651, de 25 de Maio de 2012 - Código Florestal (2012) - 12651/12
+
+http://www.lexml.gov.br/urn/urn:lex:br:federal:lei:2012;12651
+
+Página 32 de 32
+
+Parte integrante do Avulso do PLS nº 168 de 2018.
+
+
+
+
+
