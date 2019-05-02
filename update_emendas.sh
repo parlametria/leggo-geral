@@ -2,7 +2,7 @@
 
 # Faz com que as mensagens comumns e de erro deste script apareçam tanto no
 # terminal como em um arquivo de log
-exec > >(tee -a "/tmp/update.sh.log") 2>&1
+exec > >(tee -a "/tmp/update_emendas.sh.log") 2>&1
 
 # Finaliza script se algum comando der erro, mesmo em pipe
 set -e
@@ -11,35 +11,32 @@ set -o pipefail
 # Pretty Print
 pprint() {
     printf "\n===============================\n$1\n===============================\n"
+
 }
 
-cd $1
+if [ $# -ne 4 ]; then
+  pprint "Wrong number of arguments!\nUsage: update_emendas.sh <leggoR_folderpath> <emendas_raw_filepath> <distances_folderpath> <emendas_dist_filepath>"
+  exit 1
+fi
+
+leggo_folderpath=$1
+emendas_raw_filepath=$2
+distances_folderpath=$3
+emendas_dist_filepath=$4
+
+# Entra no diretório passado como argumento na chamada do script
+cd $leggo_folderpath
 
 pprint "Iniciando atualização"
 # Registra a data de início
 date
 
-pprint "Atualizando código LeggoR"
-git pull origin master
-
-pprint "Atualizando imagem docker"
-# Não usa a cache de build para usar sempre a última versão do Rcongresso
-sudo docker-compose build --no-cache
-
-pprint "Removendo CSVs anteriores"
-# Remove os CSVs antigos para evitar ficar em um estado inconsistente, com parte
-# dos dados atualizados e outros não
-rm -f exported/*.csv
-
-pprint "Baixando e exportando novos dados"
-sudo docker-compose up
-pprint "    pautas"
+pprint "Baixando e exportando distâncias para novas emendas"
 today=$(date +%Y-%m-%d)
-sudo docker-compose run --rm rmod \
-     Rscript scripts/fetch_agenda.R \
-     data/tabela_geral_ids_casa.csv \
-     2019-01-01 $today \
-     exported
+Rscript scripts/update_emendas_dist.R \
+     $emendas_raw_filepath \
+     $distances_folderpath \
+     $emendas_dist_filepath
 
 pprint "Inserindo no BD"
 # O id do container e nome pode mudar, mas parece sempre manter o "back_api" no começo
