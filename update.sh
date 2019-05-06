@@ -24,15 +24,26 @@ git pull
 
 pprint "Atualizando imagem docker"
 # Não usa a cache de build para usar sempre a última versão do Rcongresso
-sudo docker-compose build --no-cache
+sudo docker-compose build
 
-pprint "Removendo CSVs anteriores"
+#pprint "Removendo CSVs anteriores"
 # Remove os CSVs antigos para evitar ficar em um estado inconsistente, com parte
 # dos dados atualizados e outros não
-rm -f exported/*.csv
+#rm -f exported/*.csv
 
 pprint "Baixando e exportando novos dados"
-sudo docker-compose up
+sudo docker-compose run --rm rmod \
+        Rscript scripts/fetch_updated_bills_data.R \
+        data/tabela_geral_ids_casa.csv \
+        exported
+
+pprint "Atualizando as emendas com as distâncias disponíveis"
+sudo docker-compose run --rm rmod \
+        Rscript scripts/update_emendas_dist.R \
+        exported/emendas_raw.csv \
+        data/distancias \
+        exported/emendas.csv
+
 pprint "    pautas"
 today=$(date +%Y-%m-%d)
 sudo docker-compose run --rm rmod \
