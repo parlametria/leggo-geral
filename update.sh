@@ -1,12 +1,8 @@
 #!/bin/bash
-
+  
 # Faz com que as mensagens comumns e de erro deste script apareçam tanto no
 # terminal como em um arquivo de log
 exec > >(tee -a "/tmp/update.sh.log") 2>&1
-
-# Finaliza script se algum comando der erro, mesmo em pipe
-set -e
-set -o pipefail
 
 # Pretty Print
 pprint() {
@@ -26,25 +22,20 @@ pprint "Atualizando imagem docker"
 # Não usa a cache de build para usar sempre a última versão do Rcongresso
 sudo docker-compose build
 
-#pprint "Removendo CSVs anteriores"
-# Remove os CSVs antigos para evitar ficar em um estado inconsistente, com parte
-# dos dados atualizados e outros não
-#rm -f exported/*.csv
-
 pprint "Baixando e exportando novos dados"
 sudo docker-compose run --rm rmod \
-        Rscript scripts/fetch_updated_bills_data.R \
-        data/tabela_geral_ids_casa.csv \
-        exported
+       Rscript scripts/fetch_updated_bills_data.R \
+       data/tabela_geral_ids_casa.csv \
+       exported
 
 pprint "Atualizando as emendas com as distâncias disponíveis"
 sudo docker-compose run --rm rmod \
-        Rscript scripts/update_emendas_dist.R \
-        exported/emendas_raw.csv \
-        data/distancias \
-        exported/emendas.csv
+       Rscript scripts/update_emendas_dist.R \
+       exported/emendas_raw.csv \
+       data/distancias \
+       exported/emendas.csv
 
-pprint "    pautas"
+pprint "Atualizando as pautas"
 today=$(date +%Y-%m-%d)
 lastweek=$(date -d '2 weeks ago' +%Y-%m-%d)
 sudo docker-compose run --rm rmod \
@@ -63,3 +54,4 @@ sudo docker exec $api_container_id \
 # Registra a data final
 date
 pprint "Feito!"
+
