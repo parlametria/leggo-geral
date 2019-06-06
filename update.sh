@@ -46,11 +46,13 @@ sudo docker-compose run --rm rmod \
 
 pprint "    pautas"
 today=$(date +%Y-%m-%d)
+lastweek=$(date -d '2 weeks ago' +%Y-%m-%d)
 sudo docker-compose run --rm rmod \
-     Rscript scripts/fetch_agenda.R \
-     data/tabela_geral_ids_casa.csv \
-     2019-01-01 $today \
-     exported
+        Rscript scripts/fetch_agenda.R \
+        data/tabela_geral_ids_casa.csv \
+        $lastweek $today \
+        exported \
+        exported/pautas.csv
 
 pprint "Inserindo no BD"
 # O id do container e nome pode mudar, mas parece sempre manter o "back_api" no começo
