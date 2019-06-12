@@ -9,7 +9,7 @@ pprint() {
     printf "\n===============================\n$1\n===============================\n"
 }
 
-cd /home/ubuntu/agora-digital
+cd /home/ubuntu/leggoR
 
 pprint "Iniciando atualização"
 # Registra a data de início
