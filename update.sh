@@ -30,10 +30,11 @@ sudo docker-compose run --rm rmod \
 
 pprint "Atualizando as emendas com as distâncias disponíveis"
 sudo docker-compose run --rm rmod \
-       Rscript scripts/update_emendas_dist.R \
-       exported/emendas_raw.csv \
-       data/distancias \
-       exported/emendas.csv
+        Rscript scripts/update_emendas_dist.R \
+        exported/emendas_with_distances \
+        data/distancias \
+        exported/emendas_raw.csv \
+        exported/emendas.csv
 
 pprint "Atualizando as pautas"
 today=$(date +%Y-%m-%d)
