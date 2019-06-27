@@ -12,61 +12,105 @@ pprint() {
 update_rmod_container() {
 
     pprint "Atualizando código LeggoR"
-#    git pull
+    git pull
 
     pprint "Atualizando imagem docker"
-#    sudo docker-compose build
+    sudo docker-compose build
 
 }
 
 fetch_leggo_data() {
 
 pprint "Baixando e exportando novos dados"
-#sudo docker-compose run --rm rmod \
-#       Rscript scripts/fetch_updated_bills_data.R \
-#       data/tabela_geral_ids_casa.csv \
-#       exported
+sudo docker-compose run --rm rmod \
+       Rscript scripts/fetch_updated_bills_data.R \
+       data/tabela_geral_ids_casa.csv \
+       exported
+
+}
+
+update_leggo_data() {
+
+pprint "Atualizando dados do Leggo"
+sudo docker-compose run --rm rmod \
+       Rscript scripts/update_leggo_data.R \
+       data/tabela_geral_ids_casa.csv \
+       exported
+
+}
+
+process_leggo_data() {
+
+pprint "Processando dados do Leggo"
+sudo docker-compose run --rm rmod \
+       Rscript scripts/process_leggo_data.R \
+       exported \
+       exported
 
 }
 
 update_distancias_emendas() {
 
 pprint "Atualizando as emendas com as distâncias disponíveis"
-#sudo docker-compose run --rm rmod \
-#        Rscript scripts/update_emendas_dist.R \
-#        exported/emendas_with_distances \
-#        data/distancias \
-#        exported/emendas_raw.csv \
-#        exported/emendas.csv
+sudo docker-compose run --rm rmod \
+        Rscript scripts/update_emendas_dist.R \
+        exported/emendas_with_distances \
+        data/distancias \
+        exported/emendas_raw.csv \
+        exported/emendas.csv
 
 }
 
 update_pautas() {
 
 pprint "Atualizando as pautas"
-#today=$(date +%Y-%m-%d)
-#lastweek=$(date -d '2 weeks ago' +%Y-%m-%d)
-#sudo docker-compose run --rm rmod \
-#        Rscript scripts/fetch_agenda.R \
-#        data/tabela_geral_ids_casa.csv \
-#        $lastweek $today \
-#        exported \
-#        exported/pautas.csv
+today=$(date +%Y-%m-%d)
+lastweek=$(date -d '2 weeks ago' +%Y-%m-%d)
+sudo docker-compose run --rm rmod \
+        Rscript scripts/fetch_agenda.R \
+        data/tabela_geral_ids_casa.csv \
+        $lastweek $today \
+        exported \
+        exported/pautas.csv
 
 }
 
 update_db() {
 
 pprint "Inserindo no BD"
-## O id do container e nome pode mudar, mas parece sempre manter o "back_api" no começo
-#api_container_id=$(sudo docker ps | grep back_api | cut -f 1 -d ' ')
-#sudo docker exec $api_container_id \
-#     sh -c './manage.py flush --no-input; ./manage.py import_data'
+# O id do container e nome pode mudar, mas parece sempre manter o "back_api" no começo
+api_container_id=$(sudo docker ps | grep back_api | cut -f 1 -d ' ')
+sudo docker exec $api_container_id \
+     sh -c './manage.py flush --no-input; ./manage.py import_data'
 
 }
 
 
-#cd /home/ubuntu/leggoR
+cd /home/ubuntu/leggoR
+
+# Prints script usage
+print_usage() {
+    printf "Uso Correto: ./update.sh <OPERATION_LABEL>\n"
+    printf "Operation Labels:\n"
+    printf "			-help: Imprime ajuda/uso correto do script\n"
+    printf "			-build: Atualiza e faz build do container leggoR\n"
+    printf "			-update-pautas: Baixa dados atualizados de pautas\n"
+    printf "			-update-data: Baixa dados atualizados para o leggoR (versão nova)\n"
+    printf "			-process-data: Process dados do leggoR\n"
+    printf "			-fetch-data: Baixa dados para o leggoR (versão antiga)\n"
+    printf "			-update-emendas: Atualiza dados de emendas com distâncias atualizadas\n"
+    printf "			-update-db: Importa dados atualizados para o Banco de Dados\n"
+
+}
+
+if [ "$#" -lt 1 ]; then
+  echo "Número errado de parâmetros!"
+  print_usage
+  exit 1
+fi
+
+if [[ $@ == *'-help'* ]]; then print_usage; exit 0
+fi
 
 pprint "Iniciando atualização"
 # Registra a data de início
@@ -75,7 +119,13 @@ date
 if [[ $@ == *'-build'* ]]; then update_rmod_container
 fi
 
-if [[ $@ == *'-fetch-pautas'* ]]; then update_pautas
+if [[ $@ == *'-update-pautas'* ]]; then update_pautas
+fi
+
+if [[ $@ == *'update-data'* ]]; then update_leggo_data
+fi
+
+if [[ $@ == *'process-data'* ]]; then process_leggo_data
 fi
 
 if [[ $@ == *'-fetch-data'* ]]; then fetch_leggo_data
@@ -86,7 +136,6 @@ fi
 
 if [[ $@ == *'-update-db'* ]]; then update_db
 fi
-
 
 # Registra a data final
 date
