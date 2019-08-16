@@ -24,9 +24,40 @@ fetch_leggo_data() {
 pprint "Baixando e exportando novos dados"
 sudo docker-compose run --rm rmod \
        Rscript scripts/fetch_updated_bills_data.R \
-       data/tabela_geral_ids_casa.csv \
-       exported
+       -p data/tabela_geral_ids_casa.csv \
+       -e exported \
+       -f 1
 
+}
+
+fetch_leggo_props() {
+
+pprint "Baixando e exportando novos dados de proposições"
+sudo docker-compose run --rm rmod \
+       Rscript scripts/fetch_updated_bills_data.R \
+       -p data/tabela_geral_ids_casa.csv \
+       -e exported \
+       -f 2
+}
+
+fetch_leggo_emendas() {
+
+pprint "Baixando e exportando novos dados de emendas"
+sudo docker-compose run --rm rmod \
+       Rscript scripts/fetch_updated_bills_data.R \
+       -p data/tabela_geral_ids_casa.csv \
+       -e exported \
+       -f 3
+}
+
+fetch_leggo_comissoes() {
+
+pprint "Baixando e exportando novos dados de comissões"
+sudo docker-compose run --rm rmod \
+       Rscript scripts/fetch_updated_bills_data.R \
+       -p data/tabela_geral_ids_casa.csv \
+       -e exported \
+       -f 4
 }
 
 update_leggo_data() {
@@ -98,6 +129,9 @@ print_usage() {
     printf "			-update-data: Baixa dados atualizados para o leggoR (versão nova)\n"
     printf "			-process-data: Process dados do leggoR\n"
     printf "			-fetch-data: Baixa dados para o leggoR (versão antiga)\n"
+    printf "			-fetch-props: Baixa dados de proposições\n"
+    printf "			-fetch-emendas: Baixa dados de emendas\n"
+    printf "			-fetch-comissoes: Baixa dados de comissões\n"
     printf "			-update-emendas: Atualiza dados de emendas com distâncias atualizadas\n"
     printf "			-update-db: Importa dados atualizados para o Banco de Dados\n"
 
@@ -129,6 +163,15 @@ if [[ $@ == *'process-data'* ]]; then process_leggo_data
 fi
 
 if [[ $@ == *'-fetch-data'* ]]; then fetch_leggo_data
+fi
+
+if [[ $@ == *'-fetch-props'* ]]; then fetch_leggo_props
+fi
+
+if [[ $@ == *'-fetch-emendas'* ]]; then fetch_leggo_emendas
+fi
+
+if [[ $@ == *'-fetch-comissoes'* ]]; then fetch_leggo_comissoes
 fi
 
 if [[ $@ == *'-update-emendas'* ]]; then update_distancias_emendas
