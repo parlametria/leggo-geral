@@ -9,6 +9,12 @@ pprint() {
     printf "\n===============================\n$1\n===============================\n"
 }
 
+pull_rmod_container() {
+
+    pprint "Obtendo versão mais atualizada do container LeggoR"
+    sudo docker-compose pull
+}
+
 update_rmod_container() {
 
     pprint "Atualizando código LeggoR"
@@ -31,11 +37,17 @@ sudo docker-compose run --rm rmod \
 
 update_leggo_data() {
 
-pprint "Atualizando dados do Leggo"
+pprint "Atualizando dados do Leggo - Câmara"
 sudo docker-compose run --rm rmod \
        Rscript scripts/update_leggo_data.R \
        data/tabela_geral_ids_casa.csv \
-       exported
+       exported camara
+
+pprint "Atualizando dados do Leggo - Senado"
+sudo docker-compose run --rm rmod \
+       Rscript scripts/update_leggo_data.R \
+       data/tabela_geral_ids_casa.csv \
+       exported senado
 
 }
 
@@ -94,6 +106,7 @@ print_usage() {
     printf "Operation Labels:\n"
     printf "			-help: Imprime ajuda/uso correto do script\n"
     printf "			-build: Atualiza e faz build do container leggoR\n"
+    printf "			-pull-docker: Atualiza container leggoR\n"
     printf "			-update-pautas: Baixa dados atualizados de pautas\n"
     printf "			-update-data: Baixa dados atualizados para o leggoR (versão nova)\n"
     printf "			-process-data: Process dados do leggoR\n"
@@ -117,6 +130,9 @@ pprint "Iniciando atualização"
 date
 
 if [[ $@ == *'-build'* ]]; then update_rmod_container
+fi
+
+if [[ $@ == *'-pull-docker'* ]]; then pull_rmod_container
 fi
 
 if [[ $@ == *'-update-pautas'* ]]; then update_pautas
