@@ -87,8 +87,8 @@ process_leggo_data() {
 pprint "Processando dados do Leggo"
 sudo docker-compose run --rm rmod \
        Rscript scripts/process_leggo_data.R \
-       exported \
-       exported
+       -i exported \
+       -o exported
 
 }
 
