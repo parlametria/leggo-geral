@@ -123,14 +123,22 @@ sudo docker-compose run --rm rmod \
 
 update_db() {
 
-pprint "Inserindo no BD"
-# O id do container e nome pode mudar, mas parece sempre manter o "back_api" no começo
-api_container_id=$(sudo docker ps | grep back_api | cut -f 1 -d ' ')
-sudo docker exec $api_container_id \
-     sh -c './manage.py flush --no-input; ./manage.py import_data'
+pipeline=$1
 
+if [[ $pipeline == *'dev'* ]]; 
+then 
+
+	pprint "Atualizando dados no BD do Backend Development"
+	/snap/bin/heroku run python manage.py update_db_remotely -a leggo-backend-development 2>&1 | tee /tmp/heroku-dev-update-log.txt
+
+elif [[ $@ == *'prod'* ]];
+then
+
+	pprint "Atualizando dados no BD do Backend Production"
+	/snap/bin/heroku run python manage.py update_db_remotely -a leggo-backend-production 2>&1 | tee /tmp/heroku-prod-update-log.txt
+
+fi
 }
-
 
 cd /home/ubuntu/leggoR
 
@@ -149,7 +157,8 @@ print_usage() {
     printf "			-fetch-emendas: Baixa dados de emendas\n"
     printf "			-fetch-comissoes: Baixa dados de comissões\n"
     printf "			-update-emendas: Atualiza dados de emendas com distâncias atualizadas\n"
-    printf "			-update-db: Importa dados atualizados para o Banco de Dados\n"
+    printf "			-update-db-dev: Importa dados atualizados para o Banco de Dados do Backend Dev\n"
+    printf "			-update-db-prod: Importa dados atualizados para o Banco de Dados do Backend Prod\n"
 
 }
 
@@ -196,8 +205,12 @@ fi
 if [[ $@ == *'-update-emendas'* ]]; then update_distancias_emendas
 fi
 
-if [[ $@ == *'-update-db'* ]]; then update_db
+if [[ $@ == *'-update-db-dev'* ]]; then update_db dev
 fi
+
+if [[ $@ == *'-update-db-prod'* ]]; then update_db prod
+fi
+
 
 # Registra a data final
 date
