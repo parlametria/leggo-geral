@@ -9,6 +9,19 @@ pprint() {
     printf "\n===============================\n$1\n===============================\n"
 }
 
+# Function. 
+# Param 1 is the return code
+# Param 2 is text to display on failure.
+check_errs() {
+  if [ "${1}" -ne "0" ]; then
+    echo "ERROR # ${1} : ${2}"
+    # as a bonus, make our script exit with the right error code.
+    exit ${1}
+  else
+    echo "Script ran successfully"
+  fi
+}
+
 pull_rmod_container() {
 
     pprint "Obtendo versão mais atualizada do container LeggoR"
@@ -64,6 +77,7 @@ sudo docker-compose run --rm rmod \
        -p data/tabela_geral_ids_casa.csv \
        -e exported \
        -f 4
+check_errs $? "Não foi possível baixar dados de comissões."
 }
 
 update_leggo_data() {
@@ -71,14 +85,14 @@ update_leggo_data() {
 pprint "Atualizando dados do Leggo - Câmara"
 sudo docker-compose run --rm rmod \
        Rscript scripts/update_leggo_data.R \
-       data/tabela_geral_ids_casa.csv \
-       exported camara
+       -p data/tabela_geral_ids_casa.csv \
+       -e exported -c camara
 
 pprint "Atualizando dados do Leggo - Senado"
 sudo docker-compose run --rm rmod \
        Rscript scripts/update_leggo_data.R \
-       data/tabela_geral_ids_casa.csv \
-       exported senado
+       -p data/tabela_geral_ids_casa.csv \
+       -e exported -c senado
 
 }
 
@@ -88,7 +102,7 @@ pprint "Processando dados do Leggo"
 sudo docker-compose run --rm rmod \
        Rscript scripts/process_leggo_data.R \
        -f 1 \
-       -d 2019-01-31 \
+       -d "2019-01-31" \
        -p 0.1 \
        -i exported \
        -o exported
@@ -123,21 +137,21 @@ sudo docker-compose run --rm rmod \
 
 update_db() {
 
-pipeline=$1
+	pipeline=$1
 
-if [[ $pipeline == *'dev'* ]]; 
-then 
+	if [[ $pipeline == *'dev'* ]]; 
+	then 
 
-	pprint "Atualizando dados no BD do Backend Development"
-	/snap/bin/heroku run python manage.py update_db_remotely -a leggo-backend-development 2>&1 | tee /tmp/heroku-dev-update-log.txt
+		pprint "Atualizando dados no BD do Backend Development"
+		/snap/bin/heroku run python manage.py update_db_remotely -a leggo-backend-development 2>&1 | tee /tmp/heroku-dev-update-log.txt
 
-elif [[ $@ == *'prod'* ]];
-then
+	elif [[ $@ == *'prod'* ]];
+	then
 
-	pprint "Atualizando dados no BD do Backend Production"
-	/snap/bin/heroku run python manage.py update_db_remotely -a leggo-backend-production 2>&1 | tee /tmp/heroku-prod-update-log.txt
+		pprint "Atualizando dados no BD do Backend Production"
+		/snap/bin/heroku run python manage.py update_db_remotely -a leggo-backend-production 2>&1 | tee /tmp/heroku-prod-update-log.txt
 
-fi
+	fi
 }
 
 cd /home/ubuntu/leggoR
