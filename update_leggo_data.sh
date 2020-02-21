@@ -28,7 +28,7 @@ pull_rmod_container() {
     docker-compose pull
 }
 
-update_rmod_container() {
+build_leggor() {
 
     pprint "Atualizando código LeggoR"
     git pull
@@ -135,6 +135,22 @@ docker-compose run --rm rmod \
 
 }
 
+build_leggo_trends() {
+
+pprint "Atualizando código Leggo Trends"
+git pull
+
+pprint "Atualizando imagem docker do Leggo Trends"
+docker-compose -f $LEGGOTRENDS_COMPOSE_FILEPATH build
+
+}
+
+fetch_leggo_trends() {
+
+pprint "Atualizando Pressão"
+docker-compose -f $LEGGOTRENDS_COMPOSE_FILEPATH run --rm leggo-trends 
+}
+
 update_db() {
 
 	pipeline=$1
@@ -156,20 +172,22 @@ update_db() {
 
 run_pipeline() {
 	#Build container with current codebase
-	update_rmod_container
+	build_leggor
+       build_leggo_trends
 
 	#Fetch and Process Prop metadata and tramitação
-	#fetch_leggo_props
+	fetch_leggo_props
 
 	#Fetch Prop emendas
-	#fetch_leggo_emendas
+	fetch_leggo_emendas
 
 	#Compute Pressão
+       fetch_leggo_trends
 
 	#Fetch related documents
+	update_leggo_data
 
 	#Process related documents
-	update_leggo_data
 	process_leggo_data
 }
 
@@ -182,7 +200,7 @@ print_usage() {
     printf "Uso Correto: ./update.sh <OPERATION_LABEL>\n"
     printf "Operation Labels:\n"
     printf "			-help: Imprime ajuda/uso correto do script\n"
-    printf "			-build: Atualiza e faz build do container leggoR\n"
+    printf "			-build-leggor: Atualiza e faz build do container leggoR\n"
     printf "			-pull-docker: Atualiza container leggoR\n"
     printf "			-update-pautas: Baixa dados atualizados de pautas\n"
     printf "			-update-data: Baixa dados atualizados para o leggoR (versão nova)\n"
@@ -194,8 +212,9 @@ print_usage() {
     printf "			-update-emendas: Atualiza dados de emendas com distâncias atualizadas\n"
     printf "			-update-db-dev: Importa dados atualizados para o Banco de Dados do Backend Dev\n"
     printf "			-update-db-prod: Importa dados atualizados para o Banco de Dados do Backend Prod\n"
-    printf "                    -run-pipeline: Roda pipeline completo de atualização de dados do Leggo\n"
-
+    printf "                -run-pipeline: Roda pipeline completo de atualização de dados do Leggo\n"
+    printf "                -leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
+    printf "                -fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -211,7 +230,7 @@ pprint "Iniciando atualização"
 # Registra a data de início
 date
 
-if [[ $@ == *'-build'* ]]; then update_rmod_container
+if [[ $@ == *'-build-leggor'* ]]; then build_leggor
 fi
 
 if [[ $@ == *'-pull-docker'* ]]; then pull_rmod_container
@@ -248,6 +267,12 @@ if [[ $@ == *'-update-db-prod'* ]]; then update_db prod
 fi
 
 if [[ $@ == *'-run-pipeline'* ]]; then run_pipeline
+fi
+
+if [[ $@ == *'-build-leggo-trends'* ]]; then build_leggo_trends
+fi
+
+if [[ $@ == *'-fetch-leggo-trends'* ]]; then fetch_leggo_trends
 fi
 
 
