@@ -149,6 +149,29 @@ fetch_leggo_trends() {
 
 pprint "Atualizando Pressão"
 docker-compose -f $LEGGOTRENDS_COMPOSE_FILEPATH run --rm leggo-trends 
+
+}
+
+build_versoes_props() {
+
+pprint "Atualizando código Versões Proposições"
+git pull
+
+pprint "Atualizando imagem docker do Versões Proposições"
+docker-compose -f $VERSOESPROPS_COMPOSE_FILEPATH build
+
+}
+
+fetch_versoes_props() {
+
+docker-compose -f $VERSOESPROPS_COMPOSE_FILEPATH run --rm versoes_props \
+       Rscript fetcher.R -o data/emendas_raw_old.csv \
+       -e data/emendas_raw.csv \
+       -n leggo_content_data/novas_emendas.csv \
+       -a leggo_content_data/avulsos_iniciais.csv \
+       -t leggo_content_data/textos.csv \
+       -f 1 
+
 }
 
 update_db() {
@@ -170,7 +193,17 @@ update_db() {
 	fi
 }
 
-run_pipeline() {
+run_pipeline_leggo_content() {
+       #Build container with current codebase
+       build_versoes_props
+
+       #Fetch text
+       fetch_versoes_props
+
+
+}
+
+run_full_pipeline() {
 	#Build container with current codebase
 	build_leggor
        build_leggo_trends
@@ -189,6 +222,8 @@ run_pipeline() {
 
 	#Process related documents
 	process_leggo_data
+
+       #Run leggo content analysis
 }
 
 source .env
@@ -212,9 +247,11 @@ print_usage() {
     printf "			-update-emendas: Atualiza dados de emendas com distâncias atualizadas\n"
     printf "			-update-db-dev: Importa dados atualizados para o Banco de Dados do Backend Dev\n"
     printf "			-update-db-prod: Importa dados atualizados para o Banco de Dados do Backend Prod\n"
-    printf "                -run-pipeline: Roda pipeline completo de atualização de dados do Leggo\n"
-    printf "                -leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
+    printf "                -run-full-pipeline: Roda pipeline completo de atualização de dados do Leggo\n"
+    printf "                -build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
     printf "                -fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
+    printf "                -build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
+    printf "                -fetch-versoes-props: Computa dados para a Pressão usando o Versões Props\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -266,13 +303,19 @@ fi
 if [[ $@ == *'-update-db-prod'* ]]; then update_db prod
 fi
 
-if [[ $@ == *'-run-pipeline'* ]]; then run_pipeline
+if [[ $@ == *'-run-full-pipeline'* ]]; then run_full_pipeline
 fi
 
 if [[ $@ == *'-build-leggo-trends'* ]]; then build_leggo_trends
 fi
 
 if [[ $@ == *'-fetch-leggo-trends'* ]]; then fetch_leggo_trends
+fi
+
+if [[ $@ == *'-build-versoes-props'* ]]; then build_versoes_props
+fi
+
+if [[ $@ == *'-fetch-versoes-props'* ]]; then fetch_versoes_props
 fi
 
 
