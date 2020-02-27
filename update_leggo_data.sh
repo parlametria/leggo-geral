@@ -174,6 +174,23 @@ docker-compose -f $VERSOESPROPS_COMPOSE_FILEPATH run --rm versoes_props \
 
 }
 
+build_leggo_content() {
+
+pprint "Atualizando código do Leggo Content"
+git pull
+
+pprint "Atualizando imagem docker do Leggo Content"
+docker-compose -f $LEGGOCONTENT_COMPOSE_FILEPATH build
+
+}
+
+fetch_leggo_content() {
+
+docker-compose -f $LEGGOCONTENT_COMPOSE_FILEPATH run --rm leggo-content \
+       ./run_emendas_analysis.sh ./leggo_content_data
+
+}
+
 update_db() {
 
 	pipeline=$1
@@ -196,10 +213,13 @@ update_db() {
 run_pipeline_leggo_content() {
        #Build container with current codebase
        build_versoes_props
+       build_leggo_content
 
        #Fetch text
        fetch_versoes_props
 
+       # Analyze text
+       fetch_leggo_content
 
 }
 
@@ -224,6 +244,7 @@ run_full_pipeline() {
 	process_leggo_data
 
        #Run leggo content analysis
+       run_pipeline_leggo_content
 }
 
 source .env
@@ -252,6 +273,8 @@ print_usage() {
     printf "                -fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
     printf "                -build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
     printf "                -fetch-versoes-props: Computa dados para a Pressão usando o Versões Props\n"
+    printf "                -build-leggo-content: Atualiza e faz o build do Container Leggo Content\n"
+    printf "                -fetch-leggo-content: Processa dados de textos/conteúdo usando o Leggo Content\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -318,6 +341,11 @@ fi
 if [[ $@ == *'-fetch-versoes-props'* ]]; then fetch_versoes_props
 fi
 
+if [[ $@ == *'-build-leggo-content'* ]]; then build_leggo_content
+fi
+
+if [[ $@ == *'-fetch-leggo-content'* ]]; then fetch_leggo_content
+fi
 
 # Registra a data final
 date
