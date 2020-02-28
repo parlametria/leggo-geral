@@ -30,6 +30,9 @@ Exemplo: VERSOESPROPS_COMPOSE_FILEPATH=../versoes-de-proposicoes/docker-compose.
 - ***LEGGOCONTENT_COMPOSE_FILEPATH***: caminho para o arquivo docker-compose.yml do repositório do leggo-content. Este caminho é referenciado na máquina local e portanto pode ser relativo ou absoluto a mesma.
 Exemplo: LEGGOCONTENT_COMPOSE_FILEPATH=../leggo-content/docker-compose.yml
 
+- ***LOG_FILEPATH***: caminho para o arquivo de log a ser escrito durante a execução do pipeline de processamento dos dados.
+Exemplo: LOG_FILEPATH=/tmp/update_leggo_data.log
+
 ### Passo 2
 
 Uma vez configuradas as variáveis de ambiente, é possível verificar que procedimentos podem ser executados pelo `update_leggo_data` acessando o help do mesmo:

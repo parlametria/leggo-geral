@@ -1,8 +1,11 @@
 #!/bin/bash
-  
+
+# Carrega variáveis de ambiente
+source .env
+
 # Faz com que as mensagens comumns e de erro deste script apareçam tanto no
 # terminal como em um arquivo de log
-exec > >(tee -a "/tmp/update.sh.log") 2>&1
+exec > >(tee -a $LOG_FILEPATH) 2>&1
 
 # Pretty Print
 pprint() {
@@ -114,8 +117,8 @@ update_distancias_emendas() {
 pprint "Atualizando as emendas com as distâncias disponíveis"
 docker-compose run --rm rmod \
         Rscript scripts/update_emendas_dist.R \
-        $EXPORT_FOLDERPATH/emendas_with_distances \
-        data/distancias \
+        $EXPORT_FOLDERPATH/raw_emendas_distances \
+        $EXPORT_FOLDERPATH/distancias \
         $EXPORT_FOLDERPATH/emendas_raw.csv \
         $EXPORT_FOLDERPATH/emendas.csv
 
@@ -184,10 +187,10 @@ docker-compose -f $LEGGOCONTENT_COMPOSE_FILEPATH build
 
 }
 
-fetch_leggo_content() {
+process_leggo_content() {
 
 docker-compose -f $LEGGOCONTENT_COMPOSE_FILEPATH run --rm leggo-content \
-       ./run_emendas_analysis.sh ./leggo_content_data
+       ./run_emendas_analysis.sh ./leggo_content_data ./leggo_data
 
 }
 
@@ -210,6 +213,28 @@ update_db() {
 	fi
 }
 
+setup_leggo_data_volume() {
+       # Copy props tables to volume
+       docker-compose run --rm rmod \
+        cp data/tabela_geral_ids_casa* \
+        $EXPORT_FOLDERPATH
+
+       # Create folders for docs data
+       docker-compose run --rm rmod \
+        mkdir -p $EXPORT_FOLDERPATH/camara \
+        $EXPORT_FOLDERPATH/senado
+
+       # Copy deputados data to their respective folder
+       docker-compose run --rm rmod \
+        cp data/camara/parlamentares.csv \
+        $EXPORT_FOLDERPATH/camara/parlamentares.csv
+        
+       # Copy senadores data to their respective folder
+       docker-compose run --rm rmod \
+        cp data/senado/parlamentares.csv \
+        $EXPORT_FOLDERPATH/senado/parlamentares.csv
+}
+
 run_pipeline_leggo_content() {
        #Build container with current codebase
        build_versoes_props
@@ -219,14 +244,19 @@ run_pipeline_leggo_content() {
        fetch_versoes_props
 
        # Analyze text
-       fetch_leggo_content
+       process_leggo_content
 
+       # Aggregate emendas distances
+       update_distancias_emendas
 }
 
 run_full_pipeline() {
 	#Build container with current codebase
 	build_leggor
        build_leggo_trends
+
+       #Setup volume of leggo data
+       setup_leggo_data_volume
 
 	#Fetch and Process Prop metadata and tramitação
 	fetch_leggo_props
@@ -247,7 +277,6 @@ run_full_pipeline() {
        run_pipeline_leggo_content
 }
 
-source .env
 
 cd $LEGGOR_FOLDERPATH
 
@@ -269,12 +298,13 @@ print_usage() {
     printf "			-update-db-dev: Importa dados atualizados para o Banco de Dados do Backend Dev\n"
     printf "			-update-db-prod: Importa dados atualizados para o Banco de Dados do Backend Prod\n"
     printf "                -run-full-pipeline: Roda pipeline completo de atualização de dados do Leggo\n"
+    printf "                -run-pipeline-leggo-content: Roda pipeline para análise das Emendas\n"
     printf "                -build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
     printf "                -fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
     printf "                -build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
     printf "                -fetch-versoes-props: Computa dados para a Pressão usando o Versões Props\n"
     printf "                -build-leggo-content: Atualiza e faz o build do Container Leggo Content\n"
-    printf "                -fetch-leggo-content: Processa dados de textos/conteúdo usando o Leggo Content\n"
+    printf "                -process-leggo-content: Processa dados de textos/conteúdo usando o Leggo Content\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -329,6 +359,9 @@ fi
 if [[ $@ == *'-run-full-pipeline'* ]]; then run_full_pipeline
 fi
 
+if [[ $@ == *'-run-pipeline-leggo-content'* ]]; then run_pipeline_leggo_content
+fi
+
 if [[ $@ == *'-build-leggo-trends'* ]]; then build_leggo_trends
 fi
 
@@ -344,7 +377,7 @@ fi
 if [[ $@ == *'-build-leggo-content'* ]]; then build_leggo_content
 fi
 
-if [[ $@ == *'-fetch-leggo-content'* ]]; then fetch_leggo_content
+if [[ $@ == *'-process-leggo-content'* ]]; then process_leggo_content
 fi
 
 # Registra a data final
