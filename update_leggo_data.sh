@@ -275,6 +275,12 @@ run_full_pipeline() {
 
        #Run leggo content analysis
        run_pipeline_leggo_content
+
+       #Fetch comissões
+       fetch_leggo_comissoes
+
+       #Update pautas
+       update_pautas
 }
 
 
