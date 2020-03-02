@@ -2,7 +2,7 @@
 
 Repositórios para documentações e ferramentas para uso geral do projeto.
 
-- [Compose Frontend + Backend](compose)
+- [Rodar Aplicação Leggo localmente](compose)
 - [Documentação da Arquitetura](arquitetura.md)
 
 ## Como executar a captura dos dados através do Módulo de Dados
