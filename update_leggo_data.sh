@@ -25,26 +25,25 @@ check_errs() {
   fi
 }
 
-pull_rmod_container() {
-
-    pprint "Obtendo versão mais atualizada do container LeggoR"
-    docker-compose pull
-}
-
 build_leggor() {
 
-    pprint "Atualizando código LeggoR"
-    git pull
+pprint "Atualizando código do rcongresso"
+curr_branch=`git -C $LEGGOR_FOLDERPATH/rcongresso rev-parse --abbrev-ref HEAD`
+git -C $LEGGOR_FOLDERPATH/rcongresso pull origin $curr_branch
 
-    pprint "Atualizando imagem docker"
-    docker-compose build
+pprint "Atualizando código do LeggoR"
+curr_branch=`git -C $LEGGOR_FOLDERPATH rev-parse --abbrev-ref HEAD`
+git -C $LEGGOR_FOLDERPATH pull origin $curr_branch
+
+pprint "Atualizando imagem docker"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml build
 
 }
 
 fetch_leggo_data() {
 
 pprint "Baixando e exportando novos dados"
-docker-compose run --rm rmod \
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/fetch_updated_bills_data.R \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH \
@@ -55,7 +54,7 @@ docker-compose run --rm rmod \
 fetch_leggo_props() {
 
 pprint "Baixando e exportando novos dados de proposições"
-docker-compose run --rm rmod \
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/fetch_updated_bills_data.R \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH \
@@ -65,7 +64,7 @@ docker-compose run --rm rmod \
 fetch_leggo_emendas() {
 
 pprint "Baixando e exportando novos dados de emendas"
-docker-compose run --rm rmod \
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/fetch_updated_bills_data.R \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH \
@@ -75,7 +74,7 @@ docker-compose run --rm rmod \
 fetch_leggo_comissoes() {
 
 pprint "Baixando e exportando novos dados de comissões"
-docker-compose run --rm rmod \
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/fetch_updated_bills_data.R \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH \
@@ -86,13 +85,13 @@ check_errs $? "Não foi possível baixar dados de comissões."
 update_leggo_data() {
 
 pprint "Atualizando dados do Leggo - Câmara"
-docker-compose run --rm rmod \
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/update_leggo_data.R \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH -c camara
 
 pprint "Atualizando dados do Leggo - Senado"
-docker-compose run --rm rmod \
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/update_leggo_data.R \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH -c senado
@@ -102,7 +101,7 @@ docker-compose run --rm rmod \
 process_leggo_data() {
 
 pprint "Processando dados do Leggo"
-docker-compose run --rm rmod \
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/process_leggo_data.R \
        -f 1 \
        -d "2019-01-31" \
@@ -115,7 +114,7 @@ docker-compose run --rm rmod \
 update_distancias_emendas() {
 
 pprint "Atualizando as emendas com as distâncias disponíveis"
-docker-compose run --rm rmod \
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         Rscript scripts/update_emendas_dist.R \
         $EXPORT_FOLDERPATH/raw_emendas_distances \
         $EXPORT_FOLDERPATH/distancias \
@@ -129,7 +128,7 @@ update_pautas() {
 pprint "Atualizando as pautas"
 today=$(date +%Y-%m-%d)
 lastweek=$(date -d '2 weeks ago' +%Y-%m-%d)
-docker-compose run --rm rmod \
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         Rscript scripts/fetch_agenda.R \
         $PLS_FILEPATH \
         $lastweek $today \
@@ -140,34 +139,36 @@ docker-compose run --rm rmod \
 
 build_leggo_trends() {
 
-pprint "Atualizando código Leggo Trends"
-git pull
+pprint "Atualizando código do LeggoTrends"
+curr_branch=`git -C $LEGGOTRENDS_FOLDERPATH rev-parse --abbrev-ref HEAD`
+git -C $LEGGOTRENDS_FOLDERPATH pull origin $curr_branch
 
-pprint "Atualizando imagem docker do Leggo Trends"
-docker-compose -f $LEGGOTRENDS_COMPOSE_FILEPATH build
+pprint "Atualizando imagem docker"
+docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml build
 
 }
 
 fetch_leggo_trends() {
 
 pprint "Atualizando Pressão"
-docker-compose -f $LEGGOTRENDS_COMPOSE_FILEPATH run --rm leggo-trends 
+docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends 
 
 }
 
 build_versoes_props() {
 
-pprint "Atualizando código Versões Proposições"
-git pull
+pprint "Atualizando código do Versões Proposições"
+curr_branch=`git -C $VERSOESPROPS_FOLDERPATH rev-parse --abbrev-ref HEAD`
+git -C $VERSOESPROPS_FOLDERPATH pull origin $curr_branch
 
-pprint "Atualizando imagem docker do Versões Proposições"
-docker-compose -f $VERSOESPROPS_COMPOSE_FILEPATH build
+pprint "Atualizando imagem docker"
+docker-compose -f $VERSOESPROPS_FOLDERPATH/docker-compose.yml build
 
 }
 
 fetch_versoes_props() {
 
-docker-compose -f $VERSOESPROPS_COMPOSE_FILEPATH run --rm versoes_props \
+docker-compose -f $VERSOESPROPS_FOLDERPATH/docker-compose.yml run --rm versoes_props \
        Rscript fetcher.R -o data/emendas_raw_old.csv \
        -e data/emendas_raw.csv \
        -n leggo_content_data/novas_emendas.csv \
@@ -180,16 +181,17 @@ docker-compose -f $VERSOESPROPS_COMPOSE_FILEPATH run --rm versoes_props \
 build_leggo_content() {
 
 pprint "Atualizando código do Leggo Content"
-git pull
+curr_branch=`git -C $LEGGOCONTENT_FOLDERPATH rev-parse --abbrev-ref HEAD`
+git -C $LEGGOCONTENT_FOLDERPATH pull origin $curr_branch
 
-pprint "Atualizando imagem docker do Leggo Content"
-docker-compose -f $LEGGOCONTENT_COMPOSE_FILEPATH build
+pprint "Atualizando imagem docker"
+docker-compose -f $LEGGOCONTENT_FOLDERPATH/docker-compose.yml build
 
 }
 
 process_leggo_content() {
 
-docker-compose -f $LEGGOCONTENT_COMPOSE_FILEPATH run --rm leggo-content \
+docker-compose -f $LEGGOCONTENT_FOLDERPATH/docker-compose.yml run --rm leggo-content \
        ./run_emendas_analysis.sh ./leggo_content_data ./leggo_data
 
 }
@@ -215,22 +217,22 @@ update_db() {
 
 setup_leggo_data_volume() {
        # Copy props tables to volume
-       docker-compose run --rm rmod \
-        cp data/tabela_geral_ids_casa* \
+       docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+        cp data/tabela_geral_ids_casa.csv data/tabela_geral_ids_casa_new.csv \
         $EXPORT_FOLDERPATH
 
        # Create folders for docs data
-       docker-compose run --rm rmod \
+       docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         mkdir -p $EXPORT_FOLDERPATH/camara \
         $EXPORT_FOLDERPATH/senado
 
        # Copy deputados data to their respective folder
-       docker-compose run --rm rmod \
+       docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         cp data/camara/parlamentares.csv \
         $EXPORT_FOLDERPATH/camara/parlamentares.csv
         
        # Copy senadores data to their respective folder
-       docker-compose run --rm rmod \
+       docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         cp data/senado/parlamentares.csv \
         $EXPORT_FOLDERPATH/senado/parlamentares.csv
 }
@@ -284,7 +286,7 @@ run_full_pipeline() {
 }
 
 
-cd $LEGGOR_FOLDERPATH
+cd $WORKSPACE_FOLDERPATH
 
 # Prints script usage
 print_usage() {
