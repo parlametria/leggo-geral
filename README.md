@@ -15,7 +15,7 @@ Para que o script funcione corretamente, os seguintes repositórios devem ser cl
 - [versoes-de-proposicoes](https://github.com/parlametria/versoes-de-proposicoes)
 - [leggo-content](https://github.com/parlametria/leggo-content)
 
-Além disso, o repositório `rcongresso` deve ser clonado dentro da pasta do leggoR para ser usado no build do pacote R.
+Além disso, o repositório [`rcongresso`](https://github.com/analytics-ufcg/rcongresso) deve ser clonado dentro da pasta do leggoR para ser usado no build do pacote R.
 
 ### Passo 1
 Para executá-lo é preciso configurar as variáveis de ambiente por ele utilizadas. Para isto, **crie uma cópia do arquivo .env.sample** e o renomeie para `.env`. Em seguida preencha as variáveis com os valores adequados para execução.
