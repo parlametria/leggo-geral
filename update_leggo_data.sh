@@ -18,10 +18,6 @@ pprint() {
 check_errs() {
   if [ "${1}" -ne "0" ]; then
     echo "ERROR # ${1} : ${2}"
-    # as a bonus, make our script exit with the right error code.
-    exit ${1}
-  else
-    echo "Script ran successfully"
   fi
 }
 
@@ -37,6 +33,7 @@ git -C $LEGGOR_FOLDERPATH pull origin $curr_branch
 
 pprint "Atualizando imagem docker"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml build
+check_errs $? "Não foi possível fazer o build do leggoR."
 
 }
 
@@ -48,6 +45,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH \
        -f 1
+check_errs $? "Não foi possível baixar dados de proposições, emendas e comissões."
 
 }
 
@@ -59,6 +57,8 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH \
        -f 2
+check_errs $? "Não foi possível baixar dados de proposições."
+
 }
 
 fetch_leggo_emendas() {
@@ -69,6 +69,8 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH \
        -f 3
+check_errs $? "Não foi possível baixar dados de emendas."
+
 }
 
 fetch_leggo_comissoes() {
@@ -80,6 +82,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -e $EXPORT_FOLDERPATH \
        -f 4
 check_errs $? "Não foi possível baixar dados de comissões."
+
 }
 
 update_leggo_data() {
@@ -89,12 +92,14 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/update_leggo_data.R \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH -c camara
+check_errs $? "Não foi possível atualizar dados de documentos na Câmara."
 
 pprint "Atualizando dados do Leggo - Senado"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/update_leggo_data.R \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH -c senado
+check_errs $? "Não foi possível atualizar dados de documentos no Senado."
 
 }
 
@@ -108,6 +113,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -p 0.1 \
        -i $EXPORT_FOLDERPATH \
        -o $EXPORT_FOLDERPATH
+check_errs $? "Não foi possível processar dados dos documentos baixados."
 
 }
 
@@ -120,6 +126,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         $EXPORT_FOLDERPATH/distancias \
         $EXPORT_FOLDERPATH/emendas_raw.csv \
         $EXPORT_FOLDERPATH/emendas.csv
+check_errs $? "Não foi possível atualizar as distâncias advindas da análise de emendas."
 
 }
 
@@ -134,6 +141,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         $lastweek $today \
         $EXPORT_FOLDERPATH \
         $EXPORT_FOLDERPATH/pautas.csv
+check_errs $? "Não foi possível atualizar as pautas."
 
 }
 
@@ -145,6 +153,7 @@ git -C $LEGGOTRENDS_FOLDERPATH pull origin $curr_branch
 
 pprint "Atualizando imagem docker"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml build
+check_errs $? "Não foi possível fazer o build do leggoTrends."
 
 }
 
@@ -152,6 +161,7 @@ fetch_leggo_trends() {
 
 pprint "Atualizando Pressão"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends 
+check_errs $? "Não foi possível baixar dados de pressão pelo leggoTrends."
 
 }
 
@@ -163,6 +173,7 @@ git -C $VERSOESPROPS_FOLDERPATH pull origin $curr_branch
 
 pprint "Atualizando imagem docker"
 docker-compose -f $VERSOESPROPS_FOLDERPATH/docker-compose.yml build
+check_errs $? "Não foi possível fazer o build do versoes-de-proposicoes."
 
 }
 
@@ -175,7 +186,7 @@ docker-compose -f $VERSOESPROPS_FOLDERPATH/docker-compose.yml run --rm versoes_p
        -a leggo_content_data/avulsos_iniciais.csv \
        -t leggo_content_data/textos.csv \
        -f 1 
-
+check_errs $? "Não foi possível baixar dados de emendas e dos textos originais dos PLs."
 }
 
 build_leggo_content() {
@@ -186,6 +197,7 @@ git -C $LEGGOCONTENT_FOLDERPATH pull origin $curr_branch
 
 pprint "Atualizando imagem docker"
 docker-compose -f $LEGGOCONTENT_FOLDERPATH/docker-compose.yml build
+check_errs $? "Não foi possível fazer o build do leggo-content."
 
 }
 
@@ -193,6 +205,7 @@ process_leggo_content() {
 
 docker-compose -f $LEGGOCONTENT_FOLDERPATH/docker-compose.yml run --rm leggo-content \
        ./run_emendas_analysis.sh ./leggo_content_data ./leggo_data
+check_errs $? "Não foi possível analisar as emendas baixadas."
 
 }
 
@@ -204,37 +217,44 @@ update_db() {
 	then 
 
 		pprint "Atualizando dados no BD do Backend Development"
-		/snap/bin/heroku run python manage.py update_db_remotely -a leggo-backend-development 2>&1 | tee /tmp/heroku-dev-update-log.txt
+		/snap/bin/heroku run python manage.py update_db_remotely -a $DEV_BACK_APP 2>&1 | tee $LOG_FILEPATH
 
 	elif [[ $@ == *'prod'* ]];
 	then
 
 		pprint "Atualizando dados no BD do Backend Production"
-		/snap/bin/heroku run python manage.py update_db_remotely -a leggo-backend-production 2>&1 | tee /tmp/heroku-prod-update-log.txt
+		/snap/bin/heroku run python manage.py update_db_remotely -a $PROD_BACK_APP 2>&1 | tee $LOG_FILEPATH
 
 	fi
+       check_errs $? "Não foi possível atualizar os dados no BD do Heroku."
 }
 
 setup_leggo_data_volume() {
+
        # Copy props tables to volume
        docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         cp data/tabela_geral_ids_casa.csv data/tabela_geral_ids_casa_new.csv \
         $EXPORT_FOLDERPATH
+       check_errs $? "Não foi possível copiar as tabelas de proposições para o volume leggo_data."
 
        # Create folders for docs data
        docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         mkdir -p $EXPORT_FOLDERPATH/camara \
         $EXPORT_FOLDERPATH/senado
+       check_errs $? "Não foi possível criar as pastas de documentos no volume leggo_data."
 
        # Copy deputados data to their respective folder
        docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         cp data/camara/parlamentares.csv \
         $EXPORT_FOLDERPATH/camara/parlamentares.csv
+       check_errs $? "Não foi possível copiar os dados dos deputados para o volume leggo_data."
         
        # Copy senadores data to their respective folder
        docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         cp data/senado/parlamentares.csv \
         $EXPORT_FOLDERPATH/senado/parlamentares.csv
+       check_errs $? "Não foi possível copiar os dados dos senadores para o volume leggo_data."
+       
 }
 
 run_pipeline_leggo_content() {
