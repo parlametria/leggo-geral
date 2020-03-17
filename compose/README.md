@@ -7,19 +7,24 @@ https://github.com/docker/compose/issues/3874
 
 ## Uso
 
-Asumindo os repositórios do backend e frontend ao lado deste repositório, rodar os comandos abaixo.
-Dependendo da posição desses outros repositórios pode ser necessário ajustar os caminhos para eles. No caso do helper isso pode ser feito editando o arquivo `.env`.
+Assumindo os repositórios do backend e frontend estejam dentro da mesma pasta deste repositório, é possivel rodar os comandos abaixo.
+
+Obs: Dependendo da posição desses outros repositórios pode ser necessário ajustar os caminhos para eles. No caso do helper isso pode ser feito editando o arquivo `.env` (dentro do diretório `compose`).
 
 ### Com helper
 
 Desenvolvimento:
+Exemplo
 ```
-./run dev up
+python3.6 ./run dev up
 ```
 Produção:
+Exemplo
 ```
-./run prod up
+python3.6 ./run prod up
 ```
+
+Você pode executar também para qualquer versão do python acima da 3.6.
 
 ### Sem helper
 
