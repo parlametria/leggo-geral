@@ -237,6 +237,16 @@ setup_leggo_data_volume() {
         $EXPORT_FOLDERPATH/senado/parlamentares.csv
 }
 
+processa_pls_interesse() {
+
+pprint "Junta PL's de todos os interesses"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/interesses/export_pls_leggo.R \
+       -u $URL_INTERESSES \
+       -e $EXPORT_FOLDERPATH/pls_interesses.csv
+
+}
+
 run_pipeline_leggo_content() {
        #Build container with current codebase
        build_versoes_props
@@ -260,8 +270,10 @@ run_full_pipeline() {
        #Setup volume of leggo data
        setup_leggo_data_volume
 
+       processa_pls_interesse
+
 	#Fetch and Process Prop metadata and tramitação
-	fetch_leggo_props
+       fetch_leggo_props
 
 	#Fetch Prop emendas
 	fetch_leggo_emendas

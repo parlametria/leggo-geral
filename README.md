@@ -20,8 +20,11 @@ Além disso, o repositório [`rcongresso`](https://github.com/analytics-ufcg/rco
 ### Passo 1
 Para executá-lo é preciso configurar as variáveis de ambiente por ele utilizadas. Para isto, **crie uma cópia do arquivo .env.sample** e o renomeie para `.env`. Em seguida preencha as variáveis com os valores adequados para execução.
 
+- ***URL_INTERESSES***: URL para planilha com lista de interesses analisados pelo Leggo. Consulte um membro da equipe para obter essa URL. 
+Exemplo: URL_INTERESSES="<url_para_planilha>"
+
 - ***PLS_FILEPATH***: caminho para o arquivo csv com a lista de Proposições que irão ter seus dados capturados e processados. Esse caminho é referenciado dentro do container rmod e por este motivo geralmente está ligado ao diretório `leggo_data`. 
-Exemplo: PLS_FILEPATH=./leggo_data/tabela_geral_ids_casa_new.csv
+Exemplo: PLS_FILEPATH=./leggo_data/tabela_geral_ids_casa_new.csv ou PLS_FILEPATH=./leggo_data/pls_interesses.csv (caso você queira capturar todos os interesses).
 
 - ***WORKSPACE_FOLDERPATH***: caminho para a pasta base do workspace (onde os repositórios estão clonados). Esse é o diretório a partir do qual o script de update vai rodar os comandos.
 Exemplo: WORKSPACE_FOLDERPATH=../
