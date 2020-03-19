@@ -272,7 +272,9 @@ run_pipeline_leggo_content() {
        update_distancias_emendas
 }
 
-run_full_pipeline() {
+run_pipeline() {
+       full_pipeline=$1
+
 	#Build container with current codebase
 	build_leggor
        build_leggo_trends
@@ -295,14 +297,17 @@ run_full_pipeline() {
 	#Process related documents
 	process_leggo_data
 
-       #Run leggo content analysis
-       run_pipeline_leggo_content
-
        #Fetch comissões
        fetch_leggo_comissoes
 
        #Update pautas
        update_pautas
+
+       if [[ $full_pipeline == 1 ]]; 
+	then 
+              #Run emendas analysis
+              run_pipeline_leggo_content
+       fi
 }
 
 
@@ -325,6 +330,7 @@ print_usage() {
     printf "\t-update-emendas: Atualiza dados de emendas com distâncias atualizadas\n"
     printf "\t-update-db-dev: Importa dados atualizados para o Banco de Dados do Backend Dev\n"
     printf "\t-update-db-prod: Importa dados atualizados para o Banco de Dados do Backend Prod\n"
+    printf "\t-run-basic-pipeline: Roda pipeline básico de atualização de dados do Leggo (sem análise de emendas)\n"
     printf "\t-run-full-pipeline: Roda pipeline completo de atualização de dados do Leggo\n"
     printf "\t-run-pipeline-leggo-content: Roda pipeline para análise das Emendas\n"
     printf "\t-build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
@@ -384,7 +390,10 @@ fi
 if [[ $@ == *'-update-db-prod'* ]]; then update_db prod
 fi
 
-if [[ $@ == *'-run-full-pipeline'* ]]; then run_full_pipeline
+if [[ $@ == *'-run-basic-pipeline'* ]]; then run_pipeline 0
+fi
+
+if [[ $@ == *'-run-full-pipeline'* ]]; then run_pipeline 1
 fi
 
 if [[ $@ == *'-run-pipeline-leggo-content'* ]]; then run_pipeline_leggo_content
