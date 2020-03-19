@@ -47,6 +47,12 @@ Exemplo: LEGGOCONTENT_FOLDERPATH=./leggo-content
 - ***LOG_FILEPATH***: caminho para o arquivo de log a ser escrito durante a execução do pipeline de processamento dos dados.
 Exemplo: LOG_FILEPATH=/tmp/update_leggo_data.log
 
+- ***PROD_BACK_APP***: nome da aplicação do backend na versão de produção no Heroku.
+Exemplo: PROD_BACK_APP=production_app_name
+
+- ***DEV_BACK_APP***: nome da aplicação do backend na versão de desenvolvimento no Heroku.
+Exemplo: DEV_BACK_APP=development_app_name
+
 ### Passo 2
 
 Uma vez configuradas as variáveis de ambiente, é possível verificar que procedimentos podem ser executados pelo `update_leggo_data` acessando o help do mesmo:
