@@ -273,7 +273,7 @@ run_pipeline_leggo_content() {
 }
 
 run_pipeline() {
-       full_pipeline=$1
+       run_analise_emendas=$1
 
 	#Build container with current codebase
 	build_leggor
@@ -303,7 +303,7 @@ run_pipeline() {
        #Update pautas
        update_pautas
 
-       if [[ $full_pipeline == 1 ]]; 
+       if [[ $run_analise_emendas == 1 ]]; 
 	then 
               #Run emendas analysis
               run_pipeline_leggo_content
