@@ -89,14 +89,14 @@ update_leggo_data() {
 
 pprint "Atualizando dados do Leggo - Câmara"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
-       Rscript scripts/update_leggo_data.R \
+       Rscript scripts/documentos/update_leggo_data.R \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH -c camara
 check_errs $? "Não foi possível atualizar dados de documentos na Câmara."
 
 pprint "Atualizando dados do Leggo - Senado"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
-       Rscript scripts/update_leggo_data.R \
+       Rscript scripts/documentos/update_leggo_data.R \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH -c senado
 check_errs $? "Não foi possível atualizar dados de documentos no Senado."
@@ -107,7 +107,7 @@ process_leggo_data() {
 
 pprint "Processando dados do Leggo"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
-       Rscript scripts/process_leggo_data.R \
+       Rscript scripts/documentos/process_leggo_data.R \
        -f 1 \
        -d "2019-01-31" \
        -p 0.1 \
