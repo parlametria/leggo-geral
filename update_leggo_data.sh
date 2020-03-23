@@ -217,13 +217,13 @@ update_db() {
 	then 
 
 		pprint "Atualizando dados no BD do Backend Development"
-		/snap/bin/heroku run python manage.py update_db_remotely -a $DEV_BACK_APP 2>&1 | tee $LOG_FILEPATH
+		/snap/bin/heroku run python manage.py update_db_remotely -a $DEV_BACK_APP
 
 	elif [[ $@ == *'prod'* ]];
 	then
 
 		pprint "Atualizando dados no BD do Backend Production"
-		/snap/bin/heroku run python manage.py update_db_remotely -a $PROD_BACK_APP 2>&1 | tee $LOG_FILEPATH
+		/snap/bin/heroku run python manage.py update_db_remotely -a $PROD_BACK_APP
 
 	fi
        check_errs $? "Não foi possível atualizar os dados no BD do Heroku."
