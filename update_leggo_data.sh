@@ -176,8 +176,9 @@ pprint "Atualizando Pressão"
 # check_errs $? "Não foi possível baixar dados de pressão pelo Google Trends."
 
 pprint "Gerando dados de popularidade do Twitter"
-docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
-       # --env-file=".env" \
+docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
+       --env-file $LEGGOTRENDS_ENV_FILEPATH \
+       run --rm leggo-trends \
        Rscript scripts/tweets_from_last_days/export_tweets_from_last_days.R \
        -a data/apelidos.csv \
        -o data/ 
@@ -319,29 +320,29 @@ run_full_pipeline() {
 
        processa_pls_interesse
 
-	#Fetch and Process Prop metadata and tramitação
-       fetch_leggo_props
+	# #Fetch and Process Prop metadata and tramitação
+       # fetch_leggo_props
 
-	#Fetch Prop emendas
-	fetch_leggo_emendas
+	# #Fetch Prop emendas
+	# fetch_leggo_emendas
 
 	#Compute Pressão
        fetch_leggo_trends
 
-	#Fetch related documents
-	update_leggo_data
+	# #Fetch related documents
+	# update_leggo_data
 
-	#Process related documents
-	process_leggo_data
+	# #Process related documents
+	# process_leggo_data
 
-       #Run leggo content analysis
-       run_pipeline_leggo_content
+       # #Run leggo content analysis
+       # run_pipeline_leggo_content
 
-       #Fetch comissões
-       fetch_leggo_comissoes
+       # #Fetch comissões
+       # fetch_leggo_comissoes
 
-       #Update pautas
-       update_pautas
+       # #Update pautas
+       # update_pautas
 }
 
 
