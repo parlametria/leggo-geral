@@ -161,35 +161,35 @@ fetch_leggo_trends() {
 
 pprint "Atualizando Pressão"
 
-# pprint "Gerando dataframe com os apelidos para busca no Twitter e Google Trends"
-# docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
-#        Rscript gera_entrada_google_trends.R \
-#        -p data/proposicoes.csv \
-#        -a data/apelidos.csv
-# check_errs $? "Não foi possível gerar os dados de apelidos das proposições."
+pprint "Gerando dataframe com os apelidos para busca no Twitter e Google Trends"
+docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
+       Rscript gera_entrada_google_trends.R \
+       -p $PLS_FILEPATH \
+       -a leggo_data/apelidos.csv
+check_errs $? "Não foi possível gerar os dados de apelidos das proposições."
 
-# pprint "Gerando dados de pressão do Google Trends"
-# docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
-#        python3 fetch_google_trends.py \
-#        data/apelidos.csv \
-#        data/pops/
-# check_errs $? "Não foi possível baixar dados de pressão pelo Google Trends."
+pprint "Gerando dados de pressão do Google Trends"
+docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
+       python3 fetch_google_trends.py \
+       leggo_data/apelidos.csv \
+       leggo_data/pops/
+check_errs $? "Não foi possível baixar dados de pressão pelo Google Trends."
 
 pprint "Gerando dados de popularidade do Twitter"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
-       --env-file $LEGGOTRENDS_ENV_FILEPATH \
        run --rm leggo-trends \
        Rscript scripts/tweets_from_last_days/export_tweets_from_last_days.R \
-       -a data/apelidos.csv \
-       -o data/ 
+       -a leggo_data/apelidos.csv \
+       -o leggo_data/ 
 check_errs $? "Não foi possível baixar dados de pressão pelo Twitter."
 
-# pprint "Gerando índice de popularidade combinando Twitter e Google Trends"
-# docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
-#        Rscript scripts/popularity/export_popularity.R \
-#        -t $EXPORT_FOLDERPATH/trends.csv \
-#        -g $EXPORT_FOLDERPATH/pops/
-# check_errs $? "Não foi possível combinar os dados de pressão do Twitter e Google Trends."
+pprint "Gerando índice de popularidade combinando Twitter e Google Trends"
+docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
+       Rscript scripts/popularity/export_popularity.R \
+       -t leggo_data/trends.csv \
+       -g leggo_data/pops/ \
+       -o leggo_data/pressao.csv
+check_errs $? "Não foi possível combinar os dados de pressão do Twitter e Google Trends."
 
 }
 
@@ -320,29 +320,29 @@ run_full_pipeline() {
 
        processa_pls_interesse
 
-	# #Fetch and Process Prop metadata and tramitação
-       # fetch_leggo_props
+	#Fetch and Process Prop metadata and tramitação
+       fetch_leggo_props
 
-	# #Fetch Prop emendas
-	# fetch_leggo_emendas
+	#Fetch Prop emendas
+	fetch_leggo_emendas
 
 	#Compute Pressão
        fetch_leggo_trends
 
-	# #Fetch related documents
-	# update_leggo_data
+	#Fetch related documents
+	update_leggo_data
 
-	# #Process related documents
-	# process_leggo_data
+	#Process related documents
+	process_leggo_data
 
-       # #Run leggo content analysis
-       # run_pipeline_leggo_content
+       #Run leggo content analysis
+       run_pipeline_leggo_content
 
-       # #Fetch comissões
-       # fetch_leggo_comissoes
+       #Fetch comissões
+       fetch_leggo_comissoes
 
-       # #Update pautas
-       # update_pautas
+       #Update pautas
+       update_pautas
 }
 
 
