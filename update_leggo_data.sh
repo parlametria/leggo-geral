@@ -267,6 +267,17 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
 
 }
 
+processa_interesses() {
+
+pprint "Processa o mapeamento de pls e interesses"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/interesses/export_mapeamento_interesses.R \
+       -u $URL_INTERESSES \
+       -p $EXPORT_FOLDERPATH/proposicoes.csv \
+       -e $EXPORT_FOLDERPATH/interesses.csv
+
+}
+
 run_pipeline_leggo_content() {
        #Build container with current codebase
        build_versoes_props
@@ -296,6 +307,8 @@ run_pipeline() {
 
 	#Fetch and Process Prop metadata and tramitação
        fetch_leggo_props
+
+       processa_interesses
 
 	#Fetch Prop emendas
 	fetch_leggo_emendas
