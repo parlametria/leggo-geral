@@ -124,7 +124,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         Rscript scripts/update_emendas_dist.R \
         $EXPORT_FOLDERPATH/raw_emendas_distances \
         $EXPORT_FOLDERPATH/distancias \
-        $EXPORT_FOLDERPATH/emendas_raw.csv \
+        $EXPORT_FOLDERPATH/novas_emendas.csv \
         $EXPORT_FOLDERPATH/emendas.csv
 check_errs $? "Não foi possível atualizar as distâncias advindas da análise de emendas."
 
