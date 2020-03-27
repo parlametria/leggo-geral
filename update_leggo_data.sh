@@ -269,11 +269,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
 
 run_pipeline_leggo_content() {
        #Build container with current codebase
-       build_versoes_props
        build_leggo_content
-
-       #Fetch text
-       fetch_versoes_props
 
        # Analyze text
        process_leggo_content
