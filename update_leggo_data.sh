@@ -3,6 +3,9 @@
 # Carrega variáveis de ambiente
 source .env
 
+# Adiciona possiveis caminhos de bibliotecas ao PATH
+PATH=$PATH:/usr/local/bin
+
 # Faz com que as mensagens comumns e de erro deste script apareçam tanto no
 # terminal como em um arquivo de log
 exec > >(tee -a $LOG_FILEPATH) 2>&1
