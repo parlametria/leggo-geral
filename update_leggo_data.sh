@@ -309,9 +309,6 @@ run_pipeline() {
 
        processa_interesses
 
-	#Fetch Prop emendas
-	fetch_leggo_emendas
-
 	#Compute Pressão
        fetch_leggo_trends
 
