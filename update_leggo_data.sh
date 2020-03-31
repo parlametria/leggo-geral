@@ -236,7 +236,7 @@ setup_leggo_data_volume() {
 
        # Copy props tables to volume
        docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
-        cp data/tabela_geral_ids_casa.csv data/tabela_geral_ids_casa_new.csv \
+        cp inst/extdata/tabela_geral_ids_casa.csv inst/extdata/tabela_geral_ids_casa_new.csv \
         $EXPORT_FOLDERPATH
        check_errs $? "Não foi possível copiar as tabelas de proposições para o volume leggo_data."
 
@@ -248,13 +248,13 @@ setup_leggo_data_volume() {
 
        # Copy deputados data to their respective folder
        docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
-        cp data/camara/parlamentares.csv \
+        cp inst/extdata/camara/parlamentares.csv \
         $EXPORT_FOLDERPATH/camara/parlamentares.csv
        check_errs $? "Não foi possível copiar os dados dos deputados para o volume leggo_data."
         
        # Copy senadores data to their respective folder
        docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
-        cp data/senado/parlamentares.csv \
+        cp inst/extdata/senado/parlamentares.csv \
         $EXPORT_FOLDERPATH/senado/parlamentares.csv
        check_errs $? "Não foi possível copiar os dados dos senadores para o volume leggo_data."
        
