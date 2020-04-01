@@ -168,6 +168,7 @@ pprint "Gerando dataframe com os apelidos para busca no Twitter e Google Trends"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
        Rscript gera_entrada_google_trends.R \
        -p leggo_data/proposicoes.csv \
+       -i leggo_data/interesses.csv \
        -a leggo_data/apelidos.csv
 check_errs $? "Não foi possível gerar os dados de apelidos das proposições."
 
