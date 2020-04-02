@@ -127,7 +127,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
         Rscript scripts/update_emendas_dist.R \
         $EXPORT_FOLDERPATH/raw_emendas_distances \
         $EXPORT_FOLDERPATH/distancias \
-        $EXPORT_FOLDERPATH/emendas_raw.csv \
+        $EXPORT_FOLDERPATH/novas_emendas.csv \
         $EXPORT_FOLDERPATH/emendas.csv
 check_errs $? "Não foi possível atualizar as distâncias advindas da análise de emendas."
 
@@ -283,11 +283,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
 
 run_pipeline_leggo_content() {
        #Build container with current codebase
-       build_versoes_props
        build_leggo_content
-
-       #Fetch text
-       fetch_versoes_props
 
        # Analyze text
        process_leggo_content
@@ -312,9 +308,6 @@ run_pipeline() {
        fetch_leggo_props
 
        processa_interesses
-
-	#Fetch Prop emendas
-	fetch_leggo_emendas
 
 	#Compute Pressão
        fetch_leggo_trends
