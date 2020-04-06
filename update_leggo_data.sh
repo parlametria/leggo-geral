@@ -35,7 +35,7 @@ curr_branch=`git -C $LEGGOR_FOLDERPATH rev-parse --abbrev-ref HEAD`
 git -C $LEGGOR_FOLDERPATH pull origin $curr_branch
 
 pprint "Atualizando imagem docker"
-docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml build
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml build --build-arg clone_rcongresso=false rmod
 check_errs $? "Não foi possível fazer o build do leggoR."
 
 }
