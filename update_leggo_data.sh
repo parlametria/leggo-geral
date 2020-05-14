@@ -6,9 +6,16 @@ source .env
 # Adiciona possiveis caminhos de bibliotecas ao PATH
 PATH=$PATH:/usr/local/bin
 
+# Cria o diretório destino dos logs deste script
+mkdir -p $LOG_FOLDERPATH
+
+# Gera o nome do arquivo do log a partir do timestamp 
+timestamp=$(date '+%d_%m_%Y_%H_%M_%S');
+log_filepath="${LOG_FOLDERPATH}${timestamp}.txt"
+
 # Faz com que as mensagens comumns e de erro deste script apareçam tanto no
 # terminal como em um arquivo de log
-exec > >(tee -a $LOG_FILEPATH) 2>&1
+exec > >(tee -a $log_filepath) 2>&1
 
 # Pretty Print
 pprint() {
