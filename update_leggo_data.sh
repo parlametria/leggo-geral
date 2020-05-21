@@ -317,6 +317,16 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
 
 }
 
+process_anotacoes() {
+pprint "Processa os dados de anotações"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/anotacoes/export_anotacoes.R \
+       -u $URL_LISTA_ANOTACOES \
+       -i $EXPORT_FOLDERPATH/pls_interesses.csv \
+       -p $EXPORT_FOLDERPATH/proposicoes.csv \
+       -e $EXPORT_FOLDERPATH/anotacoes.csv
+}
+
 run_pipeline_leggo_content() {
        #Build container with current codebase
        build_leggo_content
@@ -344,6 +354,9 @@ run_pipeline() {
        fetch_leggo_props
 
        processa_interesses
+
+       # Fetch and Process anotações
+       process_anotacoes
 
 	#Compute Pressão
        fetch_leggo_trends
@@ -396,6 +409,7 @@ print_usage() {
     printf "\t-fetch-versoes-props: Computa dados para a Pressão usando o Versões Props\n"
     printf "\t-build-leggo-content: Atualiza e faz o build do Container Leggo Content\n"
     printf "\t-process-leggo-content: Processa dados de textos/conteúdo usando o Leggo Content\n"
+    printf "\t-process-anotacoes: Processa dados de anotações\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -472,6 +486,9 @@ if [[ $@ == *'-build-leggo-content'* ]]; then build_leggo_content
 fi
 
 if [[ $@ == *'-process-leggo-content'* ]]; then process_leggo_content
+fi
+
+if [[ $@ == *'-process-anotacoes'* ]]; then process_anotacoes
 fi
 
 # Registra a data final
