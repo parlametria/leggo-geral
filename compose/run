@@ -6,7 +6,7 @@ from pathlib import Path
 
 help_text = '''
 Roda comandos docker-compose usando as configurações de múltiplos repositórios.
-O primeiro parâmetro deve ser 'dev' ou 'prod', os seguintes serão passados
+O primeiro parâmetro deve ser 'dev', 'prod' ou 'painel', os seguintes serão passados
 diretamente para o docker-compose. Ex.:
 ./run.py dev up
 '''
@@ -24,6 +24,11 @@ configs = {
         '${FRONTEND_PATH}/docker_extra/prod.yml',
         '${BACKEND_PATH}/docker-compose.yml',
         '${BACKEND_PATH}/deploy/prod.yml'
+    ],
+    'painel': [
+        '${FRONTEND_PAINEL_PATH}/docker-compose.yml',
+        '${BACKEND_PATH}/docker-compose.yml',
+        '${BACKEND_PATH}/docker-compose.override.yml'
     ]
 }
 
@@ -34,7 +39,7 @@ if len(argv) < 2 or argv[1] not in configs.keys():
 
 # Prepara variáveis de ambiente
 with open(env_file, 'r') as f:
-    envs = ''.join([f'export {l}' for l in f.readlines() if l[0] is not '#'])
+    envs = ''.join([f'export {l}' for l in f.readlines() if l[0] != '#'])
 
 # Prepara parâmetros com arquivos compose usados
 files = ''.join([
