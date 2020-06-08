@@ -268,6 +268,26 @@ update_db() {
        check_errs $? "Não foi possível atualizar os dados no BD do Heroku."
 }
 
+update_db_insights() {
+
+	pipeline=$1
+
+	if [[ $pipeline == *'dev'* ]]; 
+	then 
+
+		pprint "Atualizando dados de Insights no BD do Backend Development"
+		/snap/bin/heroku run python manage.py update_insights_remotely -a $DEV_BACK_APP
+
+	elif [[ $@ == *'prod'* ]];
+	then
+
+		pprint "Atualizando dados de Insights no BD do Backend Production"
+		/snap/bin/heroku run python manage.py update_insights_remotely -a $PROD_BACK_APP
+
+	fi
+       check_errs $? "Não foi possível atualizar os dados de Insights no BD do Heroku."
+}
+
 setup_leggo_data_volume() {
 
        # Copy props tables to volume
@@ -410,6 +430,9 @@ print_usage() {
     printf "\t-build-leggo-content: Atualiza e faz o build do Container Leggo Content\n"
     printf "\t-process-leggo-content: Processa dados de textos/conteúdo usando o Leggo Content\n"
     printf "\t-process-anotacoes: Processa dados de anotações\n"
+    printf "\t-update-db-insights-dev: Importa dados atualizados de Insights para o Banco de Dados do Backend Dev\n"
+    printf "\t-update-db-insights-prod: Importa dados atualizados de Insights para o Banco de Dados do Backend Prod\n"
+    
 }
 
 if [ "$#" -lt 1 ]; then
@@ -459,6 +482,12 @@ if [[ $@ == *'-update-db-dev'* ]]; then update_db dev
 fi
 
 if [[ $@ == *'-update-db-prod'* ]]; then update_db prod
+fi
+
+if [[ $@ == *'-update-db-insights-dev'* ]]; then update_db_insights dev
+fi
+
+if [[ $@ == *'-update-db-insights-prod'* ]]; then update_db_insights prod
 fi
 
 if [[ $@ == *'-run-basic-pipeline'* ]]; then run_pipeline 0
