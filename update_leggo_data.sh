@@ -344,7 +344,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -u $URL_LISTA_ANOTACOES \
        -i $EXPORT_FOLDERPATH/pls_interesses.csv \
        -p $EXPORT_FOLDERPATH/proposicoes.csv \
-       -e $EXPORT_FOLDERPATH/anotacoes.csv
+       -e $EXPORT_FOLDERPATH
 }
 
 run_pipeline_leggo_content() {
