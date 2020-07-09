@@ -313,6 +313,12 @@ setup_leggo_data_volume() {
         cp inst/extdata/senado/parlamentares.csv \
         $EXPORT_FOLDERPATH/senado/parlamentares.csv
        check_errs $? "Não foi possível copiar os dados dos senadores para o volume leggo_data."
+               
+       # Copy parliamentarians data to their respective folder
+       docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+        cp inst/extdata/parlamentares.csv \
+        $EXPORT_FOLDERPATH/parlamentares.csv
+       check_errs $? "Não foi possível copiar os dados dos parlamentares para o volume leggo_data."
        
 }
 
@@ -350,9 +356,8 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
 atualiza_parlamentares() {
 pprint "Atualiza dados dos parlamentares"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
-       Rscript scripts/parlamentares/export_parlamentares.R \
-       -f 1 \
-       -o $EXPORT_FOLDERPATH
+       Rscript scripts/parlamentares/update_parlamentares.R \
+       -p $EXPORT_FOLDERPATH
 }
 
 run_pipeline_leggo_content() {
