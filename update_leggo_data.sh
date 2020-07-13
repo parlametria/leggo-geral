@@ -71,6 +71,18 @@ check_errs $? "Não foi possível baixar dados de proposições."
 
 }
 
+fetch_leggo_autores() {
+
+pprint "Baixando e exportando novos dados de autores das proposições monitoradas."
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/fetch_updated_bills_data.R \
+       -p $PLS_FILEPATH \
+       -e $EXPORT_FOLDERPATH \
+       -f 5
+check_errs $? "Não foi possível baixar dados de autores das proposições monitoradas."   
+
+}
+
 fetch_leggo_emendas() {
 
 pprint "Baixando e exportando novos dados de emendas"
@@ -373,6 +385,9 @@ run_pipeline() {
 	#Fetch and Process Prop metadata and tramitação
        fetch_leggo_props
 
+       #Fetch and Process data from authors of bills
+       fetch_leggo_autores
+
        processa_interesses
 
        # Fetch and Process anotações
@@ -414,6 +429,7 @@ print_usage() {
     printf "\t-update-data: Baixa dados atualizados para o leggoR (versão nova)\n"
     printf "\t-process-data: Process dados do leggoR\n"
     printf "\t-fetch-data: Baixa dados para o leggoR (versão antiga)\n"
+    printf "\t-fetch-autores: Baixa dados dos autores das proposições\n"    
     printf "\t-fetch-props: Baixa dados de proposições\n"
     printf "\t-fetch-emendas: Baixa dados de emendas\n"
     printf "\t-fetch-comissoes: Baixa dados de comissões\n"
@@ -464,6 +480,9 @@ if [[ $@ == *'process-data'* ]]; then process_leggo_data
 fi
 
 if [[ $@ == *'-fetch-data'* ]]; then fetch_leggo_data
+fi
+
+if [[ $@ == *'-fetch-autores'* ]]; then fetch_leggo_autores
 fi
 
 if [[ $@ == *'-fetch-props'* ]]; then fetch_leggo_props
