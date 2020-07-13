@@ -313,6 +313,12 @@ setup_leggo_data_volume() {
         cp inst/extdata/senado/parlamentares.csv \
         $EXPORT_FOLDERPATH/senado/parlamentares.csv
        check_errs $? "Não foi possível copiar os dados dos senadores para o volume leggo_data."
+               
+       # Copy parliamentarians data to their respective folder
+       docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+        cp inst/extdata/parlamentares.csv \
+        $EXPORT_FOLDERPATH/parlamentares.csv
+       check_errs $? "Não foi possível copiar os dados dos parlamentares para o volume leggo_data."
        
 }
 
@@ -345,6 +351,13 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -i $EXPORT_FOLDERPATH/pls_interesses.csv \
        -p $EXPORT_FOLDERPATH/proposicoes.csv \
        -e $EXPORT_FOLDERPATH
+}
+
+atualiza_parlamentares() {
+pprint "Atualiza dados dos parlamentares"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/parlamentares/update_parlamentares.R \
+       -p $EXPORT_FOLDERPATH
 }
 
 run_pipeline_leggo_content() {
@@ -432,6 +445,8 @@ print_usage() {
     printf "\t-process-anotacoes: Processa dados de anotações\n"
     printf "\t-update-db-insights-dev: Importa dados atualizados de Insights para o Banco de Dados do Backend Dev\n"
     printf "\t-update-db-insights-prod: Importa dados atualizados de Insights para o Banco de Dados do Backend Prod\n"
+    printf "\t-atualiza-parlamentares: Atualiza os dados dos parlamentares\n"
+
     
 }
 
@@ -518,6 +533,9 @@ if [[ $@ == *'-process-leggo-content'* ]]; then process_leggo_content
 fi
 
 if [[ $@ == *'-process-anotacoes'* ]]; then process_anotacoes
+fi
+
+if [[ $@ == *'-atualiza-parlamentares'* ]]; then atualiza_parlamentares
 fi
 
 # Registra a data final
