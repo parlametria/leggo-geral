@@ -370,6 +370,16 @@ pprint "Atualiza dados dos parlamentares"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/parlamentares/update_parlamentares.R \
        -p $EXPORT_FOLDERPATH
+check_errs $? "Não foi possível atualizar os dados de parlamentares"
+}
+
+process_entidades() {
+pprint "Processa dados de entidades"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/entidades/export_entidades.R \
+       -p $EXPORT_FOLDERPATH/parlamentares.csv \
+       -o $EXPORT_FOLDERPATH
+check_errs $? "Não foi possível processar os dados de entidades"
 }
 
 run_pipeline_leggo_content() {
@@ -393,6 +403,10 @@ run_pipeline() {
        #Setup volume of leggo data
        setup_leggo_data_volume
 
+       #Process entities
+       process_entidades
+
+       #Process pls_interesse
        processa_pls_interesse
 
 	#Fetch and Process Prop metadata and tramitação
@@ -462,7 +476,7 @@ print_usage() {
     printf "\t-update-db-insights-dev: Importa dados atualizados de Insights para o Banco de Dados do Backend Dev\n"
     printf "\t-update-db-insights-prod: Importa dados atualizados de Insights para o Banco de Dados do Backend Prod\n"
     printf "\t-atualiza-parlamentares: Atualiza os dados dos parlamentares\n"
-
+    printf "\t-process-entidades: Processa dados de entidades\n"
     
 }
 
@@ -555,6 +569,9 @@ if [[ $@ == *'-process-anotacoes'* ]]; then process_anotacoes
 fi
 
 if [[ $@ == *'-atualiza-parlamentares'* ]]; then atualiza_parlamentares
+fi
+
+if [[ $@ == *'-process-entidades'* ]]; then process_entidades
 fi
 
 # Registra a data final
