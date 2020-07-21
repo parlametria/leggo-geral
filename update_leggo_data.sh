@@ -134,7 +134,8 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -d "2019-01-31" \
        -p 0.1 \
        -i $EXPORT_FOLDERPATH \
-       -o $EXPORT_FOLDERPATH
+       -o $EXPORT_FOLDERPATH \
+       -e $EXPORT_FOLDERPATH/entidades.csv
 check_errs $? "Não foi possível processar dados dos documentos baixados."
 
 }
