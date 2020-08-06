@@ -10,6 +10,7 @@ PATH=$PATH:/usr/local/bin
 mkdir -p $LOG_FOLDERPATH
 
 # Gera o nome do arquivo do log a partir do timestamp 
+backup_file=$(date '+leggo_data_''%d_%m_%Y_%H_%M_%S')
 timestamp=$(date '+%d_%m_%Y_%H_%M_%S');
 log_filepath="${LOG_FOLDERPATH}${timestamp}.txt"
 
@@ -109,8 +110,13 @@ check_errs $? "Não foi possível baixar dados de comissões."
 
 generate_backup(){
 pprint "Gerando backup dos csvs"
-       mkdir -p ${BACKUP_FOLDERPATH}${timestamp}
-       check_errs $? "Não foi possível criar as pastas de documentos."
+       mkdir -p ${BACKUP_FOLDERPATH}${backup_file}
+       # lista = ['caminhos']
+       # docker cp autores_leggo.csv agorapi:/agora-digital-backend/data/
+       # docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       #  cp inst/extdata/tabela_geral_ids_casa.csv inst/extdata/tabela_geral_ids_casa_new.csv \
+# docker cp list to container 
+       check_errs $? "Não foi possível criar a pasta de backup."
 }
 
 update_leggo_data() {
