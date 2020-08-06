@@ -107,6 +107,13 @@ check_errs $? "Não foi possível baixar dados de comissões."
 
 }
 
+generate_backup(){
+pprint "Gerando backup dos csvs"
+       # mkdir -p ${BACKUP_FOLDERPATH}${timestamp}
+       pprint ${BACKUP_FOLDERPATH}${timestamp}
+       check_errs $? "Não foi possível criar as pastas de documentos."
+}
+
 update_leggo_data() {
 
 pprint "Atualizando dados do Leggo - Câmara"
@@ -478,7 +485,8 @@ print_usage() {
     printf "\t-update-db-insights-prod: Importa dados atualizados de Insights para o Banco de Dados do Backend Prod\n"
     printf "\t-atualiza-parlamentares: Atualiza os dados dos parlamentares\n"
     printf "\t-process-entidades: Processa dados de entidades\n"
-    
+    printf "\t-generate-backup: Gera pasta com backup dos csvs\n"
+#     generate_backup
 }
 
 if [ "$#" -lt 1 ]; then
@@ -573,6 +581,9 @@ if [[ $@ == *'-atualiza-parlamentares'* ]]; then atualiza_parlamentares
 fi
 
 if [[ $@ == *'-process-entidades'* ]]; then process_entidades
+fi
+
+if [[ $@ == *'-generate-backup'* ]]; then generate_backup
 fi
 
 # Registra a data final

@@ -1,0 +1,3042 @@
+
+===============================
+Iniciando atualização
+===============================
+ter ago  4 17:14:16 -03 2020
+
+===============================
+Atualizando código do rcongresso
+===============================
+From https://github.com/analytics-ufcg/rcongresso
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+
+===============================
+Atualizando código do LeggoR
+===============================
+From https://github.com/parlametria/leggoR
+ * branch              sprint-35  -> FETCH_HEAD
+Already up to date.
+
+===============================
+Atualizando imagem docker
+===============================
+Building rmod
+Step 1/13 : FROM rocker/tidyverse:3.6.2
+ ---> 360cea38f20b
+Step 2/13 : WORKDIR /agora-digital
+ ---> Using cache
+ ---> 698d06d0ee34
+Step 3/13 : RUN apt-get update
+ ---> Using cache
+ ---> 959713f45881
+Step 4/13 : RUN apt-get install libssl-dev libxml2-dev libcurl4-openssl-dev vim less git -y
+ ---> Using cache
+ ---> dc547b7306e9
+Step 5/13 : COPY DESCRIPTION .
+ ---> Using cache
+ ---> 20db291a0b1a
+Step 6/13 : RUN Rscript -e 'update.packages(checkBuilt=TRUE, ask=FALSE)'
+ ---> Using cache
+ ---> e7fccb6b3bbe
+Step 7/13 : RUN Rscript -e 'install.packages("devtools"); devtools::install_deps()'
+ ---> Using cache
+ ---> 46ca8c815c10
+Step 8/13 : COPY . .
+ ---> 2d95d8bd26c0
+Step 9/13 : ARG clone_rcongresso=true
+ ---> Running in 045353a77a53
+Removing intermediate container 045353a77a53
+ ---> a2cdf4d3c533
+Step 10/13 : RUN if [ "$clone_rcongresso" = "false" ] ;  then Rscript -e 'devtools::install("rcongresso/")'; else Rscript -e 'devtools::install_github("analytics-ufcg/rcongresso")'; fi
+ ---> Running in 7845234f0e25
+
+     checking for file ‘/agora-digital/rcongresso/DESCRIPTION’ ...  ✔  checking for file ‘/agora-digital/rcongresso/DESCRIPTION’ (371ms)
+  ─  preparing ‘rcongresso’:
+     checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+  ─  checking for LF line-endings in source and make files and shell scripts (718ms)
+  ─  checking for empty or unneeded directories
+       NB: this package now depends on R (>= 3.5.0)
+       WARNING: Added dependency on R >= 3.5.0 because serialized objects in  serialize/load version 3 cannot be read in older versions of R.  File(s) containing such objects:  'rcongresso/inst/extdata/test_cache.rds'
+─  building 'rcongresso_0.5.0.tar.gz'
+     
+Running /usr/local/lib/R/bin/R CMD INSTALL \
+  /tmp/Rtmp5wBJUX/rcongresso_0.5.0.tar.gz --install-tests 
+* installing to library ‘/usr/local/lib/R/site-library’
+* installing *source* package ‘rcongresso’ ...
+** using non-staged installation via StagedInstall field
+** R
+** inst
+** tests
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+* DONE (rcongresso)
+Removing intermediate container 7845234f0e25
+ ---> badaf84f606c
+Step 11/13 : RUN Rscript -e 'devtools::install_version("dplyr", version = "0.8.5", repos = "http://cran.us.r-project.org")'
+ ---> Running in df86332b2701
+[91mDownloading package from url: http://cran.us.r-project.org/src/contrib/Archive/dplyr/dplyr_0.8.5.tar.gz
+[0mellipsis   (0.3.0 -> 0.3.1) [CRAN]
+glue       (1.3.1 -> 1.4.1) [CRAN]
+Rcpp       (1.0.3 -> 1.0.5) [CRAN]
+rlang      (0.4.4 -> 0.4.7) [CRAN]
+tibble     (2.1.3 -> 3.0.3) [CRAN]
+tidyselect (1.0.0 -> 1.1.0) [CRAN]
+cli        (2.0.1 -> 2.0.2) [CRAN]
+lifecycle  (0.1.0 -> 0.2.0) [CRAN]
+vctrs      (0.2.3 -> 0.3.2) [CRAN]
+pillar     (1.4.3 -> 1.4.6) [CRAN]
+purrr      (0.3.3 -> 0.3.4) [CRAN]
+[91mInstalling 11 packages: ellipsis, glue, Rcpp, rlang, tibble, tidyselect, cli, lifecycle, vctrs, pillar, purrr
+[0m[91mInstalling packages into ‘/usr/local/lib/R/site-library’
+(as ‘lib’ is unspecified)
+[0m[91mtrying URL 'http://cran.us.r-project.org/src/contrib/ellipsis_0.3.1.tar.gz'
+[0m[91mContent type 'application/x-gzip' length 7582 bytes
+=======[0m[91m===================[0m[91m==================[0m[91m======
+downloaded 7582 bytes
+
+[0m[91mtrying URL 'http://cran.us.r-project.org/src/contrib/glue_1.4.1.tar.gz'
+[0m[91mContent type 'application/x-gzip' length 98581 bytes (96 KB)
+[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m==[0m[91m=[0m[91m=[0m[91m=[0m[91m==[0m[91m=[0m[91m=[0m[91m===[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m==[0m[91m==[0m[91m===[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m==[0m[91m=[0m[91m=[0m[91m====[0m[91m=[0m[91m===[0m[91m==[0m[91m=[0m[91m=
+[0m[91mdownloaded 96 KB
+
+[0m[91mtrying URL 'http://cran.us.r-project.org/src/contrib/Rcpp_1.0.5.tar.gz'
+[0m[91mContent type 'application/x-gzip' length 2950521 bytes (2.8 MB)
+[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=
+downloaded 2.8 MB
+
+[0m[91mtrying URL 'http://cran.us.r-project.org/src/contrib/rlang_0.4.7.tar.gz'
+[0m[91mContent type 'application/x-gzip' length 847308 bytes (827 KB)
+[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m=[0m[91m
+downloaded 158 KB
+
+[0m[91mError in download.file(url, destfile, method, mode = "wb", ...) : 
+  (converted from warning) downloaded length 162467 != reported length 847308
+[0m[91mError: Failed to install 'unknown package' from URL:
+  (converted from warning) download of package ‘rlang’ failed
+Execution halted
+[0mService 'rmod' failed to build: The command '/bin/sh -c Rscript -e 'devtools::install_version("dplyr", version = "0.8.5", repos = "http://cran.us.r-project.org")'' returned a non-zero code: 1
+ERROR # 1 : Não foi possível fazer o build do leggoR.
+
+===============================
+Atualizando código do LeggoTrends
+===============================
+From https://github.com/parlametria/leggoTrends
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+
+===============================
+Atualizando imagem docker
+===============================
+Building leggo-trends
+Step 1/20 : FROM rocker/tidyverse:3.6.2
+ ---> 360cea38f20b
+Step 2/20 : WORKDIR leggo-trends
+ ---> Using cache
+ ---> 1e2ee9225d47
+Step 3/20 : RUN apt-get update
+ ---> Using cache
+ ---> 2deeca4f46e2
+Step 4/20 : RUN apt-get install libssl-dev libxml2-dev libcurl4-openssl-dev vim less -y
+ ---> Using cache
+ ---> f47bdc7c11cb
+Step 5/20 : COPY DESCRIPTION .
+ ---> Using cache
+ ---> 6d05369a2ea4
+Step 6/20 : RUN R -e "install.packages('lubridate',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> 7a98d02aab2d
+Step 7/20 : RUN R -e "install.packages('optparse',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> 4e89f2a9ba9c
+Step 8/20 : RUN R -e "install.packages('devtools',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> 30a96e18a4a2
+Step 9/20 : RUN R -e "install.packages('glmnet',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> 9afe453d2080
+Step 10/20 : RUN R -e "install.packages('here',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> 214dbf9e2b15
+Step 11/20 : RUN R -e "install.packages('fuzzyjoin',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> ae86580ac07b
+Step 12/20 : RUN R -e "devtools::install_github('ekstroem/MESS')"
+ ---> Using cache
+ ---> 2cf8b35dd607
+Step 13/20 : RUN R -e "devtools::install_github('ropensci/rtweet')"
+ ---> Using cache
+ ---> e3b67b4c0deb
+Step 14/20 : RUN R -e "devtools::install_github('analytics-ufcg/rcongresso')"
+ ---> Using cache
+ ---> 9710ca364bef
+Step 15/20 : RUN apt-get install -y python3-pip
+ ---> Using cache
+ ---> 289f45e08e5d
+Step 16/20 : RUN pip3 install pandas
+ ---> Using cache
+ ---> 1499eb7fa870
+Step 17/20 : RUN pip3 install git+https://github.com/GeneralMills/pytrends
+ ---> Using cache
+ ---> fcd7e2857b53
+Step 18/20 : RUN pip3 install unidecode
+ ---> Using cache
+ ---> e3ce8606e24a
+Step 19/20 : COPY . .
+ ---> Using cache
+ ---> 3db4b0a92b54
+Step 20/20 : RUN R -e "devtools::install()"
+ ---> Using cache
+ ---> 7e31de119974
+
+Successfully built 7e31de119974
+Successfully tagged agoradigital/leggo-trends:latest
+cp: cannot stat 'inst/extdata/parlamentares.csv': No such file or directory
+ERROR # 1 : Não foi possível copiar os dados dos parlamentares para o volume leggo_data.
+
+===============================
+Processa dados de entidades
+===============================
+Fatal error: cannot open file 'scripts/entidades/export_entidades.R': No such file or directory
+ERROR # 2 : Não foi possível processar os dados de entidades
+
+===============================
+Junta PL's de todos os interesses
+===============================
+here() starts at /agora-digital
+here() starts at /agora-digital, because it contains a file `DESCRIPTION` with contents matching `^Package: `
+NULL
+── [1mAttaching packages[22m ─────────────────────────────────────── tidyverse 1.3.0 ──
+[32m✔[39m [34mggplot2[39m 3.2.1     [32m✔[39m [34mpurrr  [39m 0.3.4
+[32m✔[39m [34mtibble [39m 3.0.1     [32m✔[39m [34mdplyr  [39m 0.8.5
+[32m✔[39m [34mtidyr  [39m 1.0.2     [32m✔[39m [34mstringr[39m 1.4.0
+[32m✔[39m [34mreadr  [39m 1.3.1     [32m✔[39m [34mforcats[39m 0.4.0
+── [1mConflicts[22m ────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+$url
+[1] "https://docs.google.com/spreadsheets/d/e/2PACX-1vTIR2gVdVh2t2GDexd0dauxOJAE1tyKc5i7XLwLGfNPWUncsaC2CxZxh5coPvVjAIbFKHnVSEKLiZ9g/pub?gid=0&single=true&output=csv"
+
+$export_filepath
+[1] "./leggo_data/pls_interesses.csv"
+
+$help
+[1] FALSE
+
+[1] "Juntando lista de pls para os interesses..."
+Parsed with column specification:
+cols(
+  interesse = [31mcol_character()[39m,
+  url = [31mcol_character()[39m,
+  nome = [31mcol_character()[39m
+)
+[1] "Salvando pls de interesse..."
+[1] "Salvo"
+
+===============================
+Baixando e exportando novos dados de proposições
+===============================
+$flag
+[1] 2
+
+$pls_ids_filepath
+[1] "./leggo_data/pls_interesses.csv"
+
+$exporth_path
+[1] "./leggo_data"
+
+$help
+[1] FALSE
+
+     checking for file ‘/agora-digital/DESCRIPTION’ ...  [32m✔[39m  [38;5;247mchecking for file ‘/agora-digital/DESCRIPTION’[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mpreparing ‘agoradigital’:[39m[36m[36m (5.2s)[36m[39m
+     checking DESCRIPTION meta-information ...  [32m✔[39m  [38;5;247mchecking DESCRIPTION meta-information[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for LF line-endings in source and make files and shell scripts[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for empty or unneeded directories[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mbuilding ‘agoradigital_0.0.1.tar.gz’[39m[36m[39m
+     
+Running /usr/local/lib/R/bin/R CMD INSTALL \
+  /tmp/RtmpPbndhP/agoradigital_0.0.1.tar.gz --install-tests 
+[31m* installing to library ‘/usr/local/lib/R/site-library’
+[39m[31m* installing *source* package ‘agoradigital’ ...
+[39m[31m** using staged installation
+[39m[31m** R
+[39m[31m** inst
+[39m[31m** tests
+[39m[31m** byte-compile and prepare package for lazy loading
+[39mNo man pages found in package  ‘agoradigital’ 
+[31m** help
+[39m[31m*** installing help indices
+[39m[31m** building package indices
+[39m[31m** testing if installed package can be loaded from temporary location
+[39m[31m** testing if installed package can be loaded from final location
+[39m[31m** testing if installed package keeps a record of temporary installation path
+[39m[31m* DONE (agoradigital)
+[39m[1] "Atualizando as proposições!"
+Parsed with column specification:
+cols(
+  proposicao = [31mcol_character()[39m,
+  id_camara = [32mcol_double()[39m,
+  id_senado = [32mcol_double()[39m,
+  apelido = [31mcol_character()[39m,
+  Prioritário = [31mcol_character()[39m,
+  tema = [31mcol_character()[39m,
+  advocacy_link = [31mcol_character()[39m,
+  keywords = [31mcol_character()[39m,
+  tipo_agenda = [31mcol_character()[39m,
+  explicacao_projeto = [31mcol_character()[39m,
+  interesse = [31mcol_character()[39m,
+  nome_interesse = [31mcol_character()[39m,
+  link_camara = [31mcol_character()[39m,
+  link_senado = [31mcol_character()[39m
+)
+
+--- Tentativa  1 
+
+
+--- Processando 1 / 970 
+camara: 2231327 
+senado: 138555 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 2 / 970 
+camara: 1198512 
+senado: NA 
+
+
+--- Processando 3 / 970 
+camara: 2230007 
+senado: NA 
+
+
+--- Processando 4 / 970 
+camara: 2195689 
+senado: NA 
+
+
+--- Processando 5 / 970 
+camara: 2174306 
+senado: NA 
+
+
+--- Processando 6 / 970 
+camara: 501465 
+senado: NA 
+
+
+--- Processando 7 / 970 
+camara: 2193777 
+senado: NA 
+
+
+--- Processando 8 / 970 
+camara: 2193966 
+senado: NA 
+
+
+--- Processando 9 / 970 
+camara: 2193987 
+senado: NA 
+
+
+--- Processando 10 / 970 
+camara: 1278924 
+senado: NA 
+
+
+--- Processando 11 / 970 
+camara: 2194882 
+senado: NA 
+
+
+--- Processando 12 / 970 
+camara: 2195105 
+senado: NA 
+
+
+--- Processando 13 / 970 
+camara: 2197797 
+senado: NA 
+
+
+--- Processando 14 / 970 
+camara: 2198845 
+senado: 134730 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 15 / 970 
+camara: 1672689 
+senado: NA 
+
+
+--- Processando 16 / 970 
+camara: 2203660 
+senado: NA 
+
+
+--- Processando 17 / 970 
+camara: 153627 
+senado: NA 
+
+
+--- Processando 18 / 970 
+camara: 533790 
+senado: NA 
+
+
+--- Processando 19 / 970 
+camara: 534328 
+senado: NA 
+
+
+--- Processando 20 / 970 
+camara: 2190895 
+senado: NA 
+
+
+--- Processando 21 / 970 
+camara: 946629 
+senado: NA 
+
+
+--- Processando 22 / 970 
+camara: 2208697 
+senado: 132217 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 23 / 970 
+camara: 2210200 
+senado: NA 
+
+
+--- Processando 24 / 970 
+camara: 2210372 
+senado: NA 
+
+
+--- Processando 25 / 970 
+camara: 408349 
+senado: 83280 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 26 / 970 
+camara: 2075025 
+senado: NA 
+
+
+--- Processando 27 / 970 
+camara: 20703 
+senado: NA 
+
+
+--- Processando 28 / 970 
+camara: 2191094 
+senado: NA 
+
+
+--- Processando 29 / 970 
+camara: 2213791 
+senado: NA 
+
+
+--- Processando 30 / 970 
+camara: 2191163 
+senado: NA 
+
+
+--- Processando 31 / 970 
+camara: 560047 
+senado: 101713 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 32 / 970 
+camara: 949156 
+senado: NA 
+
+
+--- Processando 33 / 970 
+camara: 2220934 
+senado: NA 
+
+
+--- Processando 34 / 970 
+camara: 2088318 
+senado: NA 
+
+
+--- Processando 35 / 970 
+camara: 578426 
+senado: NA 
+
+
+--- Processando 36 / 970 
+camara: 2230008 
+senado: NA 
+
+
+--- Processando 37 / 970 
+camara: 2231036 
+senado: NA 
+
+
+--- Processando 38 / 970 
+camara: 2234655 
+senado: NA 
+
+
+--- Processando 39 / 970 
+camara: 595991 
+senado: NA 
+
+
+--- Processando 40 / 970 
+camara: 465835 
+senado: 88063 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 41 / 970 
+camara: 467520 
+senado: 84195 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 42 / 970 
+camara: 606722 
+senado: NA 
+
+
+--- Processando 43 / 970 
+camara: 332457 
+senado: NA 
+
+
+--- Processando 44 / 970 
+camara: 615717 
+senado: NA 
+
+
+--- Processando 45 / 970 
+camara: 2137635 
+senado: NA 
+
+
+--- Processando 46 / 970 
+camara: 2192230 
+senado: NA 
+
+
+--- Processando 47 / 970 
+camara: 2155290 
+senado: 120688 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 48 / 970 
+camara: 2163452 
+senado: NA 
+
+
+--- Processando 49 / 970 
+camara: NA 
+senado: 139063 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 50 / 970 
+camara: NA 
+senado: 140271 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 51 / 970 
+camara: NA 
+senado: 135492 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 52 / 970 
+camara: NA 
+senado: 135934 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 53 / 970 
+camara: NA 
+senado: 137302 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 54 / 970 
+camara: NA 
+senado: 138198 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 55 / 970 
+camara: 944309 
+senado: 138831 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 56 / 970 
+camara: NA 
+senado: 138951 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 57 / 970 
+camara: NA 
+senado: 139412 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 58 / 970 
+camara: 534072 
+senado: 139560 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 59 / 970 
+camara: NA 
+senado: 135328 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 60 / 970 
+camara: 1302254 
+senado: 127140 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 61 / 970 
+camara: NA 
+senado: 132687 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 62 / 970 
+camara: NA 
+senado: 133039 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 63 / 970 
+camara: NA 
+senado: 131275 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 64 / 970 
+camara: NA 
+senado: 134819 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 65 / 970 
+camara: NA 
+senado: 134852 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 66 / 970 
+camara: NA 
+senado: 134834 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 67 / 970 
+camara: 621792 
+senado: 122309 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 68 / 970 
+camara: 1999535 
+senado: 83516 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 69 / 970 
+camara: 2166851 
+senado: NA 
+
+
+--- Processando 70 / 970 
+camara: 2082295 
+senado: 122856 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 71 / 970 
+camara: 285505 
+senado: NA 
+
+
+--- Processando 72 / 970 
+camara: 2170969 
+senado: 127084 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 73 / 970 
+camara: 105011 
+senado: NA 
+
+
+--- Processando 74 / 970 
+camara: 996835 
+senado: NA 
+
+
+--- Processando 75 / 970 
+camara: 577133 
+senado: NA 
+
+
+--- Processando 76 / 970 
+camara: 2229712 
+senado: 129146 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 77 / 970 
+camara: 2233358 
+senado: NA 
+
+
+--- Processando 78 / 970 
+camara: 605512 
+senado: NA 
+
+
+--- Processando 79 / 970 
+camara: 403320 
+senado: NA 
+
+
+--- Processando 80 / 970 
+camara: 2079600 
+senado: NA 
+
+
+--- Processando 81 / 970 
+camara: 644045 
+senado: NA 
+
+
+--- Processando 82 / 970 
+camara: 2024195 
+senado: NA 
+
+
+--- Processando 83 / 970 
+camara: 526021 
+senado: NA 
+
+
+--- Processando 84 / 970 
+camara: 2003335 
+senado: NA 
+
+
+--- Processando 85 / 970 
+camara: 2082230 
+senado: NA 
+
+
+--- Processando 86 / 970 
+camara: 623799 
+senado: NA 
+
+
+--- Processando 87 / 970 
+camara: 2153095 
+senado: 136016 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 88 / 970 
+camara: 976389 
+senado: 133188 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 89 / 970 
+camara: NA 
+senado: 127082 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 90 / 970 
+camara: NA 
+senado: 134618 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 91 / 970 
+camara: NA 
+senado: 136476 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 92 / 970 
+camara: NA 
+senado: 134835 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 93 / 970 
+camara: NA 
+senado: 135450 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 94 / 970 
+camara: NA 
+senado: 137953 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 95 / 970 
+camara: NA 
+senado: 139854 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 96 / 970 
+camara: NA 
+senado: 120768 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 97 / 970 
+camara: NA 
+senado: 131857 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 98 / 970 
+camara: NA 
+senado: 133129 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 99 / 970 
+camara: NA 
+senado: 128186 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 100 / 970 
+camara: 437196 
+senado: NA 
+
+
+--- Processando 101 / 970 
+camara: 500633 
+senado: NA 
+
+
+--- Processando 102 / 970 
+camara: 2173210 
+senado: 112207 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 103 / 970 
+camara: 360369 
+senado: NA 
+
+
+--- Processando 104 / 970 
+camara: 2213555 
+senado: NA 
+
+
+--- Processando 105 / 970 
+camara: 342729 
+senado: 71631 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 106 / 970 
+camara: 20289 
+senado: NA 
+
+
+--- Processando 107 / 970 
+camara: 115425 
+senado: NA 
+
+
+--- Processando 108 / 970 
+camara: 2137685 
+senado: NA 
+
+
+--- Processando 109 / 970 
+camara: 2139909 
+senado: NA 
+
+
+--- Processando 110 / 970 
+camara: 2139910 
+senado: NA 
+
+
+--- Processando 111 / 970 
+camara: 2223715 
+senado: NA 
+
+
+--- Processando 112 / 970 
+camara: 2075449 
+senado: 122324 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 113 / 970 
+camara: 312134 
+senado: 44798 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 114 / 970 
+camara: 2190661 
+senado: NA 
+
+
+--- Processando 115 / 970 
+camara: 2184218 
+senado: NA 
+
+
+--- Processando 116 / 970 
+camara: 2236366 
+senado: NA 
+
+
+--- Processando 117 / 970 
+camara: 2190698 
+senado: NA 
+
+
+--- Processando 118 / 970 
+camara: 1724515 
+senado: NA 
+
+
+--- Processando 119 / 970 
+camara: 534245 
+senado: NA 
+
+
+--- Processando 120 / 970 
+camara: 1594908 
+senado: 88862 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 121 / 970 
+camara: 1197728 
+senado: NA 
+
+
+--- Processando 122 / 970 
+camara: 2211367 
+senado: NA 
+
+
+--- Processando 123 / 970 
+camara: 2223608 
+senado: NA 
+
+
+--- Processando 124 / 970 
+camara: 2175563 
+senado: NA 
+
+
+--- Processando 125 / 970 
+camara: 499594 
+senado: NA 
+
+
+--- Processando 126 / 970 
+camara: 1570646 
+senado: NA 
+
+
+--- Processando 127 / 970 
+camara: 380828 
+senado: NA 
+<simpleError in curl::curl_fetch_memory(url, handle = handle): Timeout was reached: [dadosabertos.camara.leg.br] Connection timed out after 10001 milliseconds>
+
+
+--- Processando 128 / 970 
+camara: 20956 
+senado: 1640 
+<simpleError in curl::curl_fetch_memory(url, handle = handle): Timeout was reached: [dadosabertos.camara.leg.br] Connection timed out after 10001 milliseconds>
+
+
+--- Processando 129 / 970 
+camara: 426002 
+senado: NA 
+
+
+--- Processando 130 / 970 
+camara: 465826 
+senado: 76986 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 131 / 970 
+camara: 2224630 
+senado: NA 
+
+
+--- Processando 132 / 970 
+camara: 2220931 
+senado: NA 
+
+
+--- Processando 133 / 970 
+camara: 2220932 
+senado: NA 
+
+
+--- Processando 134 / 970 
+camara: 2077748 
+senado: 136195 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 135 / 970 
+camara: NA 
+senado: 138835 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 136 / 970 
+camara: NA 
+senado: 139053 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 137 / 970 
+camara: NA 
+senado: 133765 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 138 / 970 
+camara: NA 
+senado: 134854 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 139 / 970 
+camara: NA 
+senado: 134829 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 140 / 970 
+camara: NA 
+senado: 137671 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 141 / 970 
+camara: NA 
+senado: 125329 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 142 / 970 
+camara: NA 
+senado: 129217 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 143 / 970 
+camara: NA 
+senado: 131646 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 144 / 970 
+camara: NA 
+senado: 132207 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 145 / 970 
+camara: 1266562 
+senado: 120501 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 146 / 970 
+camara: NA 
+senado: 127101 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 147 / 970 
+camara: 2195257 
+senado: 136190 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 148 / 970 
+camara: NA 
+senado: 135583 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 149 / 970 
+camara: 602729 
+senado: 134086 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 150 / 970 
+camara: NA 
+senado: 138830 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 151 / 970 
+camara: 2253934 
+senado: NA 
+
+
+--- Processando 152 / 970 
+camara: 2250723 
+senado: NA 
+
+
+--- Processando 153 / 970 
+camara: 2191844 
+senado: NA 
+
+
+--- Processando 154 / 970 
+camara: 2254734 
+senado: NA 
+
+
+--- Processando 155 / 970 
+camara: 2256411 
+senado: NA 
+
+
+--- Processando 156 / 970 
+camara: NA 
+senado: 143611 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 157 / 970 
+camara: 2080604 
+senado: 128634 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 158 / 970 
+camara: 257161 
+senado: NA 
+
+
+--- Processando 159 / 970 
+camara: NA 
+senado: 132865 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 160 / 970 
+camara: 2088990 
+senado: 91341 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 161 / 970 
+camara: 46249 
+senado: 41703 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 162 / 970 
+camara: 2121442 
+senado: 127753 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 163 / 970 
+camara: 345311 
+senado: NA 
+
+
+--- Processando 164 / 970 
+camara: 2085536 
+senado: NA 
+
+
+--- Processando 165 / 970 
+camara: 2120775 
+senado: NA 
+
+
+--- Processando 166 / 970 
+camara: 2122766 
+senado: 115926 
+[1m<error/tibble_error_column_names_cannot_be_empty>[22m
+Columns 1, 2, 3, 4, 5, and 39 more must be named.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m  2. [39mglobal::export_props(pls_ids_filepath, export_path)
+[90m  3. [39mreadr::read_csv(pls_ids_filepath)
+[90m  3. [39mdplyr::mutate(., row_num = 1:nrow(.))
+[90m  3. [39mdplyr::select(., row_num, id_camara, id_senado)
+[90m 11. [39magoradigital::fetch_props(., export_path)
+[90m 15. [39mpurrr::pmap(...)
+[90m 22. [39magoradigital:::.f(...)
+[90m 23. [39mpurrr:::safe_process_etapa(id_senado, "senado", pautas = pautas)
+[90m 32. [39magoradigital:::.f(...)
+[90m 33. [39magoradigital::fetch_proposicao(id, casa)
+[90m 34. [39magoradigital:::fetch_proposicao_senado(id, apelido, tema)
+[90m 38. [39mrcongresso::fetch_proposicao_senado(id)
+[90m 14. [39mmagrittr::extract2(., "SituacaoAtual")
+[90m 14. [39mmagrittr::extract2(., "Autuacoes")
+[90m 14. [39mmagrittr::extract2(., "Autuacao")
+[90m 14. [39mpurrr::flatten(.)
+[90m 22. [39mtibble::as_tibble(.)
+[90m 49. [39mtibble:::lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
+[90m 50. [39mtibble:::set_repaired_names(x, .name_repair)
+[90m 52. [39mtibble:::repaired_names(...)
+[90m 53. [39mtibble:::subclass_name_repair_errors(...)
+[90m 54. [39mbase::tryCatch(...)
+[90m 55. [39mbase:::tryCatchList(expr, classes, parentenv, handlers)
+[90m 58. [39mbase:::tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
+[90m 61. [39mbase:::tryCatchList(expr, names[-nh], parentenv, handlers[-nh])
+[90m 62. [39mbase:::tryCatchOne(expr, names, parentenv, handlers[[1L]])
+[90m 63. [39mvalue[[3L]](cond)
+
+
+--- Processando 167 / 970 
+camara: NA 
+senado: 126364 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 168 / 970 
+camara: 541857 
+senado: NA 
+
+
+--- Processando 169 / 970 
+camara: 2119881 
+senado: NA 
+
+
+--- Processando 170 / 970 
+camara: 2158425 
+senado: 133943 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 171 / 970 
+camara: 2056568 
+senado: NA 
+
+
+--- Processando 172 / 970 
+camara: 1738598 
+senado: NA 
+
+
+--- Processando 173 / 970 
+camara: 14562 
+senado: NA 
+
+
+--- Processando 174 / 970 
+camara: 2170839 
+senado: NA 
+
+
+--- Processando 175 / 970 
+camara: 944279 
+senado: NA 
+
+
+--- Processando 176 / 970 
+camara: NA 
+senado: 102721 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 177 / 970 
+camara: NA 
+senado: 103831 
+[1m<error/tibble_error_incompatible_new_cols>[22m
+New columns must be compatible with `.data`.
+[31m✖[39m New columns have 2 rows.
+[34mℹ[39m `.data` has 1 row.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m  2. [39mglobal::export_props(pls_ids_filepath, export_path)
+[90m  3. [39mreadr::read_csv(pls_ids_filepath)
+[90m  3. [39mdplyr::mutate(., row_num = 1:nrow(.))
+[90m  3. [39mdplyr::select(., row_num, id_camara, id_senado)
+[90m 11. [39magoradigital::fetch_props(., export_path)
+[90m 15. [39mpurrr::pmap(...)
+[90m 22. [39magoradigital:::.f(...)
+[90m 23. [39mpurrr:::safe_process_etapa(id_senado, "senado", pautas = pautas)
+[90m 32. [39magoradigital:::.f(...)
+[90m 33. [39magoradigital::fetch_proposicao(id, casa)
+[90m 34. [39magoradigital:::fetch_proposicao_senado(id, apelido, tema)
+[90m 38. [39mrcongresso::fetch_proposicao_senado(id)
+[90m 22. [39mtibble::add_column(...)
+
+
+--- Processando 178 / 970 
+camara: 2120019 
+senado: 111048 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 179 / 970 
+camara: 51066 
+senado: NA 
+
+
+--- Processando 180 / 970 
+camara: 518221 
+senado: NA 
+
+
+--- Processando 181 / 970 
+camara: 532814 
+senado: NA 
+
+
+--- Processando 182 / 970 
+camara: NA 
+senado: 120143 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 183 / 970 
+camara: 500183 
+senado: NA 
+
+
+--- Processando 184 / 970 
+camara: NA 
+senado: 106330 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 185 / 970 
+camara: 546383 
+senado: NA 
+
+
+--- Processando 186 / 970 
+camara: 1594911 
+senado: 121572 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 187 / 970 
+camara: 604888 
+senado: 96813 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 188 / 970 
+camara: 2192459 
+senado: 137999 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 189 / 970 
+camara: 2190288 
+senado: 135064 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 190 / 970 
+camara: 2192352 
+senado: NA 
+
+
+--- Processando 191 / 970 
+camara: 2192353 
+senado: NA 
+
+
+--- Processando 192 / 970 
+camara: 2192354 
+senado: NA 
+
+
+--- Processando 193 / 970 
+camara: NA 
+senado: 131906 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 194 / 970 
+camara: NA 
+senado: 120152 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 195 / 970 
+camara: 2190282 
+senado: 135061 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 196 / 970 
+camara: 353631 
+senado: NA 
+
+
+--- Processando 197 / 970 
+camara: 2178170 
+senado: NA 
+
+
+--- Processando 198 / 970 
+camara: 2190237 
+senado: 135060 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 199 / 970 
+camara: 604557 
+senado: NA 
+
+
+--- Processando 200 / 970 
+camara: NA 
+senado: 136033 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 201 / 970 
+camara: 2193540 
+senado: 136173 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 202 / 970 
+camara: NA 
+senado: 135799 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 203 / 970 
+camara: NA 
+senado: 135505 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 204 / 970 
+camara: NA 
+senado: 135062 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 205 / 970 
+camara: NA 
+senado: 131429 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 206 / 970 
+camara: 522447 
+senado: NA 
+
+
+--- Processando 207 / 970 
+camara: NA 
+senado: 129778 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 208 / 970 
+camara: 16526 
+senado: 1489 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 209 / 970 
+camara: 2199763 
+senado: 136531 
+[1m<error/tibble_error_incompatible_new_cols>[22m
+New columns must be compatible with `.data`.
+[31m✖[39m New columns have 2 rows.
+[34mℹ[39m `.data` has 1 row.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m  2. [39mglobal::export_props(pls_ids_filepath, export_path)
+[90m  3. [39mreadr::read_csv(pls_ids_filepath)
+[90m  3. [39mdplyr::mutate(., row_num = 1:nrow(.))
+[90m  3. [39mdplyr::select(., row_num, id_camara, id_senado)
+[90m 11. [39magoradigital::fetch_props(., export_path)
+[90m 15. [39mpurrr::pmap(...)
+[90m 22. [39magoradigital:::.f(...)
+[90m 23. [39mpurrr:::safe_process_etapa(id_senado, "senado", pautas = pautas)
+[90m 32. [39magoradigital:::.f(...)
+[90m 33. [39magoradigital::fetch_proposicao(id, casa)
+[90m 34. [39magoradigital:::fetch_proposicao_senado(id, apelido, tema)
+[90m 38. [39mrcongresso::fetch_proposicao_senado(id)
+[90m 22. [39mtibble::add_column(...)
+
+
+--- Processando 210 / 970 
+camara: NA 
+senado: 126049 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 211 / 970 
+camara: 1307190 
+senado: NA 
+
+
+--- Processando 212 / 970 
+camara: 2081681 
+senado: NA 
+
+
+--- Processando 213 / 970 
+camara: 2196833 
+senado: NA 
+
+
+--- Processando 214 / 970 
+camara: 2187087 
+senado: 138726 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 215 / 970 
+camara: 2208200 
+senado: 137319 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 216 / 970 
+camara: 2218881 
+senado: NA 
+
+
+--- Processando 217 / 970 
+camara: NA 
+senado: 138551 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 218 / 970 
+camara: 2209381 
+senado: 140042 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 219 / 970 
+camara: NA 
+senado: 139988 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 220 / 970 
+camara: NA 
+senado: 135216 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 221 / 970 
+camara: 2207613 
+senado: 137118 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 222 / 970 
+camara: 1996620 
+senado: NA 
+
+
+--- Processando 223 / 970 
+camara: 2206203 
+senado: NA 
+
+
+--- Processando 224 / 970 
+camara: 2182703 
+senado: NA 
+
+
+--- Processando 225 / 970 
+camara: 623800 
+senado: NA 
+
+
+--- Processando 226 / 970 
+camara: 2123638 
+senado: 126104 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 227 / 970 
+camara: 2155637 
+senado: 130711 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 228 / 970 
+camara: 473484 
+senado: NA 
+
+
+--- Processando 229 / 970 
+camara: 808928 
+senado: NA 
+
+
+--- Processando 230 / 970 
+camara: 1195577 
+senado: NA 
+
+
+--- Processando 231 / 970 
+camara: 2113552 
+senado: NA 
+
+
+--- Processando 232 / 970 
+camara: 2192672 
+senado: NA 
+
+
+--- Processando 233 / 970 
+camara: 556267 
+senado: NA 
+
+
+--- Processando 234 / 970 
+camara: 2242583 
+senado: 141443 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 235 / 970 
+camara: 2183034 
+senado: NA 
+
+
+--- Processando 236 / 970 
+camara: NA 
+senado: 136115 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 237 / 970 
+camara: NA 
+senado: 136309 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 238 / 970 
+camara: NA 
+senado: 140340 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 239 / 970 
+camara: NA 
+senado: 140343 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 240 / 970 
+camara: 2254043 
+senado: NA 
+
+
+--- Processando 241 / 970 
+camara: NA 
+senado: 141716 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 242 / 970 
+camara: 2254941 
+senado: NA 
+
+
+--- Processando 243 / 970 
+camara: 2254843 
+senado: NA 
+
+
+--- Processando 244 / 970 
+camara: 2213200 
+senado: 140534 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 245 / 970 
+camara: 2255191 
+senado: NA 
+
+
+--- Processando 246 / 970 
+camara: 2254585 
+senado: NA 
+
+
+--- Processando 247 / 970 
+camara: 2254751 
+senado: NA 
+
+
+--- Processando 248 / 970 
+camara: NA 
+senado: 142387 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 249 / 970 
+camara: 2241789 
+senado: 141147 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 250 / 970 
+camara: 2242618 
+senado: 141375 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 251 / 970 
+camara: 2242887 
+senado: 141415 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 252 / 970 
+camara: 2244243 
+senado: 141475 
+
+ Error on Calling URL: http://legis.senado.leg.br/dadosabertos/materia/movimentacoes/141475  - Status Code: 503[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 253 / 970 
+camara: 2244218 
+senado: NA 
+
+
+--- Processando 254 / 970 
+camara: 2251185 
+senado: NA 
+
+
+--- Processando 255 / 970 
+camara: 2251473 
+senado: NA 
+
+
+--- Processando 256 / 970 
+camara: 2244224 
+senado: NA 
+
+
+--- Processando 257 / 970 
+camara: 2251970 
+senado: NA 
+
+
+--- Processando 258 / 970 
+camara: NA 
+senado: 141891 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 259 / 970 
+camara: 2254032 
+senado: NA 
+
+
+--- Processando 260 / 970 
+camara: 2254060 
+senado: NA 
+
+
+--- Processando 261 / 970 
+camara: 2254457 
+senado: NA 
+
+
+--- Processando 262 / 970 
+camara: 2254942 
+senado: NA 
+
+
+--- Processando 263 / 970 
+camara: 2255134 
+senado: NA 
+
+
+--- Processando 264 / 970 
+camara: 2255427 
+senado: NA 
+
+
+--- Processando 265 / 970 
+camara: 2252589 
+senado: NA 
+
+
+--- Processando 266 / 970 
+camara: NA 
+senado: 138480 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 267 / 970 
+camara: 2258739 
+senado: NA 
+
+
+--- Processando 268 / 970 
+camara: 2239388 
+senado: NA 
+
+
+--- Processando 269 / 970 
+camara: 2239406 
+senado: NA 
+
+
+--- Processando 270 / 970 
+camara: 2239384 
+senado: NA 
+
+
+--- Processando 271 / 970 
+camara: 2239385 
+senado: NA 
+
+
+--- Processando 272 / 970 
+camara: 2239474 
+senado: NA 
+
+
+--- Processando 273 / 970 
+camara: 2239462 
+senado: NA 
+
+
+--- Processando 274 / 970 
+camara: 2239092 
+senado: NA 
+
+
+--- Processando 275 / 970 
+camara: 2239381 
+senado: NA 
+
+
+--- Processando 276 / 970 
+camara: 2242136 
+senado: NA 
+
+
+--- Processando 277 / 970 
+camara: 2242140 
+senado: NA 
+
+
+--- Processando 278 / 970 
+camara: 2242150 
+senado: NA 
+
+
+--- Processando 279 / 970 
+camara: 2242000 
+senado: NA 
+
+
+--- Processando 280 / 970 
+camara: 2241779 
+senado: NA 
+
+
+--- Processando 281 / 970 
+camara: 2242184 
+senado: NA 
+
+
+--- Processando 282 / 970 
+camara: 2242162 
+senado: NA 
+
+
+--- Processando 283 / 970 
+camara: 2242175 
+senado: NA 
+
+
+--- Processando 284 / 970 
+camara: 2242146 
+senado: NA 
+
+
+--- Processando 285 / 970 
+camara: 2241940 
+senado: NA 
+
+
+--- Processando 286 / 970 
+camara: 2242167 
+senado: NA 
+
+
+--- Processando 287 / 970 
+camara: 2242149 
+senado: NA 
+
+
+--- Processando 288 / 970 
+camara: 2241744 
+senado: NA 
+
+
+--- Processando 289 / 970 
+camara: 2241627 
+senado: NA 
+
+
+--- Processando 290 / 970 
+camara: 2241693 
+senado: NA 
+
+
+--- Processando 291 / 970 
+camara: 2242471 
+senado: NA 
+
+
+--- Processando 292 / 970 
+camara: 2242361 
+senado: NA 
+
+
+--- Processando 293 / 970 
+camara: 2242681 
+senado: NA 
+
+
+--- Processando 294 / 970 
+camara: 2242664 
+senado: NA 
+
+
+--- Processando 295 / 970 
+camara: 2242218 
+senado: NA 
+
+
+--- Processando 296 / 970 
+camara: 2242481 
+senado: NA 
+
+
+--- Processando 297 / 970 
+camara: 2242490 
+senado: NA 
+
+
+--- Processando 298 / 970 
+camara: 2242839 
+senado: NA 
+
+
+--- Processando 299 / 970 
+camara: 2242777 
+senado: NA 
+
+
+--- Processando 300 / 970 
+camara: 2242756 
+senado: 141219 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 301 / 970 
+camara: 2242351 
+senado: NA 
+
+
+--- Processando 302 / 970 
+camara: 2242488 
+senado: NA 
+
+
+--- Processando 303 / 970 
+camara: 2242384 
+senado: NA 
+
+
+--- Processando 304 / 970 
+camara: 2242819 
+senado: NA 
+
+
+--- Processando 305 / 970 
+camara: 2242462 
+senado: NA 
+
+
+--- Processando 306 / 970 
+camara: 2242797 
+senado: NA 
+
+
+--- Processando 307 / 970 
+camara: 2242785 
+senado: NA 
+
+
+--- Processando 308 / 970 
+camara: 2242386 
+senado: NA 
+
+
+--- Processando 309 / 970 
+camara: 2242378 
+senado: NA 
+
+
+--- Processando 310 / 970 
+camara: 2242201 
+senado: NA 
+
+
+--- Processando 311 / 970 
+camara: 2242656 
+senado: NA 
+
+
+--- Processando 312 / 970 
+camara: 2242826 
+senado: NA 
+
+
+--- Processando 313 / 970 
+camara: 2242479 
+senado: NA 
+
+
+--- Processando 314 / 970 
+camara: 2242269 
+senado: NA 
+
+
+--- Processando 315 / 970 
+camara: 2242494 
+senado: NA 
+
+
+--- Processando 316 / 970 
+camara: 2242237 
+senado: NA 
+
+
+--- Processando 317 / 970 
+camara: 2243963 
+senado: 135220 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 318 / 970 
+camara: 2243084 
+senado: NA 
+
+
+--- Processando 319 / 970 
+camara: 2242868 
+senado: 141174 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 320 / 970 
+camara: 2247028 
+senado: 141363 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 321 / 970 
+camara: 2243061 
+senado: NA 
+
+
+--- Processando 322 / 970 
+camara: 2247349 
+senado: NA 
+
+
+--- Processando 323 / 970 
+camara: 2243060 
+senado: NA 
+
+
+--- Processando 324 / 970 
+camara: 2243067 
+senado: NA 
+
+
+--- Processando 325 / 970 
+camara: 2244928 
+senado: NA 
+
+
+--- Processando 326 / 970 
+camara: 2244915 
+senado: NA 
+
+
+--- Processando 327 / 970 
+camara: 2243033 
+senado: NA 
+
+
+--- Processando 328 / 970 
+camara: 2243090 
+senado: NA 
+
+
+--- Processando 329 / 970 
+camara: 2244096 
+senado: NA 
+
+
+--- Processando 330 / 970 
+camara: 2245001 
+senado: NA 
+
+
+--- Processando 331 / 970 
+camara: 2247295 
+senado: NA 
+
+
+--- Processando 332 / 970 
+camara: 2247021 
+senado: NA 
+
+
+--- Processando 333 / 970 
+camara: 2244197 
+senado: NA 
+
+
+--- Processando 334 / 970 
+camara: 2247081 
+senado: NA 
+
+
+--- Processando 335 / 970 
+camara: 2244166 
+senado: NA 
+
+
+--- Processando 336 / 970 
+camara: 2247069 
+senado: NA 
+
+
+--- Processando 337 / 970 
+camara: 2247369 
+senado: NA 
+
+
+--- Processando 338 / 970 
+camara: 2244198 
+senado: NA 
+
+
+--- Processando 339 / 970 
+camara: 2244161 
+senado: NA 
+
+
+--- Processando 340 / 970 
+camara: 2248234 
+senado: NA 
+
+
+--- Processando 341 / 970 
+camara: 2249984 
+senado: NA 
+
+
+--- Processando 342 / 970 
+camara: 2247980 
+senado: 142085 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 343 / 970 
+camara: 2249851 
+senado: 141321 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 344 / 970 
+camara: 2249938 
+senado: NA 
+
+
+--- Processando 345 / 970 
+camara: 2249871 
+senado: NA 
+
+
+--- Processando 346 / 970 
+camara: 2249882 
+senado: NA 
+
+
+--- Processando 347 / 970 
+camara: 2247564 
+senado: 141306 
+[1m<error/vctrs_error_subscript_oob>[22m
+Can't rename columns that don't exist.
+[31m✖[39m Column `data_tramitacao` doesn't exist.
+[1mBacktrace:[22m
+[90m  1. [39mglobal::export_dados(flag)
+[90m 67. [39mvctrs:::stop_subscript_oob(...)
+[90m 68. [39mvctrs:::stop_subscript(...)
+
+
+--- Processando 348 / 970 
+camara: 2250375 
+senado: NA 
+
+
+--- Processando 349 / 970 
+camara: 2247978 
+senado: NA 
+
+
+--- Processando 350 / 970 
+camara: 2250288 
+senado: NA 
+
+
+--- Processando 351 / 970 
+camara: 2248274 
+senado: NA 
+
+
+--- Processando 352 / 970 
+camara: 2248209 
+senado: NA 
+
+
+--- Processando 353 / 970 
+camara: 2249865 
+senado: NA 
+
+
+--- Processando 354 / 970 
+camara: 2250287 
+senado: NA 
+
+
+--- Processando 355 / 970 
+camara: 2249899 
+senado: NA 
+
+
+--- Processando 356 / 970 
+camara: 2250388 
+senado: NA 
+
+
+--- Processando 357 / 970 
+camara: 2248519 
+senado: NA 
+
+
+--- Processando 358 / 970 
+camara: 2247431 
+senado: NA 

@@ -1,0 +1,103 @@
+
+===============================
+Iniciando atualização
+===============================
+ter ago  4 17:06:29 -03 2020
+
+===============================
+Atualizando código do rcongresso
+===============================
+From https://github.com/analytics-ufcg/rcongresso
+ * branch            master     -> FETCH_HEAD
+   1e42cf6..d3718c6  master     -> origin/master
+Updating 1e42cf6..d3718c6
+Fast-forward
+ R/colunas_constants.R             |   4 +-
+ R/constants.R                     |   3 +
+ R/proposicoes.R                   | 648 +++++++++++++++++++++++++-------------
+ R/senadores.R                     |  23 +-
+ R/tramitacoes.R                   | 131 +++++---
+ man/fetch_temas_proposicao.Rd     |  22 ++
+ tests/testthat/test_proposicoes.R |  10 +
+ 7 files changed, 568 insertions(+), 273 deletions(-)
+ create mode 100644 man/fetch_temas_proposicao.Rd
+
+===============================
+Atualizando código do LeggoR
+===============================
+From https://github.com/parlametria/leggoR
+ * branch              sprint-35  -> FETCH_HEAD
+Already up to date.
+
+===============================
+Atualizando imagem docker
+===============================
+Building rmod
+Step 1/13 : FROM rocker/tidyverse:3.6.2
+ ---> 360cea38f20b
+Step 2/13 : WORKDIR /agora-digital
+ ---> Using cache
+ ---> 698d06d0ee34
+Step 3/13 : RUN apt-get update
+ ---> Using cache
+ ---> 959713f45881
+Step 4/13 : RUN apt-get install libssl-dev libxml2-dev libcurl4-openssl-dev vim less git -y
+ ---> Using cache
+ ---> dc547b7306e9
+Step 5/13 : COPY DESCRIPTION .
+ ---> Using cache
+ ---> 20db291a0b1a
+Step 6/13 : RUN Rscript -e 'update.packages(checkBuilt=TRUE, ask=FALSE)'
+ ---> Using cache
+ ---> e7fccb6b3bbe
+Step 7/13 : RUN Rscript -e 'install.packages("devtools"); devtools::install_deps()'
+ ---> Using cache
+ ---> 46ca8c815c10
+Step 8/13 : COPY . .
+ ---> a273dfc3b0e9
+Step 9/13 : ARG clone_rcongresso=true
+ ---> Running in 4c360135563d
+Removing intermediate container 4c360135563d
+ ---> acd2ce065f6d
+Step 10/13 : RUN if [ "$clone_rcongresso" = "false" ] ;  then Rscript -e 'devtools::install("rcongresso/")'; else Rscript -e 'devtools::install_github("analytics-ufcg/rcongresso")'; fi
+ ---> Running in 9d94755da71e
+
+     checking for file ‘/agora-digital/rcongresso/DESCRIPTION’ ...  ✔  checking for file ‘/agora-digital/rcongresso/DESCRIPTION’ (432ms)
+  ─  preparing ‘rcongresso’: (354ms)
+     checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+              checking for LF line-endings in source and make files and shell scripts  ─  checking for LF line-endings in source and make files and shell scripts
+  ─  checking for empty or unneeded directories
+       NB: this package now depends on R (>= 3.5.0)
+       WARNING: Added dependency on R >= 3.5.0 because serialized objects in  serialize/load version 3 cannot be read in older versions of R.  File(s) containing such objects:  'rcongresso/inst/extdata/test_cache.rds'
+─  building 'rcongresso_0.5.0.tar.gz'
+     
+Running /usr/local/lib/R/bin/R CMD INSTALL \
+  /tmp/RtmpRNYQ8L/rcongresso_0.5.0.tar.gz --install-tests 
+* installing to library ‘/usr/local/lib/R/site-library’
+* installing *source* package ‘rcongresso’ ...
+** using non-staged installation via StagedInstall field
+** R
+** inst
+** tests
+** byte-compile and prepare package for lazy loading
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded
+* DONE (rcongresso)
+Removing intermediate container 9d94755da71e
+ ---> fd740dbfd0bc
+Step 11/13 : RUN Rscript -e 'devtools::install_version("dplyr", version = "0.8.5", repos = "http://cran.us.r-project.org")'
+ ---> Running in 24db90b7f462
+[91mError in package_find_repo(package, repos) : 
+  couldn't find package 'dplyr'
+Calls: <Anonymous> ... <Anonymous> -> download_version_url -> package_find_repo
+Execution halted
+[0mService 'rmod' failed to build: The command '/bin/sh -c Rscript -e 'devtools::install_version("dplyr", version = "0.8.5", repos = "http://cran.us.r-project.org")'' returned a non-zero code: 1
+ERROR # 1 : Não foi possível fazer o build do leggoR.
+ter ago  4 17:11:05 -03 2020
+
+===============================
+Feito!
+===============================

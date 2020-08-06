@@ -1,0 +1,1724 @@
+
+===============================
+Iniciando atualização
+===============================
+qua ago  5 10:01:22 -03 2020
+
+===============================
+Atualizando código do rcongresso
+===============================
+From https://github.com/analytics-ufcg/rcongresso
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+
+===============================
+Atualizando código do LeggoR
+===============================
+From https://github.com/parlametria/leggoR
+ * branch              sprint-35  -> FETCH_HEAD
+Already up to date.
+
+===============================
+Atualizando imagem docker
+===============================
+Building rmod
+Step 1/13 : FROM rocker/tidyverse:3.6.2
+ ---> 360cea38f20b
+Step 2/13 : WORKDIR /agora-digital
+ ---> Using cache
+ ---> 698d06d0ee34
+Step 3/13 : RUN apt-get update
+ ---> Using cache
+ ---> 959713f45881
+Step 4/13 : RUN apt-get install libssl-dev libxml2-dev libcurl4-openssl-dev vim less git -y
+ ---> Using cache
+ ---> dc547b7306e9
+Step 5/13 : COPY DESCRIPTION .
+ ---> Using cache
+ ---> 20db291a0b1a
+Step 6/13 : RUN Rscript -e 'update.packages(checkBuilt=TRUE, ask=FALSE)'
+ ---> Using cache
+ ---> e7fccb6b3bbe
+Step 7/13 : RUN Rscript -e 'install.packages("devtools"); devtools::install_deps()'
+ ---> Using cache
+ ---> 46ca8c815c10
+Step 8/13 : COPY . .
+ ---> Using cache
+ ---> 7001d0094f1d
+Step 9/13 : ARG clone_rcongresso=true
+ ---> Using cache
+ ---> 8551ce4e9e60
+Step 10/13 : RUN if [ "$clone_rcongresso" = "false" ] ;  then Rscript -e 'devtools::install("rcongresso/")'; else Rscript -e 'devtools::install_github("analytics-ufcg/rcongresso")'; fi
+ ---> Using cache
+ ---> d79485143b5b
+Step 11/13 : RUN Rscript -e 'devtools::install_version("dplyr", version = "0.8.5", repos = "http://cran.us.r-project.org")'
+ ---> Using cache
+ ---> b6f0571b6b0c
+Step 12/13 : RUN rm -rf rcongresso
+ ---> Using cache
+ ---> 342cb91bd18a
+Step 13/13 : RUN Rscript -e 'devtools::install(upgrade = "never")'
+ ---> Using cache
+ ---> 5b1c1c96d581
+
+Successfully built 5b1c1c96d581
+Successfully tagged agoradigital/r-scrapper:latest
+
+===============================
+Atualizando código do LeggoTrends
+===============================
+From https://github.com/parlametria/leggoTrends
+ * branch            master     -> FETCH_HEAD
+Already up to date.
+
+===============================
+Atualizando imagem docker
+===============================
+Building leggo-trends
+Step 1/20 : FROM rocker/tidyverse:3.6.2
+ ---> 360cea38f20b
+Step 2/20 : WORKDIR leggo-trends
+ ---> Using cache
+ ---> 1e2ee9225d47
+Step 3/20 : RUN apt-get update
+ ---> Using cache
+ ---> 2deeca4f46e2
+Step 4/20 : RUN apt-get install libssl-dev libxml2-dev libcurl4-openssl-dev vim less -y
+ ---> Using cache
+ ---> f47bdc7c11cb
+Step 5/20 : COPY DESCRIPTION .
+ ---> Using cache
+ ---> 6d05369a2ea4
+Step 6/20 : RUN R -e "install.packages('lubridate',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> 7a98d02aab2d
+Step 7/20 : RUN R -e "install.packages('optparse',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> 4e89f2a9ba9c
+Step 8/20 : RUN R -e "install.packages('devtools',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> 30a96e18a4a2
+Step 9/20 : RUN R -e "install.packages('glmnet',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> 9afe453d2080
+Step 10/20 : RUN R -e "install.packages('here',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> 214dbf9e2b15
+Step 11/20 : RUN R -e "install.packages('fuzzyjoin',dependencies=TRUE, repos='http://cran.rstudio.com/')"
+ ---> Using cache
+ ---> ae86580ac07b
+Step 12/20 : RUN R -e "devtools::install_github('ekstroem/MESS')"
+ ---> Using cache
+ ---> 2cf8b35dd607
+Step 13/20 : RUN R -e "devtools::install_github('ropensci/rtweet')"
+ ---> Using cache
+ ---> e3b67b4c0deb
+Step 14/20 : RUN R -e "devtools::install_github('analytics-ufcg/rcongresso')"
+ ---> Using cache
+ ---> 9710ca364bef
+Step 15/20 : RUN apt-get install -y python3-pip
+ ---> Using cache
+ ---> 289f45e08e5d
+Step 16/20 : RUN pip3 install pandas
+ ---> Using cache
+ ---> 1499eb7fa870
+Step 17/20 : RUN pip3 install git+https://github.com/GeneralMills/pytrends
+ ---> Using cache
+ ---> fcd7e2857b53
+Step 18/20 : RUN pip3 install unidecode
+ ---> Using cache
+ ---> e3ce8606e24a
+Step 19/20 : COPY . .
+ ---> Using cache
+ ---> 3db4b0a92b54
+Step 20/20 : RUN R -e "devtools::install()"
+ ---> Using cache
+ ---> 7e31de119974
+
+Successfully built 7e31de119974
+Successfully tagged agoradigital/leggo-trends:latest
+
+===============================
+Processa dados de entidades
+===============================
+── [1mAttaching packages[22m ─────────────────────────────────────── tidyverse 1.3.0 ──
+[32m✔[39m [34mggplot2[39m 3.2.1     [32m✔[39m [34mpurrr  [39m 0.3.4
+[32m✔[39m [34mtibble [39m 3.0.3     [32m✔[39m [34mdplyr  [39m 0.8.5
+[32m✔[39m [34mtidyr  [39m 1.0.2     [32m✔[39m [34mstringr[39m 1.4.0
+[32m✔[39m [34mreadr  [39m 1.3.1     [32m✔[39m [34mforcats[39m 0.4.0
+── [1mConflicts[22m ────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mtidyr[39m::[32mextract()[39m   masks [34mmagrittr[39m::extract()
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m    masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m       masks [34mstats[39m::lag()
+[31m✖[39m [34mpurrr[39m::[32mset_names()[39m masks [34mmagrittr[39m::set_names()
+Loading required package: optparse
+     checking for file ‘/agora-digital/DESCRIPTION’ ...  [32m✔[39m  [38;5;247mchecking for file ‘/agora-digital/DESCRIPTION’[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mpreparing ‘agoradigital’:[39m[36m[36m (2.4s)[36m[39m
+     checking DESCRIPTION meta-information ...  [32m✔[39m  [38;5;247mchecking DESCRIPTION meta-information[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for LF line-endings in source and make files and shell scripts[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for empty or unneeded directories[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mbuilding ‘agoradigital_0.0.1.tar.gz’[39m[36m[39m
+     
+Running /usr/local/lib/R/bin/R CMD INSTALL \
+  /tmp/Rtmp6ktOW0/agoradigital_0.0.1.tar.gz --install-tests 
+[31m* installing to library ‘/usr/local/lib/R/site-library’
+[39m[31m* installing *source* package ‘agoradigital’ ...
+[39m[31m** using staged installation
+[39m[31m** R
+[39m[31m** inst
+[39m[31m** tests
+[39m[31m** byte-compile and prepare package for lazy loading
+[39mNo man pages found in package  ‘agoradigital’ 
+[31m** help
+[39m[31m*** installing help indices
+[39m[31m** building package indices
+[39m[31m** testing if installed package can be loaded from temporary location
+[39m[31m** testing if installed package can be loaded from final location
+[39m[31m** testing if installed package keeps a record of temporary installation path
+[39m[31m* DONE (agoradigital)
+[39m
+===============================
+Junta PL's de todos os interesses
+===============================
+here() starts at /agora-digital
+here() starts at /agora-digital, because it contains a file `DESCRIPTION` with contents matching `^Package: `
+NULL
+── [1mAttaching packages[22m ─────────────────────────────────────── tidyverse 1.3.0 ──
+[32m✔[39m [34mggplot2[39m 3.2.1     [32m✔[39m [34mpurrr  [39m 0.3.4
+[32m✔[39m [34mtibble [39m 3.0.3     [32m✔[39m [34mdplyr  [39m 0.8.5
+[32m✔[39m [34mtidyr  [39m 1.0.2     [32m✔[39m [34mstringr[39m 1.4.0
+[32m✔[39m [34mreadr  [39m 1.3.1     [32m✔[39m [34mforcats[39m 0.4.0
+── [1mConflicts[22m ────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+$url
+[1] "https://docs.google.com/spreadsheets/d/e/2PACX-1vTIR2gVdVh2t2GDexd0dauxOJAE1tyKc5i7XLwLGfNPWUncsaC2CxZxh5coPvVjAIbFKHnVSEKLiZ9g/pub?gid=0&single=true&output=csv"
+
+$export_filepath
+[1] "./leggo_data/pls_interesses.csv"
+
+$help
+[1] FALSE
+
+[1] "Juntando lista de pls para os interesses..."
+Parsed with column specification:
+cols(
+  interesse = [31mcol_character()[39m,
+  url = [31mcol_character()[39m,
+  nome = [31mcol_character()[39m
+)
+[1] "Extraindo ementa da proposição id_camara 301799 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara NA e id_senado 53205..."
+[1] "Extraindo ementa da proposição id_camara 1234065 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara NA e id_senado 117166..."
+[1] "Extraindo ementa da proposição id_camara 530527 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara 545304 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara 556910 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara 604557 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara 619117 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara 2083042 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara NA e id_senado 92056..."
+[1] "Extraindo ementa da proposição id_camara NA e id_senado 125232..."
+[1] "Extraindo ementa da proposição id_camara 354998 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara NA e id_senado 129301..."
+[1] "Extraindo ementa da proposição id_camara 2210926 e id_senado NA..."
+[1] "Salvando pls de interesse..."
+[1] "Salvo"
+
+===============================
+Baixando e exportando novos dados de proposições
+===============================
+$flag
+[1] 2
+
+$pls_ids_filepath
+[1] "./leggo_data/pls_interesses.csv"
+
+$exporth_path
+[1] "./leggo_data"
+
+$help
+[1] FALSE
+
+     checking for file ‘/agora-digital/DESCRIPTION’ ...  [32m✔[39m  [38;5;247mchecking for file ‘/agora-digital/DESCRIPTION’[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mpreparing ‘agoradigital’:[39m[36m[39m
+     checking DESCRIPTION meta-information ...  [32m✔[39m  [38;5;247mchecking DESCRIPTION meta-information[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for LF line-endings in source and make files and shell scripts[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for empty or unneeded directories[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mbuilding ‘agoradigital_0.0.1.tar.gz’[39m[36m[39m
+     
+Running /usr/local/lib/R/bin/R CMD INSTALL \
+  /tmp/RtmpgcO05O/agoradigital_0.0.1.tar.gz --install-tests 
+[31m* installing to library ‘/usr/local/lib/R/site-library’
+[39m[31m* installing *source* package ‘agoradigital’ ...
+[39m[31m** using staged installation
+[39m[31m** R
+[39m[31m** inst
+[39m[31m** tests
+[39m[31m** byte-compile and prepare package for lazy loading
+[39mNo man pages found in package  ‘agoradigital’ [31m** help
+[39m
+[31m*** installing help indices
+[39m[31m** building package indices
+[39m[31m** testing if installed package can be loaded from temporary location
+[39m[31m** testing if installed package can be loaded from final location
+[39m[31m** testing if installed package keeps a record of temporary installation path
+[39m[31m* DONE (agoradigital)
+[39m[1] "Atualizando as proposições!"
+Parsed with column specification:
+cols(
+  proposicao = [31mcol_character()[39m,
+  id_camara = [32mcol_double()[39m,
+  id_senado = [32mcol_double()[39m,
+  apelido = [31mcol_character()[39m,
+  Prioritário = [31mcol_character()[39m,
+  tema = [31mcol_character()[39m,
+  advocacy_link = [33mcol_logical()[39m,
+  keywords = [31mcol_character()[39m,
+  tipo_agenda = [31mcol_character()[39m,
+  explicacao_projeto = [31mcol_character()[39m,
+  interesse = [31mcol_character()[39m,
+  nome_interesse = [31mcol_character()[39m,
+  link_camara = [31mcol_character()[39m,
+  link_senado = [31mcol_character()[39m
+)
+
+--- Tentativa  1 
+
+
+--- Processando 1 / 60 
+camara: 2231327 
+senado: 138555 
+
+
+--- Processando 2 / 60 
+camara: 1198512 
+senado: NA 
+
+
+--- Processando 3 / 60 
+camara: 2230007 
+senado: NA 
+
+
+--- Processando 4 / 60 
+camara: 2195689 
+senado: NA 
+
+
+--- Processando 5 / 60 
+camara: 2174306 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 6 / 60 
+camara: 501465 
+senado: NA 
+
+
+--- Processando 7 / 60 
+camara: 2193777 
+senado: NA 
+
+
+--- Processando 8 / 60 
+camara: 2193966 
+senado: NA 
+
+
+--- Processando 9 / 60 
+camara: 2193987 
+senado: NA 
+
+
+--- Processando 10 / 60 
+camara: 1278924 
+senado: NA 
+
+
+--- Processando 11 / 60 
+camara: 2194882 
+senado: NA 
+
+
+--- Processando 12 / 60 
+camara: 2195105 
+senado: NA 
+
+
+--- Processando 13 / 60 
+camara: 2197797 
+senado: NA 
+
+
+--- Processando 14 / 60 
+camara: 2198845 
+senado: 134730 
+
+
+--- Processando 15 / 60 
+camara: 1672689 
+senado: NA 
+
+
+--- Processando 16 / 60 
+camara: 2080604 
+senado: 128634 
+
+
+--- Processando 17 / 60 
+camara: 257161 
+senado: NA 
+
+
+--- Processando 18 / 60 
+camara: NA 
+senado: 132865 
+
+
+--- Processando 19 / 60 
+camara: 2088990 
+senado: 91341 
+
+
+--- Processando 20 / 60 
+camara: 46249 
+senado: 41703 
+
+
+--- Processando 21 / 60 
+camara: 2121442 
+senado: 127753 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 22 / 60 
+camara: 345311 
+senado: NA 
+
+
+--- Processando 23 / 60 
+camara: 2085536 
+senado: NA 
+
+
+--- Processando 24 / 60 
+camara: 2120775 
+senado: NA 
+
+
+--- Processando 25 / 60 
+camara: 2122766 
+senado: 115926 
+
+
+--- Processando 26 / 60 
+camara: NA 
+senado: 126364 
+
+
+--- Processando 27 / 60 
+camara: 606722 
+senado: NA 
+
+
+--- Processando 28 / 60 
+camara: 541857 
+senado: NA 
+
+
+--- Processando 29 / 60 
+camara: 2119881 
+senado: NA 
+
+
+--- Processando 30 / 60 
+camara: 2158425 
+senado: 133943 
+
+
+--- Processando 31 / 60 
+camara: 2183034 
+senado: NA 
+
+
+--- Processando 32 / 60 
+camara: NA 
+senado: 136115 
+
+
+--- Processando 33 / 60 
+camara: NA 
+senado: 136309 
+<simpleError in curl::curl_fetch_memory(url, handle = handle): Timeout was reached: [legis.senado.leg.br] Connection timed out after 10000 milliseconds>
+
+
+--- Processando 34 / 60 
+camara: NA 
+senado: 140340 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 35 / 60 
+camara: NA 
+senado: 140343 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 36 / 60 
+camara: 2254043 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 37 / 60 
+camara: NA 
+senado: 141716 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 38 / 60 
+camara: 2239388 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 39 / 60 
+camara: 2239406 
+senado: NA 
+
+
+--- Processando 40 / 60 
+camara: 2239384 
+senado: NA 
+
+
+--- Processando 41 / 60 
+camara: 2239385 
+senado: NA 
+
+
+--- Processando 42 / 60 
+camara: 2239474 
+senado: NA 
+
+
+--- Processando 43 / 60 
+camara: 2239462 
+senado: NA 
+
+
+--- Processando 44 / 60 
+camara: 2239092 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 45 / 60 
+camara: 2239381 
+senado: NA 
+
+
+--- Processando 46 / 60 
+camara: 301799 
+senado: NA 
+
+
+--- Processando 47 / 60 
+camara: NA 
+senado: 53205 
+
+
+--- Processando 48 / 60 
+camara: 1234065 
+senado: NA 
+
+
+--- Processando 49 / 60 
+camara: NA 
+senado: 117166 
+
+
+--- Processando 50 / 60 
+camara: 530527 
+senado: NA 
+
+
+--- Processando 51 / 60 
+camara: 545304 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 52 / 60 
+camara: 556910 
+senado: NA 
+
+
+--- Processando 53 / 60 
+camara: 604557 
+senado: NA 
+
+
+--- Processando 54 / 60 
+camara: 619117 
+senado: NA 
+
+
+--- Processando 55 / 60 
+camara: 2083042 
+senado: NA 
+
+
+--- Processando 56 / 60 
+camara: NA 
+senado: 92056 
+
+
+--- Processando 57 / 60 
+camara: NA 
+senado: 125232 
+
+
+--- Processando 58 / 60 
+camara: 354998 
+senado: NA 
+
+
+--- Processando 59 / 60 
+camara: NA 
+senado: 129301 
+
+
+--- Processando 60 / 60 
+camara: 2210926 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+── [1mAttaching packages[22m ─────────────────────────────────────── tidyverse 1.3.0 ──
+[32m✔[39m [34mggplot2[39m 3.2.1     [32m✔[39m [34mpurrr  [39m 0.3.4
+[32m✔[39m [34mtibble [39m 3.0.3     [32m✔[39m [34mdplyr  [39m 0.8.5
+[32m✔[39m [34mtidyr  [39m 1.0.2     [32m✔[39m [34mstringr[39m 1.4.0
+[32m✔[39m [34mreadr  [39m 1.3.1     [32m✔[39m [34mforcats[39m 0.4.0
+── [1mConflicts[22m ────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mtidyr[39m::[32mextract()[39m   masks [34mmagrittr[39m::extract()
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m    masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m       masks [34mstats[39m::lag()
+[31m✖[39m [34mpurrr[39m::[32mset_names()[39m masks [34mmagrittr[39m::set_names()
+
+--- Tentativa  2 
+
+
+--- Processando 5 / 11 
+camara: 2174306 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 21 / 11 
+camara: 2121442 
+senado: 127753 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 33 / 11 
+camara: NA 
+senado: 136309 
+
+
+--- Processando 34 / 11 
+camara: NA 
+senado: 140340 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 35 / 11 
+camara: NA 
+senado: 140343 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 36 / 11 
+camara: 2254043 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 37 / 11 
+camara: NA 
+senado: 141716 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 38 / 11 
+camara: 2239388 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 44 / 11 
+camara: 2239092 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 51 / 11 
+camara: 545304 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 60 / 11 
+camara: 2210926 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+--- Tentativa  3 
+
+
+--- Processando 5 / 10 
+camara: 2174306 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 21 / 10 
+camara: 2121442 
+senado: 127753 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 34 / 10 
+camara: NA 
+senado: 140340 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 35 / 10 
+camara: NA 
+senado: 140343 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 36 / 10 
+camara: 2254043 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 37 / 10 
+camara: NA 
+senado: 141716 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 38 / 10 
+camara: 2239388 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 44 / 10 
+camara: 2239092 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 51 / 10 
+camara: 545304 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 60 / 10 
+camara: 2210926 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+--- Tentativa  4 
+
+
+--- Processando 5 / 10 
+camara: 2174306 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 21 / 10 
+camara: 2121442 
+senado: 127753 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 34 / 10 
+camara: NA 
+senado: 140340 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 35 / 10 
+camara: NA 
+senado: 140343 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 36 / 10 
+camara: 2254043 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 37 / 10 
+camara: NA 
+senado: 141716 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 38 / 10 
+camara: 2239388 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 44 / 10 
+camara: 2239092 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 51 / 10 
+camara: 545304 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 60 / 10 
+camara: 2210926 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+--- Tentativa  5 
+
+
+--- Processando 5 / 10 
+camara: 2174306 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 21 / 10 
+camara: 2121442 
+senado: 127753 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 34 / 10 
+camara: NA 
+senado: 140340 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 35 / 10 
+camara: NA 
+senado: 140343 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 36 / 10 
+camara: 2254043 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 37 / 10 
+camara: NA 
+senado: 141716 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 38 / 10 
+camara: 2239388 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 44 / 10 
+camara: 2239092 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 51 / 10 
+camara: 545304 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+
+
+--- Processando 60 / 10 
+camara: 2210926 
+senado: NA 
+<simpleError in as.data.frame.default(x[[i]], optional = TRUE): cannot coerce class ‘"vctrs_unspecified"’ to a data.frame>
+[1] "Could not download the following propositions:"
+[38;5;246m# A tibble: 10 x 3[39m
+   row_num id_camara id_senado
+     [3m[38;5;246m<int>[39m[23m     [3m[38;5;246m<dbl>[39m[23m     [3m[38;5;246m<dbl>[39m[23m
+[38;5;250m 1[39m       5   2[4m1[24m[4m7[24m[4m4[24m306        [31mNA[39m
+[38;5;250m 2[39m      21   2[4m1[24m[4m2[24m[4m1[24m442    [4m1[24m[4m2[24m[4m7[24m753
+[38;5;250m 3[39m      34        [31mNA[39m    [4m1[24m[4m4[24m[4m0[24m340
+[38;5;250m 4[39m      35        [31mNA[39m    [4m1[24m[4m4[24m[4m0[24m343
+[38;5;250m 5[39m      36   2[4m2[24m[4m5[24m[4m4[24m043        [31mNA[39m
+[38;5;250m 6[39m      37        [31mNA[39m    [4m1[24m[4m4[24m[4m1[24m716
+[38;5;250m 7[39m      38   2[4m2[24m[4m3[24m[4m9[24m388        [31mNA[39m
+[38;5;250m 8[39m      44   2[4m2[24m[4m3[24m[4m9[24m092        [31mNA[39m
+[38;5;250m 9[39m      51    [4m5[24m[4m4[24m[4m5[24m304        [31mNA[39m
+[38;5;250m10[39m      60   2[4m2[24m[4m1[24m[4m0[24m926        [31mNA[39m
+There were 50 or more warnings (use warnings() to see the first 50)
+
+===============================
+Baixando e exportando novos dados de autores das proposições monitoradas.
+===============================
+$flag
+[1] 5
+
+$pls_ids_filepath
+[1] "./leggo_data/pls_interesses.csv"
+
+$exporth_path
+[1] "./leggo_data"
+
+$help
+[1] FALSE
+
+     checking for file ‘/agora-digital/DESCRIPTION’ ...  [32m✔[39m  [38;5;247mchecking for file ‘/agora-digital/DESCRIPTION’[39m[36m[36m (430ms)[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mpreparing ‘agoradigital’:[39m[36m[36m (3.2s)[36m[39m
+     checking DESCRIPTION meta-information ...  [32m✔[39m  [38;5;247mchecking DESCRIPTION meta-information[39m[36m[36m (915ms)[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for LF line-endings in source and make files and shell scripts[39m[36m[36m (1.3s)[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for empty or unneeded directories[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mbuilding ‘agoradigital_0.0.1.tar.gz’[39m[36m[39m
+     
+Running /usr/local/lib/R/bin/R CMD INSTALL \
+  /tmp/RtmpLiCRCB/agoradigital_0.0.1.tar.gz --install-tests 
+[31m* installing to library ‘/usr/local/lib/R/site-library’
+[39m[31m* installing *source* package ‘agoradigital’ ...
+[39m[31m** using staged installation
+[39m[31m** R
+[39m[31m** inst
+[39m[31m** tests
+[39m[31m** byte-compile and prepare package for lazy loading
+[39mNo man pages found in package  ‘agoradigital’ 
+[31m** help
+[39m[31m*** installing help indices
+[39m[31m** building package indices
+[39m[31m** testing if installed package can be loaded from temporary location
+[39m[31m** testing if installed package can be loaded from final location
+[39m[31m** testing if installed package keeps a record of temporary installation path
+[39m[31m* DONE (agoradigital)
+[39m[1] "Atualizando Autores das matérias legislativas!"
+Parsed with column specification:
+cols(
+  proposicao = [31mcol_character()[39m,
+  id_camara = [32mcol_double()[39m,
+  id_senado = [32mcol_double()[39m,
+  apelido = [31mcol_character()[39m,
+  Prioritário = [31mcol_character()[39m,
+  tema = [31mcol_character()[39m,
+  advocacy_link = [33mcol_logical()[39m,
+  keywords = [31mcol_character()[39m,
+  tipo_agenda = [31mcol_character()[39m,
+  explicacao_projeto = [31mcol_character()[39m,
+  interesse = [31mcol_character()[39m,
+  nome_interesse = [31mcol_character()[39m,
+  link_camara = [31mcol_character()[39m,
+  link_senado = [31mcol_character()[39m
+)
+[1] "Recuperando atores para a proposição: câmara 2231327  senado 138555 - 1 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 1198512  senado NA - 2 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2230007  senado NA - 3 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2195689  senado NA - 4 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2174306  senado NA - 5 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 501465  senado NA - 6 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2193777  senado NA - 7 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2193966  senado NA - 8 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2193987  senado NA - 9 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 1278924  senado NA - 10 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2194882  senado NA - 11 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2195105  senado NA - 12 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2197797  senado NA - 13 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2198845  senado 134730 - 14 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 1672689  senado NA - 15 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2080604  senado 128634 - 16 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 257161  senado NA - 17 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 132865 - 18 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2088990  senado 91341 - 19 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 46249  senado 41703 - 20 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2121442  senado 127753 - 21 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 345311  senado NA - 22 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2085536  senado NA - 23 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2120775  senado NA - 24 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2122766  senado 115926 - 25 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 126364 - 26 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 606722  senado NA - 27 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 541857  senado NA - 28 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2119881  senado NA - 29 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2158425  senado 133943 - 30 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2183034  senado NA - 31 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 136115 - 32 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 136309 - 33 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 140340 - 34 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 140343 - 35 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2254043  senado NA - 36 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 141716 - 37 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2239388  senado NA - 38 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2239406  senado NA - 39 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2239384  senado NA - 40 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2239385  senado NA - 41 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2239474  senado NA - 42 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2239462  senado NA - 43 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2239092  senado NA - 44 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2239381  senado NA - 45 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 301799  senado NA - 46 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 53205 - 47 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 1234065  senado NA - 48 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 117166 - 49 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 530527  senado NA - 50 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 545304  senado NA - 51 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 556910  senado NA - 52 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 604557  senado NA - 53 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 619117  senado NA - 54 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2083042  senado NA - 55 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 92056 - 56 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 125232 - 57 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 354998  senado NA - 58 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara NA  senado 129301 - 59 / 60"
+[1] "Casa da proposição: senado"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'[1] "Recuperando atores para a proposição: câmara 2210926  senado NA - 60 / 60"
+[1] "Casa da proposição: camara"
+'fetch_autores_documento' is not an exported object from 'namespace:agoradigital'Error: `false` must be a character vector, not a logical vector
+Backtrace:
+[90m     [39m█
+[90m  1. [39m├─global::export_dados(flag)
+[90m  2. [39m│ └─agoradigital::process_autores_props(pls_ids_filepath, export_path)
+[90m  3. [39m│   └─`%>%`(...)
+[90m  4. [39m│     ├─base::withVisible(eval(quote(`_fseq`(`_lhs`)), env, env))
+[90m  5. [39m│     └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
+[90m  6. [39m│       └─base::eval(quote(`_fseq`(`_lhs`)), env, env)
+[90m  7. [39m│         └─agoradigital:::`_fseq`(`_lhs`)
+[90m  8. [39m│           └─magrittr::freduce(value, `_function_list`)
+[90m  9. [39m│             └─function_list[[i]](value)
+[90m 10. [39m│               ├─dplyr::mutate(...)
+[90m 11. [39m│               └─dplyr:::mutate.tbl_df(...)
+[90m 12. [39m│                 └─dplyr:::mutate_impl(.data, dots, caller_env())
+[90m 13. [39m└─dplyr::if_else(...)
+[90m 14. [39m  └─dplyr:::r
+Execution halted
+ERROR # 1 : Não foi possível baixar dados de autores das proposições monitoradas.
+
+===============================
+Processa o mapeamento de pls e interesses
+===============================
+here() starts at /agora-digital
+here() starts at /agora-digital, because it contains a file `DESCRIPTION` with contents matching `^Package: `
+NULL
+── [1mAttaching packages[22m ─────────────────────────────────────── tidyverse 1.3.0 ──
+[32m✔[39m [34mggplot2[39m 3.2.1     [32m✔[39m [34mpurrr  [39m 0.3.4
+[32m✔[39m [34mtibble [39m 3.0.3     [32m✔[39m [34mdplyr  [39m 0.8.5
+[32m✔[39m [34mtidyr  [39m 1.0.2     [32m✔[39m [34mstringr[39m 1.4.0
+[32m✔[39m [34mreadr  [39m 1.3.1     [32m✔[39m [34mforcats[39m 0.4.0
+── [1mConflicts[22m ────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+$url
+[1] "https://docs.google.com/spreadsheets/d/e/2PACX-1vTIR2gVdVh2t2GDexd0dauxOJAE1tyKc5i7XLwLGfNPWUncsaC2CxZxh5coPvVjAIbFKHnVSEKLiZ9g/pub?gid=0&single=true&output=csv"
+
+$proposicoes_filepath
+[1] "./leggo_data/proposicoes.csv"
+
+$export_filepath
+[1] "./leggo_data/interesses.csv"
+
+$help
+[1] FALSE
+
+[1] "Processando interesses..."
+Parsed with column specification:
+cols(
+  interesse = [31mcol_character()[39m,
+  url = [31mcol_character()[39m,
+  nome = [31mcol_character()[39m
+)
+[1] "Extraindo ementa da proposição id_camara 301799 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara NA e id_senado 53205..."
+[1] "Extraindo ementa da proposição id_camara 1234065 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara NA e id_senado 117166..."
+[1] "Extraindo ementa da proposição id_camara 530527 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara 545304 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara 556910 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara 604557 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara 619117 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara 2083042 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara NA e id_senado 92056..."
+[1] "Extraindo ementa da proposição id_camara NA e id_senado 125232..."
+[1] "Extraindo ementa da proposição id_camara 354998 e id_senado NA..."
+[1] "Extraindo ementa da proposição id_camara NA e id_senado 129301..."
+[1] "Extraindo ementa da proposição id_camara 2210926 e id_senado NA..."
+[1] "Salvando interesses..."
+[1] "Salvo"
+
+===============================
+Processa os dados de anotações
+===============================
+here() starts at /agora-digital
+here() starts at /agora-digital, because it contains a file `DESCRIPTION` with contents matching `^Package: `
+NULL
+$url
+[1] "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIC9sm_jTojACKqzF17nPU8qiQRmWSeaKDOeRuxkLnhSZwOwdx0GpgGflpJigM3-N_KOPBz85-wR_u/pub?gid=0&single=true&output=csv"
+
+$pls_interesses_filepath
+[1] "./leggo_data/pls_interesses.csv"
+
+$proposicoes_filepath
+[1] "./leggo_data/proposicoes.csv"
+
+$export_path
+[1] "./leggo_data"
+
+$help
+[1] FALSE
+
+[1] "Baixando e processando os dados de anotações..."
+── [1mAttaching packages[22m ─────────────────────────────────────── tidyverse 1.3.0 ──
+[32m✔[39m [34mggplot2[39m 3.2.1     [32m✔[39m [34mpurrr  [39m 0.3.4
+[32m✔[39m [34mtibble [39m 3.0.3     [32m✔[39m [34mdplyr  [39m 0.8.5
+[32m✔[39m [34mtidyr  [39m 1.0.2     [32m✔[39m [34mstringr[39m 1.4.0
+[32m✔[39m [34mreadr  [39m 1.3.1     [32m✔[39m [34mforcats[39m 0.4.0
+── [1mConflicts[22m ────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+Parsed with column specification:
+cols(
+  interesse = [31mcol_character()[39m,
+  url = [31mcol_character()[39m
+)
+Parsed with column specification:
+cols(
+  `data de criação` = [31mcol_character()[39m,
+  `data última modificação` = [31mcol_character()[39m,
+  proposição = [31mcol_character()[39m,
+  autor = [31mcol_character()[39m,
+  categoria = [31mcol_character()[39m,
+  título = [31mcol_character()[39m,
+  anotação = [31mcol_character()[39m,
+  peso = [32mcol_double()[39m
+)
+Parsed with column specification:
+cols(
+  `data de criação` = [31mcol_character()[39m,
+  `data última modificação` = [31mcol_character()[39m,
+  proposição = [31mcol_character()[39m,
+  autor = [31mcol_character()[39m,
+  categoria = [31mcol_character()[39m,
+  título = [31mcol_character()[39m,
+  anotação = [31mcol_character()[39m,
+  peso = [33mcol_logical()[39m
+)
+[1] "Salvando anotacoes..."
+[1] "Salvo"
+
+===============================
+Atualizando Pressão
+===============================
+
+===============================
+Gerando dataframe com os apelidos para busca no Twitter e Google Trends
+===============================
+── [1mAttaching packages[22m ─────────────────────────────────────── tidyverse 1.3.0 ──
+[32m✔[39m [34mggplot2[39m 3.2.1     [32m✔[39m [34mpurrr  [39m 0.3.3
+[32m✔[39m [34mtibble [39m 2.1.3     [32m✔[39m [34mdplyr  [39m 0.8.4
+[32m✔[39m [34mtidyr  [39m 1.0.2     [32m✔[39m [34mstringr[39m 1.4.0
+[32m✔[39m [34mreadr  [39m 1.3.1     [32m✔[39m [34mforcats[39m 0.4.0
+── [1mConflicts[22m ────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+
+Attaching package: ‘lubridate’
+
+The following objects are masked from ‘package:dplyr’:
+
+    intersect, setdiff, union
+
+The following objects are masked from ‘package:base’:
+
+    date, intersect, setdiff, union
+
+$proposicoes_filepath
+[1] "leggo_data/proposicoes.csv"
+
+$interesses_filepath
+[1] "leggo_data/interesses.csv"
+
+$apelidos_filepath
+[1] "leggo_data/apelidos.csv"
+
+$update_flag
+[1] "1"
+
+$help
+[1] FALSE
+
+Criando novo arquivo em leggo_data/apelidos.csv ...
+Parsed with column specification:
+cols(
+  id_ext = [32mcol_double()[39m,
+  sigla_tipo = [31mcol_character()[39m,
+  numero = [32mcol_double()[39m,
+  ementa = [31mcol_character()[39m,
+  data_apresentacao = [34mcol_datetime(format = "")[39m,
+  casa = [31mcol_character()[39m,
+  casa_origem = [31mcol_character()[39m,
+  autor_nome = [31mcol_character()[39m,
+  autor_uf = [31mcol_character()[39m,
+  autor_partido = [31mcol_character()[39m,
+  regime_tramitacao = [31mcol_character()[39m,
+  forma_apreciacao = [31mcol_character()[39m,
+  relator_id = [32mcol_double()[39m,
+  relator_id_parlametria = [32mcol_double()[39m,
+  id_leggo = [32mcol_double()[39m
+)
+Parsed with column specification:
+cols(
+  id_leggo = [32mcol_double()[39m,
+  interesse = [31mcol_character()[39m,
+  nome_interesse = [31mcol_character()[39m,
+  apelido = [31mcol_character()[39m,
+  keywords = [31mcol_character()[39m,
+  tema = [31mcol_character()[39m,
+  advocacy_link = [33mcol_logical()[39m,
+  tipo_agenda = [31mcol_character()[39m
+)
+Feito!
+
+===============================
+Gerando dados de pressão do Google Trends
+===============================
+Pesquisando a popularidade: PEC 133/2019 (interesse: primeira-infancia)
+Pesquisando a popularidade: PEC 15/2015 (interesse: primeira-infancia)
+Pesquisando a popularidade: PEC 200/2019 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PEC 200/2019
+Pesquisando a popularidade: PEC 36/2019 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PEC 36/2019
+Pesquisando a popularidade: PL 1286/2011 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PL 1286/2011
+Pesquisando a popularidade: PL 1429/2019 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PL 1429/2019
+Pesquisando a popularidade: PL 1490/2019 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PL 1490/2019
+Pesquisando a popularidade: PL 1497/2019 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PL 1497/2019
+Pesquisando a popularidade: PL 1545/2015 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PL 1545/2015
+Pesquisando a popularidade: PL 1648/2019 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PL 1648/2019
+Pesquisando a popularidade: PL 1698/2019 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PL 1698/2019
+Pesquisando a popularidade: PL 2249/2019 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PL 2249/2019
+Pesquisando a popularidade: PL 2426/2019 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PL 2426/2019
+Pesquisando a popularidade: PL 2729/2015 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PL 2729/2015
+Pesquisando a popularidade: 10 Medidas Contra a Corrupcao (interesse: leggo)
+Pesquisando a popularidade: Lei do Licenciamento Ambiental (interesse: leggo)
+Pesquisando a popularidade: Lei da Qualidade Fiscal (interesse: leggo)
+Pesquisando a popularidade: PL do Veneno (interesse: leggo)
+Pesquisando a popularidade: Estatuto do Indio (interesse: leggo)
+Pesquisando a popularidade: Lei para Acabar Zona de Amortecimento (interesse: leggo)
+O Google nao retornou nenhum dado sobre: Lei para Acabar Zona de Amortecimento
+Pesquisando a popularidade: Politica Governo de Reducao de Agrotoxico (interesse: leggo)
+O Google nao retornou nenhum dado sobre: Politica Governo de Reducao de Agrotoxico
+Pesquisando a popularidade: Modernizacao da Lei de Licitacoes e Contratos (interesse: leggo)
+Pesquisando a popularidade: Escola Sem Partido (interesse: leggo)
+Pesquisando a popularidade: Revogacao do Estatuto do Desarmamento (interesse: leggo)
+O Google nao retornou nenhum dado sobre: Revogacao do Estatuto do Desarmamento
+Pesquisando a popularidade: Reforma da Previdencia Temer (interesse: leggo)
+Pesquisando a popularidade: Revisao do contrato da cessao onerosa da Petrobras (interesse: leggo)
+O Google nao retornou nenhum dado sobre: Revisao do contrato da cessao onerosa da Petrobras
+Pesquisando a popularidade: PEC 439/2018 (interesse: congresso-remoto)
+O Google nao retornou nenhum dado sobre: PEC 439/2018
+Pesquisando a popularidade: PL 675/2020 (interesse: congresso-remoto)
+Pesquisando a popularidade: PDL 87/2020 (interesse: congresso-remoto)
+Pesquisando a popularidade: PL 668/2020 (interesse: congresso-remoto)
+Pesquisando a popularidade: PL 702/2020 (interesse: congresso-remoto)
+Pesquisando a popularidade: PL 696/2020 (interesse: congresso-remoto)
+Pesquisando a popularidade: PRC 11/2020 (interesse: congresso-remoto)
+O Google nao retornou nenhum dado sobre: PRC 11/2020
+Pesquisando a popularidade: PL 5974/2005 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PL 5974/2005
+Pesquisando a popularidade: PL 1465/2015 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PL 1465/2015
+Pesquisando a popularidade: PL 2883/2011 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PL 2883/2011
+Pesquisando a popularidade: PL 4536/2012 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PL 4536/2012
+Pesquisando a popularidade: PL 6969/2013 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PL 6969/2013
+Pesquisando a popularidade: PL 7728/2014 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PL 7728/2014
+Pesquisando a popularidade: PL 5131/2016 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PL 5131/2016
+Pesquisando a popularidade: PLP 73/2007 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PLP 73/2007
+Pesquisando a popularidade: PEC 133/2019 (interesse: primeira-infancia)
+Pesquisando a popularidade: PLS 466/2018 (interesse: primeira-infancia)
+O Google nao retornou nenhum dado sobre: PLS 466/2018
+Pesquisando a popularidade: 10 Medidas Contra a Corrupcao (interesse: leggo)
+Pesquisando a popularidade: Lei Geral de Licenciamento Ambiental (interesse: leggo)
+Pesquisando a popularidade: Lei da Qualidade Fiscal (interesse: leggo)
+Pesquisando a popularidade: PL do Veneno (interesse: leggo)
+Pesquisando a popularidade: Modernizacao da Lei de Licitacoes e Contratos (interesse: leggo)
+O Google nao retornou nenhum dado sobre: Modernizacao da Lei de Licitacoes e Contratos
+Pesquisando a popularidade: Alteracao na Lei Antiterrorismo (interesse: leggo)
+O Google nao retornou nenhum dado sobre: Alteracao na Lei Antiterrorismo
+Pesquisando a popularidade: Revisao do contrato da cessao onerosa da Petrobras (interesse: leggo)
+Pesquisando a popularidade: PEC 39/2019 (interesse: congresso-remoto)
+Pesquisando a popularidade: PLS 251/2002 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PLS 251/2002
+Pesquisando a popularidade: PLS 147/2014 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PLS 147/2014
+Pesquisando a popularidade: PLS 311/2009 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PLS 311/2009
+Pesquisando a popularidade: PLS 121/2016 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PLS 121/2016
+Pesquisando a popularidade: PLS 160/2017 (interesse: reforma-tributaria)
+O Google nao retornou nenhum dado sobre: PLS 160/2017
+Pesquisando a popularidade: PEC 54/2019 (interesse: congresso-remoto)
+O Google nao retornou nenhum dado sobre: PEC 54/2019
+Não foi possível retornar a popularidade de 35/57 proposições.
+
+===============================
+Gerando dados de popularidade do Twitter
+===============================
+── [1mAttaching packages[22m ─────────────────────────────────────── tidyverse 1.3.0 ──
+[32m✔[39m [34mggplot2[39m 3.2.1     [32m✔[39m [34mpurrr  [39m 0.3.3
+[32m✔[39m [34mtibble [39m 2.1.3     [32m✔[39m [34mdplyr  [39m 0.8.4
+[32m✔[39m [34mtidyr  [39m 1.0.2     [32m✔[39m [34mstringr[39m 1.4.0
+[32m✔[39m [34mreadr  [39m 1.3.1     [32m✔[39m [34mforcats[39m 0.4.0
+── [1mConflicts[22m ────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mtidyr[39m::[32mextract()[39m   masks [34mmagrittr[39m::extract()
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m    masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m       masks [34mstats[39m::lag()
+[31m✖[39m [34mpurrr[39m::[32mset_names()[39m masks [34mmagrittr[39m::set_names()
+Loading required package: optparse
+Parsed with column specification:
+cols(
+  id_leggo = [32mcol_double()[39m,
+  id_ext = [32mcol_double()[39m,
+  casa = [31mcol_character()[39m,
+  apelido = [31mcol_character()[39m,
+  nome_formal = [31mcol_character()[39m,
+  apresentacao = [34mcol_datetime(format = "")[39m,
+  interesse = [31mcol_character()[39m,
+  keywords = [31mcol_character()[39m
+)
+Gerando dados de tweets sobre proposições e os de trends (sumarizado por proposição)...
+Parsed with column specification:
+cols(
+  id_parlamentar = [32mcol_double()[39m,
+  casa = [31mcol_character()[39m,
+  nome_eleitoral = [31mcol_character()[39m,
+  partido = [31mcol_character()[39m,
+  UF = [31mcol_character()[39m,
+  `tem twitter?` = [31mcol_character()[39m,
+  twitter = [31mcol_character()[39m,
+  `twitter2 (se houver)` = [31mcol_character()[39m,
+  `facebook (não conferido)` = [31mcol_character()[39m,
+  nome_civil = [31mcol_character()[39m,
+  fazendo = [31mcol_character()[39m
+)
+
+Baixando tweets com termo: 'from:AbilioSantana_ OR from:abouannipv OR from:acaciofavacho OR from:AdolfoViana_ OR from:adrianasounovo OR from:AdrianoBaldy OR from:AecioNeves OR from:AfonsoFlorence‏ OR from:depafonsohamm OR from:afonso_motta OR from:depaguinaldo11 OR from:FaleiroAirton OR from:Alan_Rick OR from:Alceu_Moreira OR from:oficialalesilva OR from:AlencarBraga13 OR from:AlessandroMolon OR from:alexmanentepps OR from:depalexsantana OR from:alefrotabrasil OR from:lexandreleite OR from:padilhando'...
+Warning: 215 - Bad Authentication data.
+Error in vector("list", ntimes) : invalid 'length' argument
+Calls: %>% ... <Anonymous> -> <Anonymous> -> do.call -> search_tweets_
+In addition: Warning message:
+In readRenviron(".env") : file '.env' cannot be opened for reading
+Execution halted
+ERROR # 1 : Não foi possível baixar dados de pressão pelo Twitter.
+
+===============================
+Gerando índice de popularidade combinando Twitter e Google Trends
+===============================
+── [1mAttaching packages[22m ─────────────────────────────────────── tidyverse 1.3.0 ──
+[32m✔[39m [34mggplot2[39m 3.2.1     [32m✔[39m [34mpurrr  [39m 0.3.3
+[32m✔[39m [34mtibble [39m 2.1.3     [32m✔[39m [34mdplyr  [39m 0.8.4
+[32m✔[39m [34mtidyr  [39m 1.0.2     [32m✔[39m [34mstringr[39m 1.4.0
+[32m✔[39m [34mreadr  [39m 1.3.1     [32m✔[39m [34mforcats[39m 0.4.0
+── [1mConflicts[22m ────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+Loading required package: optparse
+Gerando dados de popularidade do Google Trends e Twitter...
+Feito!
+
+===============================
+Atualizando dados do Leggo - Câmara
+===============================
+$pls_ids_filepath
+[1] "./leggo_data/pls_interesses.csv"
+
+$export_path
+[1] "./leggo_data"
+
+$casa
+[1] "camara"
+
+$help
+[1] FALSE
+
+     checking for file ‘/agora-digital/DESCRIPTION’ ...  [32m✔[39m  [38;5;247mchecking for file ‘/agora-digital/DESCRIPTION’[39m[36m[36m (354ms)[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mpreparing ‘agoradigital’:[39m[36m[36m (1.2s)[36m[39m
+     checking DESCRIPTION meta-information ...  [32m✔[39m  [38;5;247mchecking DESCRIPTION meta-information[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for LF line-endings in source and make files and shell scripts[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for empty or unneeded directories[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mbuilding ‘agoradigital_0.0.1.tar.gz’[39m[36m[39m
+     
+Running /usr/local/lib/R/bin/R CMD INSTALL \
+  /tmp/Rtmph5bpwm/agoradigital_0.0.1.tar.gz --install-tests 
+[31m* installing to library ‘/usr/local/lib/R/site-library’
+[39m[31m* installing *source* package ‘agoradigital’ ...
+[39m[31m** using staged installation
+[39m[31m** R
+[39m[31m** inst
+[39m[31m** tests
+[39m[31m** byte-compile and prepare package for lazy loading
+[39mNo man pages found in package  ‘agoradigital’ [31m** help
+[39m
+[31m*** installing help indices
+[39m[31m** building package indices
+[39m[31m** testing if installed package can be loaded from temporary location
+[39m[31m** testing if installed package can be loaded from final location
+[39m[31m** testing if installed package keeps a record of temporary installation path
+[39m[31m* DONE (agoradigital)
+[39m[1] "Lendo csvs com dados atuais..."
+[1] "Verificando se há novos documentos..."
+[1] "Foram encontrados 1644 novos documentos."
+[1] "Buscando dados sobre os novos documentos..."
+[1] "Buscando os autores dos novos documentos..."
+[1] "Adicionando  1644  novos documentos."
+[1] "Adicionando  27455  autores de novos documentos."
+[1] "Salvando documentos e autores."
+[1] "Salvo."
+Warning messages:
+1: In rcongresso::fetch_ids_relacionadas(.x, .y) :
+  A proposicao nao possui documentos relacionados.
+2: In rcongresso::fetch_ids_relacionadas(.x, .y) :
+  A proposicao nao possui documentos relacionados.
+3: In rcongresso::fetch_ids_relacionadas(.x, .y) :
+  A proposicao nao possui documentos relacionados.
+4: In rcongresso::fetch_ids_relacionadas(.x, .y) :
+  A proposicao nao possui documentos relacionados.
+5: In rcongresso::fetch_ids_relacionadas(.x, .y) :
+  A proposicao nao possui documentos relacionados.
+
+===============================
+Atualizando dados do Leggo - Senado
+===============================
+$pls_ids_filepath
+[1] "./leggo_data/pls_interesses.csv"
+
+$export_path
+[1] "./leggo_data"
+
+$casa
+[1] "senado"
+
+$help
+[1] FALSE
+
+     checking for file ‘/agora-digital/DESCRIPTION’ ...  [32m✔[39m  [38;5;247mchecking for file ‘/agora-digital/DESCRIPTION’[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mpreparing ‘agoradigital’:[39m[36m[39m
+     checking DESCRIPTION meta-information ...  [32m✔[39m  [38;5;247mchecking DESCRIPTION meta-information[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for LF line-endings in source and make files and shell scripts[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for empty or unneeded directories[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mbuilding ‘agoradigital_0.0.1.tar.gz’[39m[36m[39m
+     
+Running /usr/local/lib/R/bin/R CMD INSTALL \
+  /tmp/RtmpYB989O/agoradigital_0.0.1.tar.gz --install-tests 
+[31m* installing to library ‘/usr/local/lib/R/site-library’
+[39m[31m* installing *source* package ‘agoradigital’ ...
+[39m[31m** using staged installation
+[39m[31m** R
+[39m[31m** inst
+[39m[31m** tests
+[39m[31m** byte-compile and prepare package for lazy loading
+[39mNo man pages found in package  ‘agoradigital’ 
+[31m** help
+[39m[31m*** installing help indices
+[39m[31m** building package indices
+[39m[31m** testing if installed package can be loaded from temporary location
+[39m[31m** testing if installed package can be loaded from final location
+[39m[31m** testing if installed package keeps a record of temporary installation path
+[39m[31m* DONE (agoradigital)
+[39m[1] "Lendo csvs com dados atuais..."
+[1] "Realizando atualização dos dados do Senado"
+[1] "Salvando 679 documentos para o Senado."
+[1] "Salvando 5366 autores de documentos para o Senado."
+[1] "Salvos :)"
+Warning message:
+In agoradigital::check_dataframe(autores_senado_scrap_deputados) :
+  Dataframe de entrada deve ser não-nulo e não-vazio.
+
+===============================
+Processando dados do Leggo
+===============================
+── [1mAttaching packages[22m ─────────────────────────────────────── tidyverse 1.3.0 ──
+[32m✔[39m [34mggplot2[39m 3.2.1     [32m✔[39m [34mpurrr  [39m 0.3.4
+[32m✔[39m [34mtibble [39m 3.0.3     [32m✔[39m [34mdplyr  [39m 0.8.5
+[32m✔[39m [34mtidyr  [39m 1.0.2     [32m✔[39m [34mstringr[39m 1.4.0
+[32m✔[39m [34mreadr  [39m 1.3.1     [32m✔[39m [34mforcats[39m 0.4.0
+── [1mConflicts[22m ────────────────────────────────────────── tidyverse_conflicts() ──
+[31m✖[39m [34mdplyr[39m::[32mfilter()[39m masks [34mstats[39m::filter()
+[31m✖[39m [34mdplyr[39m::[32mlag()[39m    masks [34mstats[39m::lag()
+
+Attaching package: ‘magrittr’
+
+The following object is masked from ‘package:purrr’:
+
+    set_names
+
+The following object is masked from ‘package:tidyr’:
+
+    extract
+
+$flag
+[1] 1
+
+$data_inicial_documentos
+[1] "2019-01-31"
+
+$peso_minimo_arestas
+[1] "0.1"
+
+$input_path
+[1] "./leggo_data"
+
+$output_path
+[1] "./leggo_data"
+
+$entidades_path
+[1] "./leggo_data/entidades.csv"
+
+$help
+[1] FALSE
+
+     checking for file ‘/agora-digital/DESCRIPTION’ ...  [32m✔[39m  [38;5;247mchecking for file ‘/agora-digital/DESCRIPTION’[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mpreparing ‘agoradigital’:[39m[36m[39m
+   checking DESCRIPTION meta-information ...  [32m✔[39m  [38;5;247mchecking DESCRIPTION meta-information[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for LF line-endings in source and make files and shell scripts[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for empty or unneeded directories[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mbuilding ‘agoradigital_0.0.1.tar.gz’[39m[36m[39m
+     
+Running /usr/local/lib/R/bin/R CMD INSTALL \
+  /tmp/RtmpLrHQ9Q/agoradigital_0.0.1.tar.gz --install-tests 
+[31m* installing to library ‘/usr/local/lib/R/site-library’
+[39m[31m* installing *source* package ‘agoradigital’ ...
+[39m[31m** using staged installation
+[39m[31m** R
+[39m[31m** inst
+[39m[31m** tests
+[39m[31m** byte-compile and prepare package for lazy loading
+[39m[31m** help
+[39mNo man pages found in package  ‘agoradigital’ 
+[31m*** installing help indices
+[39m[31m** building package indices
+[39m[31m** testing if installed package can be loaded from temporary location
+[39m[31m** testing if installed package can be loaded from final location
+[39m[31m** testing if installed package keeps a record of temporary installation path
+[39m[31m* DONE (agoradigital)
+[39mParsed with column specification:
+cols(
+  legislatura = [32mcol_double()[39m,
+  id_entidade = [32mcol_double()[39m,
+  id_entidade_parlametria = [32mcol_double()[39m,
+  casa = [31mcol_character()[39m,
+  nome = [31mcol_character()[39m,
+  sexo = [31mcol_character()[39m,
+  partido = [31mcol_character()[39m,
+  uf = [31mcol_character()[39m,
+  situacao = [31mcol_character()[39m,
+  em_exercicio = [32mcol_double()[39m,
+  is_parlamentar = [32mcol_double()[39m
+)
+[1] "Atualizando tudo!"
+[1] "Gerando tabela de atuação a partir de dados atualizados de documentos e autores..."
+[1] "Gerando tabela de autorias e coautorias para a Câmara..."
+[1] "Gerando tabela de autorias e coautorias no Senado..."
+Parsed with column specification:
+cols(
+  id_leggo = [32mcol_double()[39m,
+  id_principal = [32mcol_double()[39m,
+  casa = [31mcol_character()[39m,
+  id_autor.x = [32mcol_double()[39m,
+  id_autor.y = [32mcol_double()[39m,
+  peso_arestas = [32mcol_double()[39m,
+  num_coautorias = [32mcol_double()[39m,
+  nome.x = [31mcol_character()[39m,
+  partido.x = [31mcol_character()[39m,
+  uf.x = [31mcol_character()[39m,
+  casa_autor.x = [31mcol_character()[39m,
+  bancada.x = [31mcol_character()[39m,
+  nome.y = [31mcol_character()[39m,
+  partido.y = [31mcol_character()[39m,
+  uf.y = [31mcol_character()[39m,
+  casa_autor.y = [31mcol_character()[39m,
+  bancada.y = [31mcol_character()[39m
+)
+Parsed with column specification:
+cols(
+  id_principal = [32mcol_double()[39m,
+  casa = [31mcol_character()[39m,
+  id_documento = [32mcol_double()[39m,
+  descricao_tipo_documento = [31mcol_character()[39m,
+  tipo_documento_ext = [31mcol_character()[39m,
+  id_autor = [32mcol_double()[39m,
+  data = [34mcol_datetime(format = "")[39m,
+  url_inteiro_teor = [31mcol_character()[39m,
+  id_leggo = [32mcol_double()[39m,
+  peso_autor_documento = [32mcol_double()[39m,
+  casa_autor = [31mcol_character()[39m,
+  nome_eleitoral = [31mcol_character()[39m,
+  autores = [31mcol_character()[39m
+)
+Parsed with column specification:
+cols(
+  id_leggo = [32mcol_double()[39m,
+  id_principal = [32mcol_double()[39m,
+  casa = [31mcol_character()[39m,
+  id_autor.x = [32mcol_double()[39m,
+  id_autor.y = [32mcol_double()[39m,
+  peso_arestas = [32mcol_double()[39m,
+  num_coautorias = [32mcol_double()[39m,
+  nome.x = [31mcol_character()[39m,
+  partido.x = [31mcol_character()[39m,
+  uf.x = [31mcol_character()[39m,
+  casa_autor.x = [31mcol_character()[39m,
+  bancada.x = [31mcol_character()[39m,
+  nome.y = [31mcol_character()[39m,
+  partido.y = [31mcol_character()[39m,
+  uf.y = [31mcol_character()[39m,
+  casa_autor.y = [31mcol_character()[39m,
+  bancada.y = [31mcol_character()[39m
+)
+Parsed with column specification:
+cols(
+  id_principal = [32mcol_double()[39m,
+  casa = [31mcol_character()[39m,
+  id_documento = [32mcol_double()[39m,
+  descricao_tipo_documento = [31mcol_character()[39m,
+  tipo_documento_ext = [31mcol_character()[39m,
+  id_autor = [32mcol_double()[39m,
+  data = [34mcol_date(format = "")[39m,
+  url_inteiro_teor = [31mcol_character()[39m,
+  id_leggo = [32mcol_double()[39m,
+  peso_autor_documento = [32mcol_double()[39m,
+  casa_autor = [31mcol_character()[39m,
+  nome_eleitoral = [31mcol_character()[39m,
+  autores = [31mcol_character()[39m
+)
+[1] "Gerando tabela de emendas para análise a partir de dados atualizados de documentos e autores..."
+[1] "Gerando tabela de avulsos iniciais dos PLs para análise a partir de dados atualizados de documentos..."
+
+===============================
+Baixando e exportando novos dados de comissões
+===============================
+$flag
+[1] 4
+
+$pls_ids_filepath
+[1] "./leggo_data/pls_interesses.csv"
+
+$exporth_path
+[1] "./leggo_data"
+
+$help
+[1] FALSE
+
+     checking for file ‘/agora-digital/DESCRIPTION’ ...  [32m✔[39m  [38;5;247mchecking for file ‘/agora-digital/DESCRIPTION’[39m[36m[36m (345ms)[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mpreparing ‘agoradigital’:[39m[36m[39m
+     checking DESCRIPTION meta-information ...  [32m✔[39m  [38;5;247mchecking DESCRIPTION meta-information[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for LF line-endings in source and make files and shell scripts[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mchecking for empty or unneeded directories[39m[36m[39m
+  [38;5;247m─[39m[38;5;247m  [39m[38;5;247mbuilding ‘agoradigital_0.0.1.tar.gz’[39m[36m[39m
+     
+Running /usr/local/lib/R/bin/R CMD INSTALL \
+  /tmp/Rtmp2pE7gp/agoradigital_0.0.1.tar.gz --install-tests 
+[31m* installing to library ‘/usr/local/lib/R/site-library’
+[39m[31m* installing *source* package ‘agoradigital’ ...
+[39m[31m** using staged installation
+[39m[31m** R
+[39m[31m** inst
+[39m[31m** tests
+[39m[31m** byte-compile and prepare package for lazy loading
+[39mNo man pages found in package  ‘agoradigital’ 
+[31m** help
+[39m[31m*** installing help indices
+[39m[31m** building package indices
+[39m[31m** testing if installed package can be loaded from temporary location
+[39m                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             
