@@ -111,11 +111,11 @@ check_errs $? "Não foi possível baixar dados de comissões."
 generate_backup(){
 pprint "Gerando backup dos csvs"
        mkdir -p ${BACKUP_FOLDERPATH}${backup_file}
-       # lista = ['caminhos']
-       # docker cp autores_leggo.csv agorapi:/agora-digital-backend/data/
-       # docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
-       #  cp inst/extdata/tabela_geral_ids_casa.csv inst/extdata/tabela_geral_ids_casa_new.csv \
-# docker cp list to container 
+       docker run -d --rm -it --name alpine --mount type=volume,source=leggo_data,target=/data alpine
+       # list_csv='"data/atuacao.csv" "data/autorias.csv"'
+       # for i in $list_csv; do 
+       #        docker cp alpine:/i ${BACKUP_FOLDERPATH}${backup_file}
+       docker cp alpine:/data/atuacao.csv ${BACKUP_FOLDERPATH}${backup_file}
        check_errs $? "Não foi possível criar a pasta de backup."
 }
 
@@ -491,7 +491,6 @@ print_usage() {
     printf "\t-atualiza-parlamentares: Atualiza os dados dos parlamentares\n"
     printf "\t-process-entidades: Processa dados de entidades\n"
     printf "\t-generate-backup: Gera pasta com backup dos csvs\n"
-#     generate_backup
 }
 
 if [ "$#" -lt 1 ]; then
