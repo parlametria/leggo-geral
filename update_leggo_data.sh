@@ -109,8 +109,7 @@ check_errs $? "Não foi possível baixar dados de comissões."
 
 generate_backup(){
 pprint "Gerando backup dos csvs"
-       # mkdir -p ${BACKUP_FOLDERPATH}${timestamp}
-       pprint ${BACKUP_FOLDERPATH}${timestamp}
+       mkdir -p ${BACKUP_FOLDERPATH}${timestamp}
        check_errs $? "Não foi possível criar as pastas de documentos."
 }
 
