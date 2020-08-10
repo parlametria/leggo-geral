@@ -109,13 +109,35 @@ check_errs $? "Não foi possível baixar dados de comissões."
 }
 
 generate_backup(){
+
 pprint "Gerando backup dos csvs"
        mkdir -p ${BACKUP_FOLDERPATH}${backup_file}
        docker run -d --rm -it --name alpine --mount type=volume,source=leggo_data,target=/data alpine
-       # list_csv='"data/atuacao.csv" "data/autorias.csv"'
-       # for i in $list_csv; do 
-       #        docker cp alpine:/i ${BACKUP_FOLDERPATH}${backup_file}
-       docker cp alpine:/data/atuacao.csv ${BACKUP_FOLDERPATH}${backup_file}
+       list_csv=( 
+       alpine:/data/camara 
+       alpine:/data/senado 
+       alpine:/data/pops 
+       alpine:/data/proposicoes.csv 
+       alpine:/data/coautorias_edges.csv 
+       alpine:/data/coautorias_nodes.csv 
+       alpine:/data/trams.csv 
+       alpine:/data/hists_temperatura.csv 
+       alpine:/data/autorias.csv 
+       alpine:/data/pautas.csv 
+       alpine:/data/progressos.csv 
+       alpine:/data/emendas.csv 
+       alpine:/data/atuacao.csv 
+       alpine:/data/comissoes.csv 
+       alpine:/data/pressao.csv 
+       alpine:/data/anotacoes_especificas.csv 
+       alpine:/data/interesses.csv 
+       alpine:/data/anotacoes_gerais.csv 
+       alpine:/data/entidades.csv 
+       alpine:/data/autores_leggo.csv 
+       )
+       for index in ${list_csv[@]}; do 
+              docker cp $index ${BACKUP_FOLDERPATH}${backup_file}
+       done
        check_errs $? "Não foi possível criar a pasta de backup."
 }
 
