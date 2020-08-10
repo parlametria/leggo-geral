@@ -141,6 +141,15 @@ pprint "Gerando backup dos csvs"
        check_errs $? "Não foi possível criar a pasta de backup."
 }
 
+keep_last_backups() {
+pprint "Mantendo apenas os últimos backups gerados"
+       backups_to_keep=7
+       ls -lt ${BACKUP_FOLDERPATH} | grep ^d | tail -n +$(($backups_to_keep + 1)) | awk '{print $9}' | while IFS= read -r f; do
+              pprint $'Removendo '${BACKUP_FOLDERPATH}$f
+              rm -rf ${BACKUP_FOLDERPATH}$f
+       done
+}
+
 update_leggo_data() {
 
 pprint "Atualizando dados do Leggo - Câmara"
@@ -513,6 +522,7 @@ print_usage() {
     printf "\t-atualiza-parlamentares: Atualiza os dados dos parlamentares\n"
     printf "\t-process-entidades: Processa dados de entidades\n"
     printf "\t-generate-backup: Gera pasta com backup dos csvs\n"
+    printf "\t-keep-last-backups: Mantém apenas um número fixo de backups armazenados\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -610,6 +620,9 @@ if [[ $@ == *'-process-entidades'* ]]; then process_entidades
 fi
 
 if [[ $@ == *'-generate-backup'* ]]; then generate_backup
+fi
+
+if [[ $@ == *'-keep-last-backups'* ]]; then keep_last_backups
 fi
 
 # Registra a data final
