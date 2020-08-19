@@ -138,6 +138,7 @@ pprint "Gerando backup dos csvs"
        for index in ${list_csv[@]}; do 
               docker cp $index ${BACKUP_FOLDERPATH}${backup_file}
        done
+       docker stop alpine
        check_errs $? "Não foi possível criar a pasta de backup."
 }
 
@@ -628,4 +629,3 @@ fi
 # Registra a data final
 date
 pprint "Feito!"
-
