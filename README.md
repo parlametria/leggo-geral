@@ -53,6 +53,9 @@ Exemplo: PROD_BACK_APP=production_app_name
 - ***DEV_BACK_APP***: nome da aplicação do backend na versão de desenvolvimento no Heroku.
 Exemplo: DEV_BACK_APP=development_app_name
 
+- ***BACKUP_FOLDERPATH***: caminho para o diretório onde são armazenados os arquivos de backup dos dados.
+Exemplo: BACKUP_FOLDERPATH=./backups/
+
 ### Passo 2
 
 Uma vez configuradas as variáveis de ambiente, é possível verificar que procedimentos podem ser executados pelo `update_leggo_data` acessando o help do mesmo:
