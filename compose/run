@@ -28,7 +28,9 @@ configs = {
     'painel': [
         '${FRONTEND_PAINEL_PATH}/docker-compose.yml',
         '${BACKEND_PATH}/docker-compose.yml',
-        '${BACKEND_PATH}/docker-compose.override.yml'
+        '${BACKEND_PATH}/docker-compose.override.yml',
+        '${TWITTER_API_PATH}/docker-compose.yml',
+        '${TWITTER_API_DADOS_PATH}/docker-compose.yml'
     ]
 }
 
