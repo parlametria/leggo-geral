@@ -10,6 +10,7 @@ PATH=$PATH:/usr/local/bin
 mkdir -p $LOG_FOLDERPATH
 
 # Gera o nome do arquivo do log a partir do timestamp 
+backup_file=$(date '+leggo_data_''%d_%m_%Y_%H_%M_%S')
 timestamp=$(date '+%d_%m_%Y_%H_%M_%S');
 log_filepath="${LOG_FOLDERPATH}${timestamp}.txt"
 
@@ -105,6 +106,49 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -f 4
 check_errs $? "Não foi possível baixar dados de comissões."
 
+}
+
+generate_backup(){
+
+pprint "Gerando backup dos csvs"
+       mkdir -p ${BACKUP_FOLDERPATH}${backup_file}
+       docker run -d --rm -it --name alpine --mount type=volume,source=leggo_data,target=/data alpine
+       list_csv=( 
+       alpine:/data/camara 
+       alpine:/data/senado 
+       alpine:/data/pops 
+       alpine:/data/proposicoes.csv 
+       alpine:/data/coautorias_edges.csv 
+       alpine:/data/coautorias_nodes.csv 
+       alpine:/data/trams.csv 
+       alpine:/data/hists_temperatura.csv 
+       alpine:/data/autorias.csv 
+       alpine:/data/pautas.csv 
+       alpine:/data/progressos.csv 
+       alpine:/data/emendas.csv 
+       alpine:/data/atuacao.csv 
+       alpine:/data/comissoes.csv 
+       alpine:/data/pressao.csv 
+       alpine:/data/anotacoes_especificas.csv 
+       alpine:/data/interesses.csv 
+       alpine:/data/anotacoes_gerais.csv 
+       alpine:/data/entidades.csv 
+       alpine:/data/autores_leggo.csv 
+       )
+       for index in ${list_csv[@]}; do 
+              docker cp $index ${BACKUP_FOLDERPATH}${backup_file}
+       done
+       docker stop alpine
+       check_errs $? "Não foi possível criar a pasta de backup."
+}
+
+keep_last_backups() {
+pprint "Mantendo apenas os últimos backups gerados"
+       backups_to_keep=7
+       ls -lt ${BACKUP_FOLDERPATH} | grep ^d | tail -n +$(($backups_to_keep + 1)) | awk '{print $9}' | while IFS= read -r f; do
+              pprint $'Removendo '${BACKUP_FOLDERPATH}$f
+              rm -rf ${BACKUP_FOLDERPATH}$f
+       done
 }
 
 update_leggo_data() {
@@ -478,7 +522,8 @@ print_usage() {
     printf "\t-update-db-insights-prod: Importa dados atualizados de Insights para o Banco de Dados do Backend Prod\n"
     printf "\t-atualiza-parlamentares: Atualiza os dados dos parlamentares\n"
     printf "\t-process-entidades: Processa dados de entidades\n"
-    
+    printf "\t-generate-backup: Gera pasta com backup dos csvs\n"
+    printf "\t-keep-last-backups: Mantém apenas um número fixo de backups armazenados\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -575,7 +620,12 @@ fi
 if [[ $@ == *'-process-entidades'* ]]; then process_entidades
 fi
 
+if [[ $@ == *'-generate-backup'* ]]; then generate_backup
+fi
+
+if [[ $@ == *'-keep-last-backups'* ]]; then keep_last_backups
+fi
+
 # Registra a data final
 date
 pprint "Feito!"
-
