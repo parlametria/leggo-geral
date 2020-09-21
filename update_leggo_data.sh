@@ -233,30 +233,31 @@ docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-tren
        Rscript gera_entrada_google_trends.R \
        -p leggo_data/proposicoes.csv \
        -i leggo_data/interesses.csv \
-       -a leggo_data/apelidos.csv
+       -a leggo_data/apelidos.csv 
 check_errs $? "Não foi possível gerar os dados de apelidos das proposições."
 
 pprint "Gerando dados de pressão do Google Trends"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
        python3 fetch_google_trends.py \
        leggo_data/apelidos.csv \
-       leggo_data/pops/
+       leggo_data/pops/ \
+       configuration.env
 check_errs $? "Não foi possível baixar dados de pressão pelo Google Trends."
 
 pprint "Gerando dados de popularidade do Twitter"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
-       run --rm leggo-trends \
-       Rscript scripts/tweets_from_last_days/export_tweets_from_last_days.R \
-       -a leggo_data/apelidos.csv \
-       -o leggo_data/ 
+      run --rm leggo-trends \
+      Rscript scripts/tweets_from_last_days/export_tweets_from_last_days.R \
+      -a leggo_data/apelidos.csv \
+      -o leggo_data/ 
 check_errs $? "Não foi possível baixar dados de pressão pelo Twitter."
-
+#
 pprint "Gerando índice de popularidade combinando Twitter e Google Trends"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
-       Rscript scripts/popularity/export_popularity.R \
-       -t leggo_data/trends.csv \
-       -g leggo_data/pops/ \
-       -o leggo_data/pressao.csv
+      Rscript scripts/popularity/export_popularity.R \
+      -t leggo_data/trends.csv \
+      -g leggo_data/pops/ \
+      -o leggo_data/pressao.csv
 check_errs $? "Não foi possível combinar os dados de pressão do Twitter e Google Trends."
 
 }
@@ -443,7 +444,7 @@ run_pipeline() {
 
 	#Build container with current codebase
 	build_leggor
-       build_leggo_trends
+       #build_leggo_trends
 
        #Setup volume of leggo data
        setup_leggo_data_volume
@@ -454,7 +455,7 @@ run_pipeline() {
        #Process pls_interesse
        processa_pls_interesse
 
-	#Fetch and Process Prop metadata and tramitação
+       #Fetch and Process Prop metadata and tramitação
        fetch_leggo_props
 
        #Fetch and Process data from authors of bills
@@ -466,7 +467,7 @@ run_pipeline() {
        process_anotacoes
 
 	#Compute Pressão
-       fetch_leggo_trends
+       #fetch_leggo_trends
 
 	#Fetch related documents
 	update_leggo_data
