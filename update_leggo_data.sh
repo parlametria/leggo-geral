@@ -572,6 +572,9 @@ fi
 if [[ $@ == *'process-data'* ]]; then process_leggo_data
 fi
 
+if [[ $@ == *'processa-interesses'* ]]; then processa_interesses
+fi
+
 if [[ $@ == *'-fetch-data'* ]]; then fetch_leggo_data
 fi
 
