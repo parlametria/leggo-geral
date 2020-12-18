@@ -442,6 +442,19 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
 check_errs $? "Não foi possível processar os dados de entidades"
 }
 
+process_criterios () {
+pprint "Processa criterios de proposições em destaque"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/proposicoes/destaques/export_destaques.R \
+       -p $EXPORT_FOLDERPATH/proposicoes.csv \
+       -t $EXPORT_FOLDERPATH/progressos.csv \
+       -r $EXPORT_FOLDERPATH/trams.csv \
+       -i $EXPORT_FOLDERPATH/leggo_data_10_12_2020_10_05_33/interesses.csv \
+       -a $EXPORT_FOLDERPATH/leggo_data_10_12_2020_10_05_33/pressao.csv \
+       -e $EXPORT_FOLDERPATH/proposicoes_destaques.csv
+check_errs $? "Não foi possível processar os dados de criterios de destaque"
+}
+
 run_pipeline_leggo_content() {
        #Build container with current codebase
        build_leggo_content
@@ -488,6 +501,8 @@ run_pipeline() {
 
 	#Fetch related documents
 	update_leggo_data
+
+       process_criterios
 
 	#Process related documents
 	process_leggo_data
@@ -543,6 +558,7 @@ print_usage() {
     printf "\t-process-entidades: Processa dados de entidades\n"
     printf "\t-generate-backup: Gera pasta com backup dos csvs\n"
     printf "\t-keep-last-backups: Mantém apenas um número fixo de backups armazenados\n"
+    printf "\t-process-criterios: Processa critérios\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -643,6 +659,9 @@ if [[ $@ == *'-atualiza-parlamentares'* ]]; then atualiza_parlamentares
 fi
 
 if [[ $@ == *'-process-entidades'* ]]; then process_entidades
+fi
+
+if [[ $@ == *'-process-criterios'* ]]; then process_criterios
 fi
 
 if [[ $@ == *'-generate-backup'* ]]; then generate_backup
