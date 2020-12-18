@@ -502,6 +502,7 @@ run_pipeline() {
 	#Fetch related documents
 	update_leggo_data
 
+       #processa criterios 
        process_criterios
 
 	#Process related documents
