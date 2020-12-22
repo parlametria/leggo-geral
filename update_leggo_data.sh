@@ -449,8 +449,8 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -p $EXPORT_FOLDERPATH/proposicoes.csv \
        -t $EXPORT_FOLDERPATH/progressos.csv \
        -r $EXPORT_FOLDERPATH/trams.csv \
-       -i $EXPORT_FOLDERPATH/leggo_data_10_12_2020_10_05_33/interesses.csv \
-       -a $EXPORT_FOLDERPATH/leggo_data_10_12_2020_10_05_33/pressao.csv \
+       -i $EXPORT_FOLDERPATH/interesses.csv \
+       -s $EXPORT_FOLDERPATH/pressao.csv \
        -e $EXPORT_FOLDERPATH/proposicoes_destaques.csv
 check_errs $? "Não foi possível processar os dados de criterios de destaque"
 }
