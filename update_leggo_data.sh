@@ -9,7 +9,7 @@ PATH=$PATH:/usr/local/bin
 # Cria o diretório destino dos logs deste script
 mkdir -p $LOG_FOLDERPATH
 
-# Gera o nome do arquivo do log a partir do timestamp 
+# Gera o nome do arquivo do log a partir do timestamp  
 backup_file=$(date '+leggo_data_''%d_%m_%Y_%H_%M_%S')
 timestamp=$(date '+%d_%m_%Y_%H_%M_%S');
 log_filepath="${LOG_FOLDERPATH}${timestamp}.txt"
@@ -431,7 +431,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/parlamentares/update_parlamentares.R \
        -p $EXPORT_FOLDERPATH
 check_errs $? "Não foi possível atualizar os dados de parlamentares"
-}
+} 
 
 process_entidades() {
 pprint "Processa dados de entidades"
@@ -440,7 +440,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -p $EXPORT_FOLDERPATH/parlamentares.csv \
        -o $EXPORT_FOLDERPATH
 check_errs $? "Não foi possível processar os dados de entidades"
-}
+} 
 
 run_pipeline_leggo_content() {
        #Build container with current codebase
@@ -449,7 +449,7 @@ run_pipeline_leggo_content() {
        # Analyze text
        process_leggo_content
 
-       # Aggregate emendas distances
+       #Aggregate emendas distances
        update_distancias_emendas
 }
 
