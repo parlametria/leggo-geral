@@ -9,7 +9,7 @@ PATH=$PATH:/usr/local/bin
 # Cria o diretório destino dos logs deste script
 mkdir -p $LOG_FOLDERPATH
 
-# Gera o nome do arquivo do log a partir do timestamp 
+# Gera o nome do arquivo do log a partir do timestamp  
 backup_file=$(date '+leggo_data_''%d_%m_%Y_%H_%M_%S')
 timestamp=$(date '+%d_%m_%Y_%H_%M_%S');
 log_filepath="${LOG_FOLDERPATH}${timestamp}.txt"
@@ -431,7 +431,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/parlamentares/update_parlamentares.R \
        -p $EXPORT_FOLDERPATH
 check_errs $? "Não foi possível atualizar os dados de parlamentares"
-}
+} 
 
 process_entidades() {
 pprint "Processa dados de entidades"
@@ -440,6 +440,19 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -p $EXPORT_FOLDERPATH/parlamentares.csv \
        -o $EXPORT_FOLDERPATH
 check_errs $? "Não foi possível processar os dados de entidades"
+} 
+
+process_criterios () {
+pprint "Processa criterios de proposições em destaque"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/proposicoes/destaques/export_destaques.R \
+       -p $EXPORT_FOLDERPATH/proposicoes.csv \
+       -t $EXPORT_FOLDERPATH/progressos.csv \
+       -r $EXPORT_FOLDERPATH/trams.csv \
+       -i $EXPORT_FOLDERPATH/interesses.csv \
+       -s $EXPORT_FOLDERPATH/pressao.csv \
+       -e $EXPORT_FOLDERPATH/proposicoes_destaques.csv
+check_errs $? "Não foi possível processar os dados de criterios de destaque"
 }
 
 run_pipeline_leggo_content() {
@@ -449,7 +462,7 @@ run_pipeline_leggo_content() {
        # Analyze text
        process_leggo_content
 
-       # Aggregate emendas distances
+       #Aggregate emendas distances
        update_distancias_emendas
 }
 
@@ -488,6 +501,9 @@ run_pipeline() {
 
 	#Fetch related documents
 	update_leggo_data
+
+       #processa criterios 
+       process_criterios
 
 	#Process related documents
 	process_leggo_data
@@ -543,6 +559,7 @@ print_usage() {
     printf "\t-process-entidades: Processa dados de entidades\n"
     printf "\t-generate-backup: Gera pasta com backup dos csvs\n"
     printf "\t-keep-last-backups: Mantém apenas um número fixo de backups armazenados\n"
+    printf "\t-process-criterios: Processa critérios\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -643,6 +660,9 @@ if [[ $@ == *'-atualiza-parlamentares'* ]]; then atualiza_parlamentares
 fi
 
 if [[ $@ == *'-process-entidades'* ]]; then process_entidades
+fi
+
+if [[ $@ == *'-process-criterios'* ]]; then process_criterios
 fi
 
 if [[ $@ == *'-generate-backup'* ]]; then generate_backup
