@@ -198,6 +198,17 @@ check_errs $? "Não foi possível processar dados dos documentos baixados."
 
 }
 
+process_governismo() {
+
+pprint "Processando dados de Governismo"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/governismo/export_governismo.R \
+       -v $EXPORT_FOLDERPATH/votos.csv \
+       -e $EXPORT_FOLDERPATH/governismo.csv
+check_errs $? "Não foi possível processar dados de Governismo"
+
+}
+
 update_distancias_emendas() {
 
 pprint "Atualizando as emendas com as distâncias disponíveis"
@@ -669,6 +680,9 @@ if [[ $@ == *'-generate-backup'* ]]; then generate_backup
 fi
 
 if [[ $@ == *'-keep-last-backups'* ]]; then keep_last_backups
+fi
+
+if [[ $@ == *'-process-governismo'* ]]; then process_governismo
 fi
 
 # Registra a data final
