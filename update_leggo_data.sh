@@ -233,7 +233,7 @@ curr_branch=`git -C $LEGGOTRENDS_FOLDERPATH rev-parse --abbrev-ref HEAD`
 git -C $LEGGOTRENDS_FOLDERPATH pull origin $curr_branch
 
 pprint "Atualizando imagem docker"
-docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml build
+docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml build --no-cache
 check_errs $? "Não foi possível fazer o build do leggoTrends."
 
 }
@@ -455,6 +455,16 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
 check_errs $? "Não foi possível processar os dados de criterios de destaque"
 }
 
+process_votos () {
+  pprint "Atualiza e processa dados de votos"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/votos/export_votos.R \
+       -v $EXPORT_FOLDERPATH/votacoes.csv \
+       -u $EXPORT_FOLDERPATH/votos.csv
+check_errs $? "Não foi possível atualizar e processar os dados de votos"
+     
+}
+
 run_pipeline_leggo_content() {
        #Build container with current codebase
        build_leggo_content
@@ -514,6 +524,9 @@ run_pipeline() {
        #Update pautas
        update_pautas
 
+       #Fetch votos
+       process_votos
+
        if [[ $run_analise_emendas == 1 ]]; 
 	then 
               #Run emendas analysis
@@ -560,6 +573,7 @@ print_usage() {
     printf "\t-generate-backup: Gera pasta com backup dos csvs\n"
     printf "\t-keep-last-backups: Mantém apenas um número fixo de backups armazenados\n"
     printf "\t-process-criterios: Processa critérios\n"
+    printf "\t-process-votos: Atualiza e processa dados de votos\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -669,6 +683,9 @@ if [[ $@ == *'-generate-backup'* ]]; then generate_backup
 fi
 
 if [[ $@ == *'-keep-last-backups'* ]]; then keep_last_backups
+fi
+
+if [[ $@ == *'-process-votos'* ]]; then process_votos
 fi
 
 # Registra a data final
