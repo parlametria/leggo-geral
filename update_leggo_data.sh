@@ -233,7 +233,7 @@ curr_branch=`git -C $LEGGOTRENDS_FOLDERPATH rev-parse --abbrev-ref HEAD`
 git -C $LEGGOTRENDS_FOLDERPATH pull origin $curr_branch
 
 pprint "Atualizando imagem docker"
-docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml build --no-cache
+docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml build
 check_errs $? "Não foi possível fazer o build do leggoTrends."
 
 }
