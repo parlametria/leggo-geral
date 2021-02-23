@@ -524,8 +524,6 @@ run_pipeline() {
        #Update pautas
        update_pautas
 
-       #Fetch votos
-       process_votos
 
        if [[ $run_analise_emendas == 1 ]]; 
 	then 
