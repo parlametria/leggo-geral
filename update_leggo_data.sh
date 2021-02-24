@@ -148,6 +148,7 @@ pprint "Gerando backup dos csvs"
        alpine:/data/entidades.csv 
        alpine:/data/autores_leggo.csv 
        alpine:/data/relatores_leggo.csv
+       alpine:/data/proposicoes_destaques.csv
        )
        for index in ${list_csv[@]}; do 
               docker cp $index ${BACKUP_FOLDERPATH}${backup_file}
