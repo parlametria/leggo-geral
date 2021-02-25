@@ -148,6 +148,7 @@ pprint "Gerando backup dos csvs"
        alpine:/data/entidades.csv 
        alpine:/data/autores_leggo.csv 
        alpine:/data/relatores_leggo.csv
+       alpine:/data/proposicoes_destaques.csv
        )
        for index in ${list_csv[@]}; do 
               docker cp $index ${BACKUP_FOLDERPATH}${backup_file}
@@ -195,6 +196,17 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -o $EXPORT_FOLDERPATH \
        -e $EXPORT_FOLDERPATH/entidades.csv
 check_errs $? "Não foi possível processar dados dos documentos baixados."
+
+}
+
+process_governismo() {
+
+pprint "Processando dados de Governismo"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/governismo/export_governismo.R \
+       -v $EXPORT_FOLDERPATH/votos.csv \
+       -e $EXPORT_FOLDERPATH/governismo.csv
+check_errs $? "Não foi possível processar dados de Governismo"
 
 }
 
@@ -684,6 +696,9 @@ if [[ $@ == *'-keep-last-backups'* ]]; then keep_last_backups
 fi
 
 if [[ $@ == *'-process-votos'* ]]; then process_votos
+fi
+
+if [[ $@ == *'-process-governismo'* ]]; then process_governismo
 fi
 
 # Registra a data final
