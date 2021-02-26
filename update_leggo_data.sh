@@ -148,6 +148,7 @@ pprint "Gerando backup dos csvs"
        alpine:/data/entidades.csv 
        alpine:/data/autores_leggo.csv 
        alpine:/data/relatores_leggo.csv
+       alpine:/data/proposicoes_destaques.csv
        )
        for index in ${list_csv[@]}; do 
               docker cp $index ${BACKUP_FOLDERPATH}${backup_file}
@@ -195,6 +196,17 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        -o $EXPORT_FOLDERPATH \
        -e $EXPORT_FOLDERPATH/entidades.csv
 check_errs $? "Não foi possível processar dados dos documentos baixados."
+
+}
+
+process_governismo() {
+
+pprint "Processando dados de Governismo"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/governismo/export_governismo.R \
+       -v $EXPORT_FOLDERPATH/votos.csv \
+       -e $EXPORT_FOLDERPATH/governismo.csv
+check_errs $? "Não foi possível processar dados de Governismo"
 
 }
 
@@ -456,6 +468,16 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
 check_errs $? "Não foi possível processar os dados de criterios de destaque"
 }
 
+process_votos () {
+  pprint "Atualiza e processa dados de votos"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/votos/export_votos.R \
+       -v $EXPORT_FOLDERPATH/votacoes.csv \
+       -u $EXPORT_FOLDERPATH/votos.csv
+check_errs $? "Não foi possível atualizar e processar os dados de votos"
+     
+}
+
 run_pipeline_leggo_content() {
        #Build container with current codebase
        build_leggo_content
@@ -515,6 +537,7 @@ run_pipeline() {
        #Update pautas
        update_pautas
 
+
        if [[ $run_analise_emendas == 1 ]]; 
 	then 
               #Run emendas analysis
@@ -561,6 +584,7 @@ print_usage() {
     printf "\t-generate-backup: Gera pasta com backup dos csvs\n"
     printf "\t-keep-last-backups: Mantém apenas um número fixo de backups armazenados\n"
     printf "\t-process-criterios: Processa critérios\n"
+    printf "\t-process-votos: Atualiza e processa dados de votos\n"
     printf "\t-setup-leggo-data-volume: Configura volume leggo_data\n"
 }
 
@@ -671,6 +695,12 @@ if [[ $@ == *'-generate-backup'* ]]; then generate_backup
 fi
 
 if [[ $@ == *'-keep-last-backups'* ]]; then keep_last_backups
+fi
+
+if [[ $@ == *'-process-votos'* ]]; then process_votos
+fi
+
+if [[ $@ == *'-process-governismo'* ]]; then process_governismo
 fi
 
 if [[ $@ == *'-setup-leggo-data-volume'* ]]; then setup_leggo_data_volume
