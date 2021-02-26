@@ -255,6 +255,7 @@ docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-tren
        python3 fetch_google_trends.py \
        leggo_data/apelidos.csv \
        leggo_data/pops/ \
+       leggo_data/pops_backups/ \
        configuration.env
 check_errs $? "Não foi possível baixar dados de pressão pelo Google Trends."
 
@@ -265,7 +266,7 @@ docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
       -a leggo_data/apelidos.csv \
       -o leggo_data/ 
 check_errs $? "Não foi possível baixar dados de pressão pelo Twitter."
-#
+
 pprint "Gerando índice de popularidade combinando Twitter e Google Trends"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
       Rscript scripts/popularity/export_popularity.R \
@@ -560,6 +561,7 @@ print_usage() {
     printf "\t-generate-backup: Gera pasta com backup dos csvs\n"
     printf "\t-keep-last-backups: Mantém apenas um número fixo de backups armazenados\n"
     printf "\t-process-criterios: Processa critérios\n"
+    printf "\t-setup-leggo-data-volume: Configura volume leggo_data\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -669,6 +671,9 @@ if [[ $@ == *'-generate-backup'* ]]; then generate_backup
 fi
 
 if [[ $@ == *'-keep-last-backups'* ]]; then keep_last_backups
+fi
+
+if [[ $@ == *'-setup-leggo-data-volume'* ]]; then setup_leggo_data_volume
 fi
 
 # Registra a data final
