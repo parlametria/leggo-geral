@@ -478,6 +478,21 @@ check_errs $? "Não foi possível atualizar e processar os dados de votos"
      
 }
 
+run_pipeline_votacoes() {
+
+       pprint "Atualizando Dados de Votações, votos e governismo"
+
+       # Build do leggoR
+       build_leggor
+
+       # Processa dados de votações e votos na legislatura atual
+       process_votos
+
+       # Calcula o governismo com base nos votos nominais dos parlamentares
+       process_governismo
+
+}
+
 run_pipeline_leggo_content() {
        #Build container with current codebase
        build_leggo_content
@@ -570,6 +585,7 @@ print_usage() {
     printf "\t-run-basic-pipeline: Roda pipeline básico de atualização de dados do Leggo (sem análise de emendas)\n"
     printf "\t-run-full-pipeline: Roda pipeline completo de atualização de dados do Leggo\n"
     printf "\t-run-pipeline-leggo-content: Roda pipeline para análise das Emendas\n"
+    printf "\t-run-pipeline-votacoes: Roda pipeline para captura e processamento de Votações, votos e governismo\n"
     printf "\t-build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
     printf "\t-fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
     printf "\t-build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
@@ -659,6 +675,9 @@ if [[ $@ == *'-run-full-pipeline'* ]]; then run_pipeline 1
 fi
 
 if [[ $@ == *'-run-pipeline-leggo-content'* ]]; then run_pipeline_leggo_content
+fi
+
+if [[ $@ == *'-run-pipeline-votacoes'* ]]; then run_pipeline_votacoes
 fi
 
 if [[ $@ == *'-build-leggo-trends'* ]]; then build_leggo_trends
