@@ -205,6 +205,9 @@ pprint "Processando dados de Governismo"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/governismo/export_governismo.R \
        -v $EXPORT_FOLDERPATH/votos.csv \
+       -p $EXPORT_FOLDERPATH/votacoes.csv \
+       -i "2019-02-01" \
+       -f "2022-12-31" \
        -e $EXPORT_FOLDERPATH/governismo.csv
 check_errs $? "Não foi possível processar dados de Governismo"
 
