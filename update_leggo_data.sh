@@ -501,6 +501,9 @@ run_pipeline_votacoes() {
        # Calcula o governismo com base nos votos nominais dos parlamentares
        process_governismo
 
+       #Calcula os dados de orientações na Câmara e Senado
+       process-orientacoes
+
 }
 
 run_pipeline_leggo_content() {
