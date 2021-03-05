@@ -480,7 +480,7 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
 check_errs $? "Não foi possível atualizar e processar os dados de votos"
      
 }
-
+      
 run_pipeline_votacoes() {
 
        pprint "Atualizando Dados de Votações, votos e governismo"
