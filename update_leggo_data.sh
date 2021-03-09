@@ -505,7 +505,7 @@ run_pipeline_votacoes() {
        process_governismo
 
        #Calcula os dados de orientações na Câmara e Senado
-       process-orientacoes
+       process_orientacoes
 
 }
 
