@@ -481,7 +481,7 @@ check_errs $? "Não foi possível atualizar e processar os dados de votos"
      
 }
 
-process-orientacoes (){
+process_orientacoes (){
        pprint "Atualiza e processa dados de orientações"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/orientacoes/export_orientacoes.R \
