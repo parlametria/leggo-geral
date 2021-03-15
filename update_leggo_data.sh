@@ -496,6 +496,16 @@ check_errs $? "Não foi possível atualizar e processar os dados de votos"
      
 }
 
+process_orientacoes (){
+       pprint "Atualiza e processa dados de orientações"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/orientacoes/export_orientacoes.R \
+       -v $EXPORT_FOLDERPATH/votacoes.csv \
+       -u $EXPORT_FOLDERPATH/votos.csv \
+       -o $EXPORT_FOLDERPATH/orientacoes.csv
+check_errs $? "Não foi possível atualizar e processar os dados de orientações"
+}
+
 run_pipeline_votacoes() {
 
        pprint "Atualizando Dados de Votações, votos, governismo e disciplina"
@@ -509,6 +519,9 @@ run_pipeline_votacoes() {
        # Calcula o governismo com base nos votos nominais dos parlamentares
        process_governismo
 
+       #Calcula os dados de orientações na Câmara e Senado
+       process_orientacoes
+       
        # Calcula a Disciplina Partidária com base nos votos nominais dos parlamentares
        process_disciplina
 
@@ -622,6 +635,7 @@ print_usage() {
     printf "\t-keep-last-backups: Mantém apenas um número fixo de backups armazenados\n"
     printf "\t-process-criterios: Processa critérios\n"
     printf "\t-process-votos: Atualiza e processa dados de votos\n"
+    printf "\t-process-orientacoes: Atualiza e processa dados de orientacoes\n"
     printf "\t-setup-leggo-data-volume: Configura volume leggo_data\n"
 }
 
@@ -738,6 +752,9 @@ if [[ $@ == *'-keep-last-backups'* ]]; then keep_last_backups
 fi
 
 if [[ $@ == *'-process-votos'* ]]; then process_votos
+fi
+
+if [[ $@ == *'-process-orientacoes'* ]]; then process_orientacoes
 fi
 
 if [[ $@ == *'-process-governismo'* ]]; then process_governismo
