@@ -213,6 +213,21 @@ check_errs $? "Não foi possível processar dados de Governismo"
 
 }
 
+process_disciplina() {
+
+pprint "Processando dados de Disciplina"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/disciplina/export_disciplina.R \
+       -v $EXPORT_FOLDERPATH/votos.csv \
+       -o $EXPORT_FOLDERPATH/orientacoes.csv \
+       -p $EXPORT_FOLDERPATH/votacoes.csv \
+       -i "2019-02-01" \
+       -f "2022-12-31" \
+       -e $EXPORT_FOLDERPATH/disciplina.csv
+check_errs $? "Não foi possível processar dados de Disciplina"
+
+}
+
 update_distancias_emendas() {
 
 pprint "Atualizando as emendas com as distâncias disponíveis"
@@ -493,7 +508,7 @@ check_errs $? "Não foi possível atualizar e processar os dados de orientaçõe
 
 run_pipeline_votacoes() {
 
-       pprint "Atualizando Dados de Votações, votos e governismo"
+       pprint "Atualizando Dados de Votações, votos, governismo e disciplina"
 
        # Build do leggoR
        build_leggor
@@ -506,6 +521,9 @@ run_pipeline_votacoes() {
 
        #Calcula os dados de orientações na Câmara e Senado
        process_orientacoes
+       
+       # Calcula a Disciplina Partidária com base nos votos nominais dos parlamentares
+       process_disciplina
 
 }
 
@@ -601,7 +619,7 @@ print_usage() {
     printf "\t-run-basic-pipeline: Roda pipeline básico de atualização de dados do Leggo (sem análise de emendas)\n"
     printf "\t-run-full-pipeline: Roda pipeline completo de atualização de dados do Leggo\n"
     printf "\t-run-pipeline-leggo-content: Roda pipeline para análise das Emendas\n"
-    printf "\t-run-pipeline-votacoes: Roda pipeline para captura e processamento de Votações, votos e governismo\n"
+    printf "\t-run-pipeline-votacoes: Roda pipeline para captura e processamento de Votações, votos, governismo e disciplina\n"
     printf "\t-build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
     printf "\t-fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
     printf "\t-build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
@@ -740,6 +758,9 @@ if [[ $@ == *'-process-orientacoes'* ]]; then process_orientacoes
 fi
 
 if [[ $@ == *'-process-governismo'* ]]; then process_governismo
+fi
+
+if [[ $@ == *'-process-disciplina'* ]]; then process_disciplina
 fi
 
 if [[ $@ == *'-setup-leggo-data-volume'* ]]; then setup_leggo_data_volume
