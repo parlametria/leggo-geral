@@ -506,6 +506,20 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
 check_errs $? "Não foi possível atualizar e processar os dados de orientações"
 }
 
+process_votacoes_sumarizadas() {
+
+pprint "Processando dados de Votações sumarizadas"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/votacoes_sumarizadas/export_votacoes_sumarizadas.R \
+       -v $EXPORT_FOLDERPATH/votos.csv \
+       -p $EXPORT_FOLDERPATH/votacoes.csv \
+       -i "2019-02-01" \
+       -f "2022-12-31" \
+       -e $EXPORT_FOLDERPATH/votacoes_sumarizadas.csv
+check_errs $? "Não foi possível processar dados de Votações sumarizadas"
+
+}
+
 run_pipeline_votacoes() {
 
        pprint "Atualizando Dados de Votações, votos, governismo e disciplina"
@@ -519,11 +533,14 @@ run_pipeline_votacoes() {
        # Calcula o governismo com base nos votos nominais dos parlamentares
        process_governismo
 
-       #Calcula os dados de orientações na Câmara e Senado
+       # Calcula os dados de orientações na Câmara e Senado
        process_orientacoes
        
        # Calcula a Disciplina Partidária com base nos votos nominais dos parlamentares
        process_disciplina
+
+       # Processa dados sumarizados de votações por parlamentar
+       process_votacoes_sumarizadas
 
 }
 
@@ -761,6 +778,9 @@ if [[ $@ == *'-process-governismo'* ]]; then process_governismo
 fi
 
 if [[ $@ == *'-process-disciplina'* ]]; then process_disciplina
+fi
+
+if [[ $@ == *'-process-votacoes-sumarizadas'* ]]; then process_votacoes_sumarizadas
 fi
 
 if [[ $@ == *'-setup-leggo-data-volume'* ]]; then setup_leggo_data_volume
