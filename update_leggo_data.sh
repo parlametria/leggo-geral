@@ -491,7 +491,9 @@ process_votos () {
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/votos/export_votos.R \
        -v $EXPORT_FOLDERPATH/votacoes.csv \
-       -u $EXPORT_FOLDERPATH/votos.csv
+       -u $EXPORT_FOLDERPATH/votos.csv \
+       -p $EXPORT_FOLDERPATH/proposicoes.csv \
+       -e $EXPORT_FOLDERPATH/entidades.csv
 check_errs $? "Não foi possível atualizar e processar os dados de votos"
      
 }
