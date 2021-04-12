@@ -514,6 +514,7 @@ pprint "Processando dados de Votações sumarizadas"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/votacoes_sumarizadas/export_votacoes_sumarizadas.R \
        -v $EXPORT_FOLDERPATH/votos.csv \
+       -o $EXPORT_FOLDERPATH/orientacoes.csv \
        -p $EXPORT_FOLDERPATH/votacoes.csv \
        -i "2019-02-01" \
        -f "2022-12-31" \
@@ -655,6 +656,9 @@ print_usage() {
     printf "\t-process-criterios: Processa critérios\n"
     printf "\t-process-votos: Atualiza e processa dados de votos\n"
     printf "\t-process-orientacoes: Atualiza e processa dados de orientacoes\n"
+    printf "\t-process-governismo: Processa dados de governismo\n"
+    printf "\t-process-disciplina: Processa dados de disciplina partidária\n"
+    printf "\t-process-votacoes-sumarizadas: Processa dados de votações sumarizadas\n"
     printf "\t-setup-leggo-data-volume: Configura volume leggo_data\n"
 }
 
