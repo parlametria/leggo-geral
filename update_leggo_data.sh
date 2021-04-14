@@ -563,7 +563,6 @@ run_pipeline() {
 
 	#Build container with current codebase
 	build_leggor
-       #build_leggo_trends
 
        #Setup volume of leggo data
        setup_leggo_data_volume
@@ -588,9 +587,6 @@ run_pipeline() {
        # Fetch and Process anotações
        process_anotacoes
 
-	#Compute Pressão
-       #fetch_leggo_trends
-
 	#Fetch related documents
 	update_leggo_data
 
@@ -599,13 +595,6 @@ run_pipeline() {
 
 	#Process related documents
 	process_leggo_data
-
-       #Fetch comissões
-       fetch_leggo_comissoes
-
-       #Update pautas
-       update_pautas
-
 
        if [[ $run_analise_emendas == 1 ]]; 
 	then 
