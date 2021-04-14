@@ -53,6 +53,7 @@ fetch_leggo_data() {
 pprint "Baixando e exportando novos dados"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/fetch_updated_bills_data.R \
+       -a $EXPORT_FOLDERPATH/autores_leggo.csv \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH \
        -f 1
@@ -77,6 +78,7 @@ fetch_leggo_autores() {
 pprint "Baixando e exportando novos dados de autores das proposições monitoradas."
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/fetch_updated_bills_data.R \
+       -a $EXPORT_FOLDERPATH/autores_leggo.csv \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH \
        -f 5
