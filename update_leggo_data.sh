@@ -53,6 +53,7 @@ fetch_leggo_data() {
 pprint "Baixando e exportando novos dados"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/fetch_updated_bills_data.R \
+       -a $EXPORT_FOLDERPATH/autores_leggo.csv \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH \
        -f 1
@@ -77,6 +78,7 @@ fetch_leggo_autores() {
 pprint "Baixando e exportando novos dados de autores das proposições monitoradas."
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
        Rscript scripts/fetch_updated_bills_data.R \
+       -a $EXPORT_FOLDERPATH/autores_leggo.csv \
        -p $PLS_FILEPATH \
        -e $EXPORT_FOLDERPATH \
        -f 5
@@ -563,7 +565,6 @@ run_pipeline() {
 
 	#Build container with current codebase
 	build_leggor
-       #build_leggo_trends
 
        #Setup volume of leggo data
        setup_leggo_data_volume
@@ -588,9 +589,6 @@ run_pipeline() {
        # Fetch and Process anotações
        process_anotacoes
 
-	#Compute Pressão
-       #fetch_leggo_trends
-
 	#Fetch related documents
 	update_leggo_data
 
@@ -599,13 +597,6 @@ run_pipeline() {
 
 	#Process related documents
 	process_leggo_data
-
-       #Fetch comissões
-       fetch_leggo_comissoes
-
-       #Update pautas
-       update_pautas
-
 
        if [[ $run_analise_emendas == 1 ]]; 
 	then 
