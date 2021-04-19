@@ -496,7 +496,7 @@ check_errs $? "Não foi possível processar os dados de criterios de destaque"
 process_props_apensadas() {
 pprint "Processa proposições apensadas"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
-       Rscript scripts/apensadas/export_apensadas.R \
+       Rscript scripts/proposicoes/apensadas/export_apensadas.R \
        -p $EXPORT_FOLDERPATH/proposicoes.csv \
        -i $EXPORT_FOLDERPATH/interesses.csv \
        -o $EXPORT_FOLDERPATH
