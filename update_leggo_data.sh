@@ -151,6 +151,11 @@ pprint "Gerando backup dos csvs"
        alpine:/data/autores_leggo.csv 
        alpine:/data/relatores_leggo.csv
        alpine:/data/proposicoes_destaques.csv
+       alpine:/data/governismo.csv
+       alpine:/data/disciplina.csv
+       alpine:/data/votacoes_sumarizadas.csv
+       alpine:/data/props_apensadas.csv
+       alpine:/data/props_apensadas_nao_monitoradas.csv
        )
        for index in ${list_csv[@]}; do 
               docker cp $index ${BACKUP_FOLDERPATH}${backup_file}
@@ -488,6 +493,16 @@ docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
 check_errs $? "Não foi possível processar os dados de criterios de destaque"
 }
 
+process_props_apensadas() {
+pprint "Processa proposições apensadas"
+docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
+       Rscript scripts/proposicoes/apensadas/export_apensadas.R \
+       -p $EXPORT_FOLDERPATH/proposicoes.csv \
+       -i $EXPORT_FOLDERPATH/interesses.csv \
+       -o $EXPORT_FOLDERPATH
+check_errs $? "Não foi possível processar os dados de proposições apensadas"
+}
+
 process_votos () {
   pprint "Atualiza e processa dados de votos"
 docker-compose -f $LEGGOR_FOLDERPATH/docker-compose.yml run --rm rmod \
@@ -584,7 +599,11 @@ run_pipeline() {
        #Fetch and Process data from authors of bills
        fetch_leggo_relatores
 
+       #Fetch and Process interests
        processa_interesses
+
+       #Process appended propositions
+       process_props_apensadas
 
        # Fetch and Process anotações
        process_anotacoes
@@ -651,6 +670,7 @@ print_usage() {
     printf "\t-process-disciplina: Processa dados de disciplina partidária\n"
     printf "\t-process-votacoes-sumarizadas: Processa dados de votações sumarizadas\n"
     printf "\t-setup-leggo-data-volume: Configura volume leggo_data\n"
+    printf "\t-process-apensadas: Processa dados de proposições apensadas\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -781,6 +801,9 @@ if [[ $@ == *'-process-votacoes-sumarizadas'* ]]; then process_votacoes_sumariza
 fi
 
 if [[ $@ == *'-setup-leggo-data-volume'* ]]; then setup_leggo_data_volume
+fi
+
+if [[ $@ == *'-process-apensadas'* ]]; then process_props_apensadas
 fi
 
 # Registra a data final
