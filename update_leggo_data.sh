@@ -307,7 +307,7 @@ pprint "Gerando índice de popularidade combinando Twitter e Google Trends"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
       Rscript scripts/popularity/export_popularity.R \
       -t leggo_data/trends.csv \
-      -g leggo_data/pops/ \
+      -g leggo_data/pops \
       -i leggo_data/interesses.csv \
       -o leggo_data/pressao.csv
 check_errs $? "Não foi possível combinar os dados de pressão do Twitter e Google Trends."
