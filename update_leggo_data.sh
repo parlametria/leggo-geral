@@ -295,13 +295,13 @@ docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-tren
        configuration.env
 check_errs $? "Não foi possível baixar dados de pressão pelo Google Trends."
 
-pprint "Gerando dados de popularidade do Twitter"
-docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
-      run --rm leggo-trends \
-      Rscript scripts/tweets_from_last_days/export_tweets_from_last_days.R \
-      -a leggo_data/apelidos.csv \
-      -o leggo_data/ 
-check_errs $? "Não foi possível baixar dados de pressão pelo Twitter."
+# pprint "Gerando dados de popularidade do Twitter"
+# docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
+#       run --rm leggo-trends \
+#       Rscript scripts/tweets_from_last_days/export_tweets_from_last_days.R \
+#       -a leggo_data/apelidos.csv \
+#       -o leggo_data/ 
+# check_errs $? "Não foi possível baixar dados de pressão pelo Twitter."
 
 pprint "Gerando índice de popularidade combinando Twitter e Google Trends"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
