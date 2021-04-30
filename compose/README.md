@@ -47,6 +47,14 @@ python3.6 run prod up
 
 **Você pode executar também para qualquer versão do python acima da 3.6. Caso você não a tenha instalada na sua máquina.**
 
+#### **Configuração de volumes**
+Se ao levantar os serviços usando o leggo-geral o seguinte erro for encontrado:
+```sh
+ERROR: Volume backup_data declared as external, but could not be found. Please create the volume manually using `docker volume create --name=backup_data` and try again.
+```
+Então execute em um terminal local: `docker volume create --name=backup_data`
+
+
 ### Sem helper
 
 De dentro do diretório `compose` é possível executar:
