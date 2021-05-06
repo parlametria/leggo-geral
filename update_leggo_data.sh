@@ -545,6 +545,8 @@ process_twitter() {
 docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml run --rm r-twitter-service \
        Rscript code/export_data.R \
        -u $URL_API_PARLAMETRIA
+docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml run --rm r-twitter-service \
+       Rscript code/processor/export_data_to_db_format.R
 }
 
 run_pipeline_votacoes() {
