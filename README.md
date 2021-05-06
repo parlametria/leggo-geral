@@ -1,9 +1,8 @@
 # Leggo - Documentação geral
 
-Repositórios para documentações e ferramentas para uso geral do projeto.
+Repositório para documentação e ferramentas de uso geral do projeto.
 
-- [Rodar Aplicação Leggo localmente](compose)
-- [Documentação da Arquitetura](arquitetura.md)
+- [Rodar Aplicação Leggo localmente](compose/README.md)
 
 ## Como executar a captura dos dados através do Módulo de Dados
 
@@ -14,6 +13,7 @@ Para que o script funcione corretamente, os seguintes repositórios devem ser cl
 - [leggoTrends](https://github.com/parlametria/leggoTrends)
 - [versoes-de-proposicoes](https://github.com/parlametria/versoes-de-proposicoes)
 - [leggo-content](https://github.com/parlametria/leggo-content)
+- [leggo-twitter-dados](https://github.com/parlametria/leggo-twitter-dados)
 
 Além disso, o repositório [`rcongresso`](https://github.com/analytics-ufcg/rcongresso) deve ser clonado dentro da pasta do leggoR para ser usado no build do pacote R.
 
@@ -44,8 +44,11 @@ Exemplo: VERSOESPROPS_FOLDERPATH=./versoes-de-proposicoes
 - ***LEGGOCONTENT_FOLDERPATH***: caminho para o diretório que contém o código do repositório leggo-content. Este caminho é referenciado na máquina local e portanto pode ser relativo ou absoluto a mesma.
 Exemplo: LEGGOCONTENT_FOLDERPATH=./leggo-content
 
-- ***LOG_FILEPATH***: caminho para o arquivo de log a ser escrito durante a execução do pipeline de processamento dos dados.
-Exemplo: LOG_FILEPATH=/tmp/update_leggo_data.log
+- ***LEGGOTWITTER_FOLDERPATH***: caminho para o diretório que contém o código do repositório leggo-twitter-dados. Este caminho é referenciado na máquina local e portanto pode ser relativo ou absoluto a mesma.
+Exemplo: LEGGOTWITTER_FOLDERPATH=./leggo-twitter-dados
+
+- ***LOG_FOLDERPATH***: caminho para o arquivo de log a ser escrito durante a execução do pipeline de processamento dos dados.
+Exemplo: LOG_FILEPATH=./logs/
 
 - ***PROD_BACK_APP***: nome da aplicação do backend na versão de produção no Heroku.
 Exemplo: PROD_BACK_APP=production_app_name
@@ -55,9 +58,6 @@ Exemplo: DEV_BACK_APP=development_app_name
 
 - ***BACKUP_FOLDERPATH***: caminho para o diretório onde são armazenados os arquivos de backup dos dados.
 Exemplo: BACKUP_FOLDERPATH=./backups/
-
-- ***LOG_FOLDERPATH***: caminho para o diretório onde são armazenados os logs do processamento de dados.
-Exemplo: BACKUP_FOLDERPATH=./logs/
 
 ### Passo 2
 
