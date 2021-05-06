@@ -540,6 +540,13 @@ check_errs $? "Não foi possível processar dados de Votações sumarizadas"
 
 }
 
+process_twitter() {
+       pprint "Processa os dados de tweets"
+docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml run --rm r-twitter-service \
+       Rscript code/export_data.R \
+       -u $URL_API_PARLAMETRIA
+}
+
 run_pipeline_votacoes() {
 
        pprint "Atualizando Dados de Votações, votos, governismo e disciplina"
@@ -650,6 +657,7 @@ print_usage() {
     printf "\t-run-full-pipeline: Roda pipeline completo de atualização de dados do Leggo\n"
     printf "\t-run-pipeline-leggo-content: Roda pipeline para análise das Emendas\n"
     printf "\t-run-pipeline-votacoes: Roda pipeline para captura e processamento de Votações, votos, governismo e disciplina\n"
+    printf "\t-process-leggo-twitter: Processa dados de tweets\n"
     printf "\t-build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
     printf "\t-fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
     printf "\t-build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
@@ -747,6 +755,9 @@ if [[ $@ == *'-run-pipeline-leggo-content'* ]]; then run_pipeline_leggo_content
 fi
 
 if [[ $@ == *'-run-pipeline-votacoes'* ]]; then run_pipeline_votacoes
+fi
+
+if [[ $@ == *'-process-leggo-twitter'* ]]; then process_twitter
 fi
 
 if [[ $@ == *'-build-leggo-trends'* ]]; then build_leggo_trends
