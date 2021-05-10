@@ -283,7 +283,6 @@ pprint "Gerando dataframe com os apelidos para busca no Twitter e Google Trends"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
        Rscript gera_entrada_google_trends.R \
        -p leggo_data/proposicoes.csv \
-       -i leggo_data/interesses.csv \
        -a leggo_data/apelidos.csv 
 check_errs $? "Não foi possível gerar os dados de apelidos das proposições."
 
@@ -296,19 +295,20 @@ docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-tren
        configuration.env
 check_errs $? "Não foi possível baixar dados de pressão pelo Google Trends."
 
-pprint "Gerando dados de popularidade do Twitter"
-docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
-      run --rm leggo-trends \
-      Rscript scripts/tweets_from_last_days/export_tweets_from_last_days.R \
-      -a leggo_data/apelidos.csv \
-      -o leggo_data/ 
-check_errs $? "Não foi possível baixar dados de pressão pelo Twitter."
+# pprint "Gerando dados de popularidade do Twitter"
+# docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
+#       run --rm leggo-trends \
+#       Rscript scripts/tweets_from_last_days/export_tweets_from_last_days.R \
+#       -a leggo_data/apelidos.csv \
+#       -o leggo_data/ 
+# check_errs $? "Não foi possível baixar dados de pressão pelo Twitter."
 
 pprint "Gerando índice de popularidade combinando Twitter e Google Trends"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
       Rscript scripts/popularity/export_popularity.R \
       -t leggo_data/trends.csv \
-      -g leggo_data/pops/ \
+      -g leggo_data/pops \
+      -i leggo_data/interesses.csv \
       -o leggo_data/pressao.csv
 check_errs $? "Não foi possível combinar os dados de pressão do Twitter e Google Trends."
 
@@ -540,6 +540,15 @@ check_errs $? "Não foi possível processar dados de Votações sumarizadas"
 
 }
 
+process_twitter() {
+       pprint "Processa os dados de tweets"
+docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml run --rm r-twitter-service \
+       Rscript code/export_data.R \
+       -u $URL_API_PARLAMETRIA
+docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml run --rm r-twitter-service \
+       Rscript code/processor/export_data_to_db_format.R
+}
+
 run_pipeline_votacoes() {
 
        pprint "Atualizando Dados de Votações, votos, governismo e disciplina"
@@ -650,6 +659,7 @@ print_usage() {
     printf "\t-run-full-pipeline: Roda pipeline completo de atualização de dados do Leggo\n"
     printf "\t-run-pipeline-leggo-content: Roda pipeline para análise das Emendas\n"
     printf "\t-run-pipeline-votacoes: Roda pipeline para captura e processamento de Votações, votos, governismo e disciplina\n"
+    printf "\t-process-leggo-twitter: Processa dados de tweets\n"
     printf "\t-build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
     printf "\t-fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
     printf "\t-build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
@@ -747,6 +757,9 @@ if [[ $@ == *'-run-pipeline-leggo-content'* ]]; then run_pipeline_leggo_content
 fi
 
 if [[ $@ == *'-run-pipeline-votacoes'* ]]; then run_pipeline_votacoes
+fi
+
+if [[ $@ == *'-process-leggo-twitter'* ]]; then process_twitter
 fi
 
 if [[ $@ == *'-build-leggo-trends'* ]]; then build_leggo_trends
