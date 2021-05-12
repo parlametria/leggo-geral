@@ -619,7 +619,7 @@ update_db_twitter() {
 reset_db_twitter() {
        env=$1
 
-       pprint "Reseta banco de dados do Twitter e popula novamente"
+       pprint "Reseta banco de dados do Twitter e aplica as migrations"
 
        if [ $env == "development" ]
        then
@@ -627,8 +627,7 @@ reset_db_twitter() {
               docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
                      -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
                      run --no-deps --rm feed sh -c "python manage.py drop-tables --drop true \
-                     && python manage.py create-tables && python manage.py do-migrations \
-                     && python manage.py import-data"
+                     && python manage.py create-tables && python manage.py do-migrations"
        elif [ $env == "staging" ]
        then
               echo "Atualizando BD Staging"
@@ -640,8 +639,7 @@ reset_db_twitter() {
               docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
                      -f $LEGGOTWITTER_FOLDERPATH/deploy/staging.yml \
                      run --no-deps --rm feed sh -c "python manage.py drop-tables --drop true \
-                     && python manage.py create-tables && python manage.py do-migrations \
-                     && python manage.py import-data"
+                     && python manage.py create-tables && python manage.py do-migrations"
        elif [ $env == "production" ]
        then
               echo "Atualizando BD Production"
@@ -653,8 +651,7 @@ reset_db_twitter() {
               docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
                      -f $LEGGOTWITTER_FOLDERPATH/deploy/prod.yml \
                      run --no-deps --rm feed sh -c "python manage.py drop-tables --drop true \
-                     && python manage.py create-tables && python manage.py do-migrations \
-                     && python manage.py import-data"
+                     && python manage.py create-tables && python manage.py do-migrations"
        else
               echo "Tipo de atualização inválido. As opções são 'development', 'staging', 'production'."
        fi
@@ -772,7 +769,7 @@ print_usage() {
     printf "\t-run-pipeline-votacoes: Roda pipeline para captura e processamento de Votações, votos, governismo e disciplina\n"
     printf "\t-process-leggo-twitter <env>: Processa dados de tweets. <env> pode ser: 'development', production'.\n"
     printf "\t-update-db-twitter <env>: Atualiza dados do BD do leggo-twitter. <env> pode ser: 'development', 'staging', production'.\n"
-    printf "\t-reset-db-twitter <env>: Reseta e popula BD do leggo-twitter. <env> pode ser: 'development', 'staging', production'.\n"
+    printf "\t-reset-db-twitter <env>: Reseta o BD do leggo-twitter. <env> pode ser: 'development', 'staging', production'.\n"
     printf "\t-build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
     printf "\t-fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
     printf "\t-build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
