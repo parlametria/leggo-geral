@@ -616,6 +616,24 @@ update_db_twitter() {
        fi
 }
 
+create_schema_tweets() {
+       pprint "Criando tabelas da atualização dos tweets"
+       docker-compose -f $LEGGOTWITTERDADOS_FOLDERPATH/docker-compose.yml \
+       -f $LEGGOTWITTERDADOS_FOLDERPATH/docker-compose.override.yml \
+       run --no-deps --rm crawler-twitter-service \
+       sh -c "python manage.py create-schema" \
+       check_errs $? "Não foi possível criar as tabelas de atualização dos tweets."
+}
+
+process_tweets() {
+       pprint "Processando tweets por username"
+       docker-compose -f $LEGGOTWITTERDADOS_FOLDERPATH/docker-compose.yml \
+       -f $LEGGOTWITTERDADOS_FOLDERPATH/docker-compose.override.yml \
+       run --no-deps --rm crawler-twitter-service \
+       sh -c "python manage.py process-tweets -l 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR1Dh6vN_cCzpPqtY1nfZU90W5nghlesAFAE3-uqMgw8tOn0UpKJjW-eNd_g-BAs-nhrXLBTDCL8IvJ/pub?gid=0&single=true&output=csv'" \
+       check_errs $? "Não foi possível processar os tweets."
+}
+
 reset_db_twitter() {
        env=$1
 
@@ -933,6 +951,12 @@ if [[ $@ == *'-setup-leggo-data-volume'* ]]; then setup_leggo_data_volume
 fi
 
 if [[ $@ == *'-process-apensadas'* ]]; then process_props_apensadas
+fi
+
+if [[ $@ == *'-process-tweets'* ]]; then process_tweets
+fi
+
+if [[ $@ == *'-create-schema-tweets'* ]]; then create_schema_tweets
 fi
 
 # Registra a data final
