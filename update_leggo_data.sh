@@ -618,8 +618,8 @@ update_db_twitter() {
 
 create_schema_tweets() {
        pprint "Criando tabelas da atualização dos tweets"
-       docker-compose -f $LEGGOTWITTERDADOS_FOLDERPATH/docker-compose.yml \
-       -f $LEGGOTWITTERDADOS_FOLDERPATH/docker-compose.override.yml \
+       docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+       -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
        run --no-deps --rm crawler-twitter-service \
        sh -c "python manage.py create-schema" \
        check_errs $? "Não foi possível criar as tabelas de atualização dos tweets."
@@ -627,10 +627,10 @@ create_schema_tweets() {
 
 process_tweets() {
        pprint "Processando tweets por username"
-       docker-compose -f $LEGGOTWITTERDADOS_FOLDERPATH/docker-compose.yml \
-       -f $LEGGOTWITTERDADOS_FOLDERPATH/docker-compose.override.yml \
+       docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+       -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
        run --no-deps --rm crawler-twitter-service \
-       sh -c "python manage.py process-tweets -l 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR1Dh6vN_cCzpPqtY1nfZU90W5nghlesAFAE3-uqMgw8tOn0UpKJjW-eNd_g-BAs-nhrXLBTDCL8IvJ/pub?gid=0&single=true&output=csv'" \
+       sh -c "python manage.py process-tweets -l '${URL_USERNAMES_TWITTER}'" \
        check_errs $? "Não foi possível processar os tweets."
 }
 
