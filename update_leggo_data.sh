@@ -809,6 +809,8 @@ print_usage() {
     printf "\t-process-votacoes-sumarizadas: Processa dados de votações sumarizadas\n"
     printf "\t-setup-leggo-data-volume: Configura volume leggo_data\n"
     printf "\t-process-apensadas: Processa dados de proposições apensadas\n"
+    printf "\t-create-schema-tweets: Cria tabelas que possibilitam a atualização dos tweets\n"
+    printf "\t-process-tweets: Processa e atualiza dados de tweets\n"
 }
 
 if [ "$#" -lt 1 ]; then
