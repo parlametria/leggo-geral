@@ -305,7 +305,7 @@ docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
       -u $URL_TWITTER_API/proposicoes \
       -i $today \
       -f $var_3monthsago \
-      -o $EXPORT_FOLDERPATH/tweets_proposicoes2.csv 
+      -o $EXPORT_FOLDERPATH/tweets_proposicoes.csv 
 check_errs $? "Não foi possível baixar dados de pressão pelo Twitter."
 
 pprint "Gerando índice de popularidade combinando Twitter e Google Trends"
