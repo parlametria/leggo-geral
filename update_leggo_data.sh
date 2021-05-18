@@ -546,6 +546,141 @@ check_errs $? "Não foi possível processar dados de Votações sumarizadas"
 
 }
 
+process_twitter() {
+       env=$1
+       pprint "Processa os dados de tweets"
+
+       if [ $env == "development" ]
+       then
+              echo "Processando dados no ambiente de desenvolvimento"
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
+                     run --rm r-twitter-service \
+                     Rscript code/export_data.R \
+                     -u $URL_API_PARLAMETRIA
+
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
+                     run --rm r-twitter-service \
+                     Rscript code/processor/export_data_to_db_format.R
+       elif [ $env == "production" ]
+       then
+              echo "Processando dados no ambiente de produção"
+
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/prod.yml \
+                     build
+
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/prod.yml \
+                     run --rm r-twitter-service \
+                     Rscript code/export_data.R \
+                     -u $URL_API_PARLAMETRIA
+
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/prod.yml \
+                     run --rm r-twitter-service \
+                     Rscript code/processor/export_data_to_db_format.R
+       else
+              echo "Tipo de atualização inválido. As opções são 'development', 'production'."
+       fi
+}
+
+update_db_twitter() {
+       env=$1
+
+       pprint "Atualiza banco de dados do Twitter"
+
+       if [ $env == "development" ]
+       then
+              echo "Atualizando BD de desenvolvimento"
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
+                     run --no-deps --rm feed sh -c "python manage.py do-migrations && python manage.py update-data"
+       elif [ $env == "staging" ]
+       then
+              echo "Atualizando BD Staging"
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/staging.yml \
+                     build
+
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/staging.yml \
+                     run --no-deps --rm feed sh -c "python manage.py do-migrations && python manage.py update-data"
+       elif [ $env == "production" ]
+       then
+              echo "Atualizando BD Production"
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/prod.yml \
+                     build
+
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/prod.yml \
+                     run --no-deps --rm feed sh -c "python manage.py do-migrations && python manage.py update-data"
+       else
+              echo "Tipo de atualização inválido. As opções são 'development', 'staging', 'production'."
+       fi
+}
+
+create_schema_tweets() {
+       pprint "Criando tabelas da atualização dos tweets"
+       docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+       -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
+       run --no-deps --rm crawler-twitter-service \
+       sh -c "python manage.py create-schema" \
+       check_errs $? "Não foi possível criar as tabelas de atualização dos tweets."
+}
+
+process_tweets() {
+       pprint "Processando tweets por username"
+       docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+       -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
+       run --no-deps --rm crawler-twitter-service \
+       sh -c "python manage.py process-tweets -l 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR1Dh6vN_cCzpPqtY1nfZU90W5nghlesAFAE3-uqMgw8tOn0UpKJjW-eNd_g-BAs-nhrXLBTDCL8IvJ/pub?gid=0&single=true&output=csv'" \
+       check_errs $? "Não foi possível processar os tweets."
+}
+
+reset_db_twitter() {
+       env=$1
+
+       pprint "Reseta banco de dados do Twitter e aplica as migrations"
+
+       if [ $env == "development" ]
+       then
+              echo "Atualizando BD de desenvolvimento"
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
+                     run --no-deps --rm feed sh -c "python manage.py drop-tables --drop true \
+                     && python manage.py create-tables && python manage.py do-migrations"
+       elif [ $env == "staging" ]
+       then
+              echo "Atualizando BD Staging"
+              
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/staging.yml \
+                     build
+
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/staging.yml \
+                     run --no-deps --rm feed sh -c "python manage.py drop-tables --drop true \
+                     && python manage.py create-tables && python manage.py do-migrations"
+       elif [ $env == "production" ]
+       then
+              echo "Atualizando BD Production"
+       
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/prod.yml \
+                     build
+              
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/prod.yml \
+                     run --no-deps --rm feed sh -c "python manage.py drop-tables --drop true \
+                     && python manage.py create-tables && python manage.py do-migrations"
+       else
+              echo "Tipo de atualização inválido. As opções são 'development', 'staging', 'production'."
+       fi
+}
+
 run_pipeline_votacoes() {
 
        pprint "Atualizando Dados de Votações, votos, governismo e disciplina"
@@ -656,6 +791,9 @@ print_usage() {
     printf "\t-run-full-pipeline: Roda pipeline completo de atualização de dados do Leggo\n"
     printf "\t-run-pipeline-leggo-content: Roda pipeline para análise das Emendas\n"
     printf "\t-run-pipeline-votacoes: Roda pipeline para captura e processamento de Votações, votos, governismo e disciplina\n"
+    printf "\t-process-leggo-twitter <env>: Processa dados de tweets. <env> pode ser: 'development', production'.\n"
+    printf "\t-update-db-twitter <env>: Atualiza dados do BD do leggo-twitter. <env> pode ser: 'development', 'staging', production'.\n"
+    printf "\t-reset-db-twitter <env>: Reseta o BD do leggo-twitter. <env> pode ser: 'development', 'staging', production'.\n"
     printf "\t-build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
     printf "\t-fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
     printf "\t-build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
@@ -677,6 +815,8 @@ print_usage() {
     printf "\t-process-votacoes-sumarizadas: Processa dados de votações sumarizadas\n"
     printf "\t-setup-leggo-data-volume: Configura volume leggo_data\n"
     printf "\t-process-apensadas: Processa dados de proposições apensadas\n"
+    printf "\t-create-schema-tweets: Cria tabelas que possibilitam a atualização dos tweets\n"
+    printf "\t-process-tweets: Processa e atualiza dados de tweets\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -755,6 +895,15 @@ fi
 if [[ $@ == *'-run-pipeline-votacoes'* ]]; then run_pipeline_votacoes
 fi
 
+if [[ $@ == *'-process-leggo-twitter'* ]]; then process_twitter "$2"
+fi
+
+if [[ $@ == *'-update-db-twitter'* ]]; then update_db_twitter "$2"
+fi
+
+if [[ $@ == *'-reset-db-twitter'* ]]; then reset_db_twitter "$2"
+fi
+
 if [[ $@ == *'-build-leggo-trends'* ]]; then build_leggo_trends
 fi
 
@@ -810,6 +959,12 @@ if [[ $@ == *'-setup-leggo-data-volume'* ]]; then setup_leggo_data_volume
 fi
 
 if [[ $@ == *'-process-apensadas'* ]]; then process_props_apensadas
+fi
+
+if [[ $@ == *'-process-tweets'* ]]; then process_tweets
+fi
+
+if [[ $@ == *'-create-schema-tweets'* ]]; then create_schema_tweets
 fi
 
 # Registra a data final
