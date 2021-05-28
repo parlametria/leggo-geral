@@ -303,8 +303,8 @@ docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
       run --rm leggo-trends \
       Rscript scripts/tweets/export_tweets.R \
       -u $URL_TWITTER_API/proposicoes \
-      -i $today \
-      -f $var_3monthsago \
+      -i $var_3monthsago \
+      -f $today \
       -o $EXPORT_FOLDERPATH/tweets_proposicoes.csv 
 check_errs $? "Não foi possível baixar dados de pressão pelo Twitter."
 
