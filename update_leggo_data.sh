@@ -693,6 +693,15 @@ update_table_tweets_processados() {
        check_errs $? "Não foi possível atualizar tweets processados."
 }
 
+r_export_tweets_to_process() {
+       pprint "Recuperando tweets do BD não processados e salvando em csv"
+       docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+       -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
+       run --no-deps --rm feed \
+       sh -c "python manage.py r-export-tweets-to-process" \
+       check_errs $? "Não foi possível recuperar tweets não processados ou salvá-los em csv."
+}
+
 run_pipeline_votacoes() {
 
        pprint "Atualizando Dados de Votações, votos, governismo e disciplina"
@@ -779,6 +788,9 @@ run_pipeline() {
 
 run_pipeline_twitter() {
 
+       # Recupera os tweets do BD que ainda não foram processados e salva em csv
+       r_export_tweets_to_process
+
        # Processa dados para proposições, parlamentares e tweets
        process_twitter
 
@@ -841,6 +853,7 @@ print_usage() {
     printf "\t-process-apensadas: Processa dados de proposições apensadas\n"
     printf "\t-create-schema-tweets: Cria tabelas que possibilitam a atualização dos tweets\n"
     printf "\t-process-tweets: Processa e atualiza dados de tweets\n"
+    printf "\t-r-export-tweets-to-process: Recupera os tweets do BD que ainda não foram processados e salva em csv\n"
     printf "\t-create-table-tweets-processados: Cria tabela de tweets processados\n"
     printf "\t-update-tweets-processados: Atualiza dados de tweets processados\n"
     printf "\t-run-pipeline-twitter: Roda pipeline de atualização do twitter\n"
@@ -992,6 +1005,9 @@ if [[ $@ == *'-process-tweets'* ]]; then process_tweets
 fi
 
 if [[ $@ == *'-create-schema-tweets'* ]]; then create_schema_tweets
+fi
+
+if [[ $@ == *'-r-export-tweets-to-process'* ]]; then r_export_tweets_to_process
 fi
 
 if [[ $@ == *'-create-table-tweets-processados'* ]]; then create_table_tweets_processados
