@@ -675,6 +675,24 @@ reset_db_twitter() {
        fi
 }
 
+create_table_tweets_processados() {
+       pprint "Cria tabela de tweets processados"
+       docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+       -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
+       run --no-deps --rm feed \
+       sh -c "python manage.py create-table-tweets-processados" \
+       check_errs $? "Não foi possível criar tabela de tweets processados."
+}
+
+update_table_tweets_processados() {
+       pprint "Atualiza dados da tabela de tweets processados"
+       docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+       -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
+       run --no-deps --rm feed \
+       sh -c "python manage.py update-data-tweets-processados" \
+       check_errs $? "Não foi possível atualizar tweets processados."
+}
+
 run_pipeline_votacoes() {
 
        pprint "Atualizando Dados de Votações, votos, governismo e disciplina"
@@ -759,6 +777,18 @@ run_pipeline() {
        fi
 }
 
+run_pipeline_twitter() {
+
+       # Processa dados para proposições, parlamentares e tweets
+       process_twitter
+
+       # Atualiza dados do twitter
+       update_db_twitter
+
+       # Atualiza dados de tweets processados
+       update_table_tweets_processados
+
+}
 
 cd $WORKSPACE_FOLDERPATH
 
@@ -811,6 +841,9 @@ print_usage() {
     printf "\t-process-apensadas: Processa dados de proposições apensadas\n"
     printf "\t-create-schema-tweets: Cria tabelas que possibilitam a atualização dos tweets\n"
     printf "\t-process-tweets: Processa e atualiza dados de tweets\n"
+    printf "\t-create-table-tweets-processados: Cria tabela de tweets processados\n"
+    printf "\t-update-tweets-processados: Atualiza dados de tweets processados\n"
+    printf "\t-run-pipeline-twitter: Roda pipeline de atualização do twitter\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -959,6 +992,15 @@ if [[ $@ == *'-process-tweets'* ]]; then process_tweets
 fi
 
 if [[ $@ == *'-create-schema-tweets'* ]]; then create_schema_tweets
+fi
+
+if [[ $@ == *'-create-table-tweets-processados'* ]]; then create_table_tweets_processados
+fi
+
+if [[ $@ == *'-update-tweets-processados'* ]]; then update_table_tweets_processados
+fi
+
+if [[ $@ == *'-run-pipeline-twitter'* ]]; then run_pipeline_twitter
 fi
 
 # Registra a data final
