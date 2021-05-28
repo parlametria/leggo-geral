@@ -59,6 +59,9 @@ Exemplo: DEV_BACK_APP=development_app_name
 - ***BACKUP_FOLDERPATH***: caminho para o diretório onde são armazenados os arquivos de backup dos dados.
 Exemplo: BACKUP_FOLDERPATH=./backups/
 
+- ***URL_USERNAMES_TWITTER***: URL para lista de usernames para a recuperação e processamentos dos tweets
+Exemplo: URL_USERNAMES_TWITTER="https://docs.google.com/spreadsheets/d/e/2PACX-1vR1Dh6vN_cCzpPqtY1nfZU90W5nghlesAFAE3-uqMgw8tOn0UpKJjW-eNd_g-BAs-nhrXLBTDCL8IvJ/pub?gid=0&single=true&output=csv"
+
 ### Passo 2
 
 Uma vez configuradas as variáveis de ambiente, é possível verificar que procedimentos podem ser executados pelo `update_leggo_data` acessando o help do mesmo:
