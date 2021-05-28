@@ -697,8 +697,8 @@ r_export_tweets_to_process() {
        pprint "Recuperando tweets do BD não processados e salvando em csv"
        docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
        -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
-       run --no-deps --rm feed \
-       sh -c "python manage.py r-export-tweets-to-process" \
+       run --rm r-twitter-service \
+       Rscript code/tweets/export_tweets_to_process.R 
        check_errs $? "Não foi possível recuperar tweets não processados ou salvá-los em csv."
 }
 
