@@ -838,7 +838,7 @@ print_usage() {
     printf "\t-update-db-twitter <env>: Atualiza dados do BD do leggo-twitter. <env> pode ser: 'development', 'staging', production'.\n"
     printf "\t-reset-db-twitter <env>: Reseta o BD do leggo-twitter. <env> pode ser: 'development', 'staging', production'.\n"
     printf "\t-build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
-    printf "\t-process_pressao: Computa dados para a Pressão usando o Twitter\n"
+    printf "\t-process-pressao: Computa dados para a Pressão usando o Twitter\n"
     printf "\t-build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
     printf "\t-fetch-versoes-props: Computa dados para a Pressão usando o Versões Props\n"
     printf "\t-build-leggo-content: Atualiza e faz o build do Container Leggo Content\n"
