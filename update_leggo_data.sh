@@ -275,41 +275,47 @@ check_errs $? "Não foi possível fazer o build do leggoTrends."
 
 }
 
-fetch_leggo_trends() {
+process_pressao() {
 
 pprint "Atualizando Pressão"
 
-pprint "Gerando dataframe com os apelidos para busca no Twitter e Google Trends"
-docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
-       Rscript gera_entrada_google_trends.R \
-       -p leggo_data/proposicoes.csv \
-       -a leggo_data/apelidos.csv 
-check_errs $? "Não foi possível gerar os dados de apelidos das proposições."
+# pprint "Gerando dataframe com os apelidos para busca no Twitter e Google Trends"
+# docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
+#        Rscript gera_entrada_google_trends.R \
+#        -p leggo_data/proposicoes.csv \
+#        -a leggo_data/apelidos.csv 
+# check_errs $? "Não foi possível gerar os dados de apelidos das proposições."
 
-pprint "Gerando dados de pressão do Google Trends"
-docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
-       python3 fetch_google_trends.py \
-       leggo_data/apelidos.csv \
-       leggo_data/pops/ \
-       leggo_data/pops_backups/ \
-       configuration.env
-check_errs $? "Não foi possível baixar dados de pressão pelo Google Trends."
+# pprint "Gerando dados de pressão do Google Trends"
+# docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
+#        python3 fetch_google_trends.py \
+#        leggo_data/apelidos.csv \
+#        leggo_data/pops/ \
+#        leggo_data/pops_backups/ \
+#        configuration.env
+# check_errs $? "Não foi possível baixar dados de pressão pelo Google Trends."
 
-# pprint "Gerando dados de popularidade do Twitter"
-# docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
-#       run --rm leggo-trends \
-#       Rscript scripts/tweets_from_last_days/export_tweets_from_last_days.R \
-#       -a leggo_data/apelidos.csv \
-#       -o leggo_data/ 
-# check_errs $? "Não foi possível baixar dados de pressão pelo Twitter."
+today=$(date +%Y-%m-%d)
+var_3monthsago=$(date -d '3 months ago' +%Y-%m-%d)
+
+pprint "Gerando dados de popularidade do Twitter"
+docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml \
+      run --rm leggo-trends \
+      Rscript scripts/tweets/export_tweets.R \
+      -u $URL_TWITTER_API/proposicoes \
+      -i $var_3monthsago \
+      -f $today \
+      -o $EXPORT_FOLDERPATH/tweets_proposicoes.csv 
+check_errs $? "Não foi possível baixar dados de pressão pelo Twitter."
 
 pprint "Gerando índice de popularidade combinando Twitter e Google Trends"
 docker-compose -f $LEGGOTRENDS_FOLDERPATH/docker-compose.yml run --rm leggo-trends \
       Rscript scripts/popularity/export_popularity.R \
-      -t leggo_data/trends.csv \
-      -g leggo_data/pops \
-      -i leggo_data/interesses.csv \
-      -o leggo_data/pressao.csv
+      -t $EXPORT_FOLDERPATH/tweets_proposicoes.csv \
+      -g $EXPORT_FOLDERPATH/pops \
+      -i $EXPORT_FOLDERPATH/interesses.csv \
+      -p $EXPORT_FOLDERPATH/proposicoes.csv \
+      -o $EXPORT_FOLDERPATH/pressao.csv
 check_errs $? "Não foi possível combinar os dados de pressão do Twitter e Google Trends."
 
 }
@@ -832,7 +838,7 @@ print_usage() {
     printf "\t-update-db-twitter <env>: Atualiza dados do BD do leggo-twitter. <env> pode ser: 'development', 'staging', production'.\n"
     printf "\t-reset-db-twitter <env>: Reseta o BD do leggo-twitter. <env> pode ser: 'development', 'staging', production'.\n"
     printf "\t-build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
-    printf "\t-fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
+    printf "\t-process-pressao: Computa dados para a Pressão usando o Twitter\n"
     printf "\t-build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
     printf "\t-fetch-versoes-props: Computa dados para a Pressão usando o Versões Props\n"
     printf "\t-build-leggo-content: Atualiza e faz o build do Container Leggo Content\n"
@@ -948,7 +954,7 @@ fi
 if [[ $@ == *'-build-leggo-trends'* ]]; then build_leggo_trends
 fi
 
-if [[ $@ == *'-fetch-leggo-trends'* ]]; then fetch_leggo_trends
+if [[ $@ == *'-process-pressao'* ]]; then process_pressao
 fi
 
 if [[ $@ == *'-build-versoes-props'* ]]; then build_versoes_props
