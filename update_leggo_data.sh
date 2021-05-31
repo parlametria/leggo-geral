@@ -787,15 +787,16 @@ run_pipeline() {
 }
 
 run_pipeline_twitter() {
+       parametro_ambiente=$1
 
        # Recupera os tweets do BD que ainda não foram processados e salva em csv
        r_export_tweets_to_process
 
        # Processa dados para proposições, parlamentares e tweets
-       process_twitter
+       process_twitter $parametro_ambiente
 
        # Atualiza dados do twitter
-       update_db_twitter
+       update_db_twitter $parametro_ambiente
 
        # Atualiza dados de tweets processados
        update_table_tweets_processados
@@ -856,7 +857,7 @@ print_usage() {
     printf "\t-r-export-tweets-to-process: Recupera os tweets do BD que ainda não foram processados e salva em csv\n"
     printf "\t-create-table-tweets-processados: Cria tabela de tweets processados\n"
     printf "\t-update-tweets-processados: Atualiza dados de tweets processados\n"
-    printf "\t-run-pipeline-twitter: Roda pipeline de atualização do twitter\n"
+    printf "\t-run-pipeline-twitter <env>: Roda pipeline de atualização do twitter. <env> pode ser: 'development', production'.\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -1016,7 +1017,7 @@ fi
 if [[ $@ == *'-update-tweets-processados'* ]]; then update_table_tweets_processados
 fi
 
-if [[ $@ == *'-run-pipeline-twitter'* ]]; then run_pipeline_twitter
+if [[ $@ == *'-run-pipeline-twitter'* ]]; then run_pipeline_twitter "$2"
 fi
 
 # Registra a data final
