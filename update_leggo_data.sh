@@ -275,7 +275,7 @@ check_errs $? "Não foi possível fazer o build do leggoTrends."
 
 }
 
-fetch_leggo_trends() {
+process_pressao() {
 
 pprint "Atualizando Pressão"
 
@@ -838,7 +838,7 @@ print_usage() {
     printf "\t-update-db-twitter <env>: Atualiza dados do BD do leggo-twitter. <env> pode ser: 'development', 'staging', production'.\n"
     printf "\t-reset-db-twitter <env>: Reseta o BD do leggo-twitter. <env> pode ser: 'development', 'staging', production'.\n"
     printf "\t-build-leggo-trends: Atualiza e faz o build do Container Leggo Trends\n"
-    printf "\t-fetch-leggo-trends: Computa dados para a Pressão usando o Leggo Trends\n"
+    printf "\t-process_pressao: Computa dados para a Pressão usando o Twitter\n"
     printf "\t-build-versoes-props: Atualiza e faz o build do Container Versões Props\n"
     printf "\t-fetch-versoes-props: Computa dados para a Pressão usando o Versões Props\n"
     printf "\t-build-leggo-content: Atualiza e faz o build do Container Leggo Content\n"
@@ -954,7 +954,7 @@ fi
 if [[ $@ == *'-build-leggo-trends'* ]]; then build_leggo_trends
 fi
 
-if [[ $@ == *'-fetch-leggo-trends'* ]]; then fetch_leggo_trends
+if [[ $@ == *'-process-pressao'* ]]; then process_pressao
 fi
 
 if [[ $@ == *'-build-versoes-props'* ]]; then build_versoes_props
