@@ -11,7 +11,7 @@ mkdir -p $LOG_FOLDERPATH
 
 # Gera o nome do arquivo do log a partir do timestamp  
 backup_file=$(date '+leggo_data_''%d_%m_%Y_%H_%M_%S')
-timestamp=$(date '+%d_%m_%Y_%H_%M_%S');
+timestamp=$(date '+%Y_%m_%d_%H_%M_%S');
 log_filepath="${LOG_FOLDERPATH}${timestamp}.txt"
 
 # Faz com que as mensagens comumns e de erro deste script apareçam tanto no
