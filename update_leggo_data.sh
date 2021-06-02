@@ -563,6 +563,24 @@ process_twitter() {
                      -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
                      run --rm r-twitter-service \
                      Rscript code/processor/export_data_to_db_format.R
+       elif [ $env == "staging" ]
+       then
+              echo "Processando dados no ambiente de staging"
+
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/staging.yml \
+                     build
+
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/staging.yml \
+                     run --rm r-twitter-service \
+                     Rscript code/export_data.R \
+                     -u $URL_API_PARLAMETRIA
+
+              docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+                     -f $LEGGOTWITTER_FOLDERPATH/deploy/staging.yml \
+                     run --rm r-twitter-service \
+                     Rscript code/processor/export_data_to_db_format.R
        elif [ $env == "production" ]
        then
               echo "Processando dados no ambiente de produção"
@@ -582,7 +600,7 @@ process_twitter() {
                      run --rm r-twitter-service \
                      Rscript code/processor/export_data_to_db_format.R
        else
-              echo "Tipo de atualização inválido. As opções são 'development', 'production'."
+              echo "Tipo de atualização inválido. As opções são 'development', 'staging', 'production'."
        fi
 }
 
