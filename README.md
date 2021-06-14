@@ -11,8 +11,8 @@ Para que o script funcione corretamente, os seguintes repositórios devem ser cl
 
 - [leggoR](https://github.com/parlametria/leggoR)
 - [leggoTrends](https://github.com/parlametria/leggoTrends)
-- [versoes-de-proposicoes](https://github.com/parlametria/versoes-de-proposicoes)
-- [leggo-content](https://github.com/parlametria/leggo-content)
+- [versoes-de-proposicoes](https://github.com/parlametria/versoes-de-proposicoes) (deprecated)
+- [leggo-content](https://github.com/parlametria/leggo-content) (deprecated)
 - [leggo-twitter-dados](https://github.com/parlametria/leggo-twitter-dados)
 
 Além disso, o repositório [`rcongresso`](https://github.com/analytics-ufcg/rcongresso) deve ser clonado dentro da pasta do leggoR para ser usado no build do pacote R.
