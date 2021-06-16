@@ -38,10 +38,10 @@ Exemplo: LEGGOR_FOLDERPATH=./leggoR
 - ***LEGGOTRENDS_FOLDERPATH***: caminho para o diretório que contém o código do repositório leggoTrends. Este caminho é referenciado na máquina local e portanto pode ser relativo ou absoluto a mesma.
 Exemplo: LEGGOTRENDS_FOLDERPATH=./leggoTrends
 
-- ***VERSOESPROPS_FOLDERPATH***: caminho para o diretório que contém o código do repositório versoes-de-proposicoes. Este caminho é referenciado na máquina local e portanto pode ser relativo ou absoluto a mesma.
+- ***VERSOESPROPS_FOLDERPATH*** (deprecated): caminho para o diretório que contém o código do repositório versoes-de-proposicoes. Este caminho é referenciado na máquina local e portanto pode ser relativo ou absoluto a mesma.
 Exemplo: VERSOESPROPS_FOLDERPATH=./versoes-de-proposicoes
 
-- ***LEGGOCONTENT_FOLDERPATH***: caminho para o diretório que contém o código do repositório leggo-content. Este caminho é referenciado na máquina local e portanto pode ser relativo ou absoluto a mesma.
+- ***LEGGOCONTENT_FOLDERPATH*** (deprecated): caminho para o diretório que contém o código do repositório leggo-content. Este caminho é referenciado na máquina local e portanto pode ser relativo ou absoluto a mesma.
 Exemplo: LEGGOCONTENT_FOLDERPATH=./leggo-content
 
 - ***LEGGOTWITTER_FOLDERPATH***: caminho para o diretório que contém o código do repositório leggo-twitter-dados. Este caminho é referenciado na máquina local e portanto pode ser relativo ou absoluto a mesma.
@@ -74,10 +74,10 @@ Uma vez configuradas as variáveis de ambiente, é possível verificar que proce
 ```
 Olhe com cuidado para todos os roteiros que podem ser executados.
 
-Para executar o pipeline principal com a atualização completa de todos os dados para as proposições de interesse execute:
+Para executar o pipeline principal com a atualização completa de todos os dados para as proposições de interesse (sem análise de emendas), execute:
 
 ```
-./update_leggo_data.sh -run-full-pipeline
+./update_leggo_data.sh -run-basic-pipeline
 ```
 
 Atente que dependendo do número de proposições de interesse esse passo pode demorar um tempo considerável.
