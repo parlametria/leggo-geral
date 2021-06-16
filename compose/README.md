@@ -22,9 +22,9 @@ leggo-frontend é a versão do frontend escrita em Vue e não é mais continuada
 
 Existem quatro stacks possíveis para execução:
 - `painel` (backend e frontend usando Angular)
+- `twitter-dados` executa apenas o módulo do leggo-twitter-dados
 - `dev` (backend e frontend usando Vue, que foi descontinuado)
 - `prod` (não é mais utilizada)
-- `twitter-dados` executa apenas o módulo do leggo-twitter-dados
 
 ### Com helper
 
@@ -36,13 +36,6 @@ python3.6 run painel up
 ```
 A API estará disponível em http://localhost:8000/.
 O frontend estará disponível em http://localhost:4200/.
-
-#### Dev (backend + frontend Vue) - Não é mais utilizado
-```
-python3.6 run dev up
-```
-A API estará disponível em http://localhost:8000/.
-O frontend estará disponível em http://localhost:3000/.
 
 #### Twitter-dados (banco PostgreSQL)
 ```
@@ -70,11 +63,6 @@ De dentro do diretório `compose` é possível executar (apesar de não ser reco
 docker-compose -f docker-compose.yml -f ../../leggo-painel/docker-compose.yml -f ../../leggo-backend/docker-compose.yml -f ../../leggo-backend/docker-compose.override.yml -f ../../leggo-twitter-dados/docker-compose.yml -f ../../leggo-twitter/docker-compose.yml -f ../../leggo-twitter/docker-compose.override.yml up
 ```
 
-#### Dev:
-```
-docker-compose -f docker-compose.yml -f ../../leggo-frontend/docker-compose.yml -f ../../leggo-backend/docker-compose.yml -f ../../leggo-backend/docker-compose.override.yml up
-```
-
 #### Twitter-dados:
 ```
 docker-compose -f docker-compose.yml -f ../../leggo-twitter-dados/docker-compose.yml up
@@ -89,19 +77,19 @@ Um comando que deve ser usado com cuidado é aquele que para os serviços e apag
 ```
 python3.6 run <stack> down --volumes
 ```
-\<stack\> deve ser dev ou painel.
+\<stack\> deve ser painel ou twitter-dados.
 
 Também é possível realizar o build de todos os serviços:
 ```
 python3.6 run <stack> build
 ```
-\<stack\> deve ser dev ou painel.
+\<stack\> deve ser painel ou twitter-dados.
 
 Ou ainda executar um build sem cache (pode demorar bastante devido a instalação de todas as depedências):
 ```
 python3.6 run <stack> build --no-cache
 ```
-\<stack\> deve ser dev ou painel.
+\<stack\> deve ser painel ou twitter-dados.
 
 Para saber a lista completa de comandos do docker-compose execute:
 `docker-compose help`
@@ -120,6 +108,8 @@ ou
 $ docker exec -it dbapi sh
 ou
 $ docker exec -it frontend_painel_dev sh
+ou
+$ docker exec -it postgres-leggo-twitter sh
 ```
 Um terminal shell dentro do container correspondente abrirá.
 
