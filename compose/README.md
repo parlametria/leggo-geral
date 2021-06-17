@@ -13,36 +13,35 @@ Os repositórios que devem ser baixados são:
 - [leggo-twitter-dados](https://github.com/parlametria/leggo-twitter-dados)
 - [leggo-twitter](https://github.com/parlametria/leggo-twitter)
 - [leggo-backend](https://github.com/parlametria/leggo-backend)
-- [leggo-frontend](https://github.com/parlametria/leggo-frontend)
+- [leggo-frontend](https://github.com/parlametria/leggo-frontend) (deprecated)
 - [leggo-painel](https://github.com/parlametria/leggo-painel)
 
 Atenção: Leia o README do [leggo-backend](https://github.com/parlametria/leggo-backend) para a configuração correta das variáveis de ambiente necessárias para a execução da API.
 
-leggo-frontend é a versão do frontend escrita em Vue. Já o leggo-painel é a versão do frontend escrita em Angular.
+leggo-frontend é a versão do frontend escrita em Vue e não é mais continuada pelo Parlametria. Já o leggo-painel é a versão do frontend escrita em Angular.
 
 Existem quatro stacks possíveis para execução:
-- dev (backend e frontend usando Vue)
-- painel (backend e frontend usando Angular)
-- prod (não é mais utilizada)
-- twitter-dados executa apenas o módulo do leggo-twitter-dados
+- `painel` (backend e frontend usando Angular)
+- `twitter-dados` executa apenas o módulo do leggo-twitter-dados
+- `dev` (backend e frontend usando Vue, que foi descontinuado)
+- `prod` (não é mais utilizada)
 
 ### Com helper
 
 De dentro do diretório `compose` é possível executar:
 
-Dev (backend + frontend Vue)
-```
-python3.6 run dev up
-```
-A API estará disponível em hhttp://localhost:8000/.
-O frontend estará disponível em http://localhost:3000/.
-
-Painel (backend + frontend Angular)
+#### Painel (backend + frontend Angular)
 ```
 python3.6 run painel up
 ```
 A API estará disponível em http://localhost:8000/.
 O frontend estará disponível em http://localhost:4200/.
+
+#### Twitter-dados (banco PostgreSQL)
+```
+python3.6 run twitter-dados up
+```
+O banco estará disponível no host, user, database e senha setados no arquivo .env do leggo-twitter-dados.
 
 **Você pode executar também para qualquer versão do python acima da 3.6. Caso você não a tenha instalada na sua máquina.**
 
@@ -59,14 +58,14 @@ O mesmo vale para o volume leggo_data.
 
 De dentro do diretório `compose` é possível executar (apesar de não ser recomendado):
 
-Dev:
+#### Painel:
 ```
-docker-compose -f docker-compose.yml -f ../../leggo-frontend/docker-compose.yml -f ../../leggo-backend/docker-compose.yml -f ../../leggo-backend/docker-compose.override.yml up
+docker-compose -f docker-compose.yml -f ../../leggo-painel/docker-compose.yml -f ../../leggo-backend/docker-compose.yml -f ../../leggo-backend/docker-compose.override.yml -f ../../leggo-twitter-dados/docker-compose.yml -f ../../leggo-twitter/docker-compose.yml -f ../../leggo-twitter-dados/docker-compose.override.yml up
 ```
 
-Painel:
+#### Twitter-dados:
 ```
-docker-compose -f docker-compose.yml -f ../../leggo-painel/docker-compose.yml -f ../../leggo-backend/docker-compose.yml -f ../../leggo-backend/docker-compose.override.yml up
+docker-compose -f docker-compose.yml -f ../../leggo-twitter-dados/docker-compose.yml -f ../../leggo-twitter-dados/docker-compose.override.yml up
 ```
 
 ### Comandos úteis
@@ -78,19 +77,19 @@ Um comando que deve ser usado com cuidado é aquele que para os serviços e apag
 ```
 python3.6 run <stack> down --volumes
 ```
-\<stack\> deve ser dev ou painel.
+\<stack\> deve ser painel ou twitter-dados.
 
 Também é possível realizar o build de todos os serviços:
 ```
 python3.6 run <stack> build
 ```
-\<stack\> deve ser dev ou painel.
+\<stack\> deve ser painel ou twitter-dados.
 
 Ou ainda executar um build sem cache (pode demorar bastante devido a instalação de todas as depedências):
 ```
 python3.6 run <stack> build --no-cache
 ```
-\<stack\> deve ser dev ou painel.
+\<stack\> deve ser painel ou twitter-dados.
 
 Para saber a lista completa de comandos do docker-compose execute:
 `docker-compose help`
@@ -110,7 +109,7 @@ $ docker exec -it dbapi sh
 ou
 $ docker exec -it frontend_painel_dev sh
 ou
-$ docker exec -it frontend_dev sh
+$ docker exec -it postgres-leggo-twitter sh
 ```
 Um terminal shell dentro do container correspondente abrirá.
 
