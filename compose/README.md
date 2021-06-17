@@ -60,12 +60,12 @@ De dentro do diretório `compose` é possível executar (apesar de não ser reco
 
 #### Painel:
 ```
-docker-compose -f docker-compose.yml -f ../../leggo-painel/docker-compose.yml -f ../../leggo-backend/docker-compose.yml -f ../../leggo-backend/docker-compose.override.yml -f ../../leggo-twitter-dados/docker-compose.yml -f ../../leggo-twitter/docker-compose.yml -f ../../leggo-twitter/docker-compose.override.yml up
+docker-compose -f docker-compose.yml -f ../../leggo-painel/docker-compose.yml -f ../../leggo-backend/docker-compose.yml -f ../../leggo-backend/docker-compose.override.yml -f ../../leggo-twitter-dados/docker-compose.yml -f ../../leggo-twitter/docker-compose.yml -f ../../leggo-twitter-dados/docker-compose.override.yml up
 ```
 
 #### Twitter-dados:
 ```
-docker-compose -f docker-compose.yml -f ../../leggo-twitter-dados/docker-compose.yml up
+docker-compose -f docker-compose.yml -f ../../leggo-twitter-dados/docker-compose.yml -f ../../leggo-twitter-dados/docker-compose.override.yml up
 ```
 
 ### Comandos úteis
