@@ -6,7 +6,7 @@ from pathlib import Path
 
 help_text = '''
 Roda comandos docker-compose usando as configurações de múltiplos repositórios.
-O primeiro parâmetro deve ser 'dev', 'prod' ou 'painel', os seguintes serão passados
+O primeiro parâmetro deve ser 'dev', 'twitter-dados' ou 'painel', os seguintes serão passados
 diretamente para o docker-compose. Ex.:
 ./run.py dev up
 '''
@@ -16,7 +16,7 @@ env_file = this_folder / '.env'
 
 configs = {
     'dev': [
-        '${FRONTEND_PATH}/docker-compose.yml',
+        '${FRONTEND_PAINEL_PATH}/docker-compose.yml',
         '${BACKEND_PATH}/docker-compose.yml',
         '${BACKEND_PATH}/docker-compose.override.yml'
     ],
@@ -34,36 +34,153 @@ configs = {
         '${TWITTER_API_PATH}/docker-compose.yml'
     ],
     'twitter-dados': [
-        '${TWITTER_API_DADOS_PATH}/docker-compose.yml'
+        '${TWITTER_API_DADOS_PATH}/docker-compose.yml',
+        '${TWITTER_API_DADOS_PATH}/docker-compose.override.yml',
+    ],
+    'twitter-api': [
+      '${TWITTER_API_PATH}/docker-compose.yml'
     ]
 }
 
-# Verifica argumentos e sai se estiverem incorretos
+
+def execute_cmd(cmd):
+    """Recebe um comando como string e o executa como comando shell.
+
+    Parameters
+    ----------
+    cmd : str
+        A string com o comando a ser executado.
+    """
+    process = subprocess.Popen(cmd, shell=True, executable='/bin/bash')
+    while process.poll() is None:
+        try:
+            process.wait()
+        except KeyboardInterrupt:
+            pass
+
+
+def create_network(network_name):
+    """Recebe um nome de network e a cria caso não exista.
+
+    Parameters
+    ----------
+    netwoaterk_name : str
+        A string com o nome da network a ser criada.
+    """
+    print(f'Criando network {network_name}...')
+    cmd = ('COND=$(docker network ls --filter name=^' + 
+    network_name + 
+    '$ --format="{{ .Name }}") ; if [ -z $COND ]; then docker network create ' + 
+    network_name + 
+    '; fi')
+    execute_cmd(cmd)
+    print('Feito!')
+    
+
+def create_volume(volume_name):
+    """Recebe um nome de volume e o cria.
+
+    Parameters
+    ----------
+    volume_name : str
+        A string com o nome do volume a ser criado.
+    """
+    print(f'Criando volume {volume_name}...')
+    cmd = f'docker volume create --name={volume_name}'
+    execute_cmd(cmd)
+    print('Feito!')
+
+
+def execute(config, compose_args):
+    """A partir de uma configuração de containers e um comando compose,
+    executa o comando para a configuração escolhida. 
+
+    Parameters
+    ----------
+    config : str
+        A configuração de containers que se deseja gerenciar.
+        Pode ser painel ou twitter-dados.
+    compose_args : str
+        O comando compose que será aplicado aos containers 
+        que compõem a config passada.
+    """
+    with open(env_file, 'r') as f:
+        envs = ''.join([f'export {l}' for l in f.readlines() if l[0] != '#'])
+
+    # Prepara parâmetros com arquivos compose usados
+    files = ''.join([
+        f' -f {this_folder / f}'
+        for f in ['docker-compose.yml'] + configs[config]
+    ])
+    
+    cmd = f'{envs}\ndocker-compose {files} {compose_args}'
+    execute_cmd(cmd)
+
+
+def build(config, compose_args):
+    """Realiza o build de uma config escolhida. Caso seja feito o build 
+    do painel, as configurações serão executadas separadamente para que 
+    as prioridades de builds dos containers dependentes sejam respeitadas.
+
+    Parameters
+    ----------
+    config : str
+        A configuração de containers que se deseja gerenciar.
+        Pode ser painel ou twitter-dados.
+    compose_args : str
+        O comando compose que será aplicado aos containers 
+        que compõem a config passada.
+    """
+    create_volume('backup_data')
+    execute(config, compose_args)
+
+    if 'painel' in config: 
+        create_network('leggo_twitter_network')
+
+
+def execute_in_sequence(compose_args):
+    """Realiza o comando de uma config escolhida na sequência
+    de dependências.
+    Parameters
+    ----------
+    config : str
+        A configuração de containers que se deseja gerenciar.
+        Pode ser painel ou twitter-dados.
+    compose_args : str
+        O comando compose que será aplicado aos containers 
+        que compõem a config passada.
+    """
+    execute('twitter-dados', compose_args)
+    execute('twitter-api', compose_args)
+    execute('dev', compose_args)
+
+
+def execute_docker_command(config, compose_args):
+    """Realiza o comando de uma config escolhida.
+    Parameters
+    ----------
+    config : str
+        A configuração de containers que se deseja gerenciar.
+        Pode ser painel ou twitter-dados.
+    compose_args : str
+        O comando compose que será aplicado aos containers 
+        que compõem a config passada.
+    """
+
+    if 'build' in compose_args:
+        build(config, compose_args)
+    # elif 'painel' in config:
+    #     execute_in_sequence(compose_args)
+    else:
+        execute(config, compose_args)
+
+
 if len(argv) < 2 or argv[1] not in configs.keys():
     print(help_text)
     exit()
 
-# Prepara variáveis de ambiente
-with open(env_file, 'r') as f:
-    envs = ''.join([f'export {l}' for l in f.readlines() if l[0] != '#'])
-
-# Prepara parâmetros com arquivos compose usados
-files = ''.join([
-    f' -f {this_folder / f}'
-    for f in ['docker-compose.yml'] + configs[argv[1]]
-])
-
+config = argv[1]
 # Parâmetros passados para o docker-compose
 compose_args = ' '.join(argv[2:])
 
-# Prepara comando completo
-cmd = f'{envs}\ndocker-compose {files} {compose_args}'
-
-# Inicia o comando
-process = subprocess.Popen(cmd, shell=True, executable='/bin/bash')
-# Aguarda comando terminar permitindo enviar múltiplos Ctrl+c a ele
-while process.poll() is None:
-    try:
-        process.wait()
-    except KeyboardInterrupt:
-        pass
+execute_docker_command(config, compose_args)

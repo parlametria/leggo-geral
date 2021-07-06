@@ -20,11 +20,28 @@ Atenção: Leia o README do [leggo-backend](https://github.com/parlametria/leggo
 
 leggo-frontend é a versão do frontend escrita em Vue e não é mais continuada pelo Parlametria. Já o leggo-painel é a versão do frontend escrita em Angular.
 
-Existem quatro stacks possíveis para execução:
-- `painel` (backend e frontend usando Angular)
-- `twitter-dados` executa apenas o módulo do leggo-twitter-dados
-- `dev` (backend e frontend usando Vue, que foi descontinuado)
-- `prod` (não é mais utilizada)
+Existem duas stacks possíveis para execução:
+- `painel` : executa todos os containers necessários para o Painel ser acessado;
+- `twitter-dados`: executa apenas o módulo do leggo-twitter-dados
+
+
+### Com make
+
+Temos alguns comandos definidos que podem facilitar caso seja a sua primeira execução ou deseje apenas gerenciar os containers que levantam o `painel`. As opções são:
+
+ - **`help`**: Mostra a mensagem de ajuda
+ - **`build-painel`**: Contrói todos os volumes e containers necessários. Recomendado para primeira execução.
+- **`build-no-cache-painel`**: Contrói todos os volumes e containers necessários sem cache.
+- **`up-painel`**: Levanta todos os containers do Painel.
+- **`down-volumes-painel`**: Apaga todos os containers, incluindo volumes
+
+
+#### Exemplo de chamada
+Estando neste diretório é possível executar:
+
+```
+make build-painel
+```
 
 ### Com helper
 
