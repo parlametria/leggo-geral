@@ -131,28 +131,12 @@ def build(config, compose_args):
         O comando compose que será aplicado aos containers 
         que compõem a config passada.
     """
-    create_volume('backup_data')
     execute(config, compose_args)
 
     if 'painel' in config: 
         create_network('leggo_twitter_network')
-
-
-def execute_in_sequence(compose_args):
-    """Realiza o comando de uma config escolhida na sequência
-    de dependências.
-    Parameters
-    ----------
-    config : str
-        A configuração de containers que se deseja gerenciar.
-        Pode ser painel ou twitter-dados.
-    compose_args : str
-        O comando compose que será aplicado aos containers 
-        que compõem a config passada.
-    """
-    execute('twitter-dados', compose_args)
-    execute('twitter-api', compose_args)
-    execute('dev', compose_args)
+        
+    create_volume('backup_data')
 
 
 def execute_docker_command(config, compose_args):
@@ -169,8 +153,6 @@ def execute_docker_command(config, compose_args):
 
     if 'build' in compose_args:
         build(config, compose_args)
-    # elif 'painel' in config:
-    #     execute_in_sequence(compose_args)
     else:
         execute(config, compose_args)
 

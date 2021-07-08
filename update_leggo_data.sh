@@ -651,6 +651,28 @@ create_schema_tweets() {
        check_errs $? "Não foi possível criar as tabelas de atualização dos tweets."
 }
 
+create_tables_leggo_twitter() {
+       pprint "Criando tabelas"
+       docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
+              -f $LEGGOTWITTER_FOLDERPATH/docker-compose.override.yml \
+              run --no-deps --rm feed sh -c "python manage.py drop-tables --drop true \
+              && python manage.py create-tables && python manage.py do-migrations"
+       check_errs $? "Não foi possível criar as tabelas do banco do leggo twitter."
+}
+
+setup_leggo_twitter_tables() {
+
+       # Cria tabelas de atualização dos tweets: tweet_raw e log
+       create_schema_tweets
+
+       # Cria tabela tweet_processados
+       create_table_tweets_processados
+
+       # Cria tabelas utilizadas pela API
+       create_tables_leggo_twitter 
+
+}
+
 process_tweets() {
        pprint "Processando tweets por username"
        docker-compose -f $LEGGOTWITTER_FOLDERPATH/docker-compose.yml \
@@ -884,6 +906,7 @@ print_usage() {
     printf "\t-create-table-tweets-processados: Cria tabela de tweets processados\n"
     printf "\t-update-tweets-processados: Atualiza dados de tweets processados\n"
     printf "\t-run-pipeline-twitter <env>: Roda pipeline de atualização do twitter. <env> pode ser: 'development', production'.\n"
+    printf "\t-setup-leggo-twitter-tables: Cria as tabelas do banco do leggo twitter\n"
 }
 
 if [ "$#" -lt 1 ]; then
@@ -1044,6 +1067,9 @@ if [[ $@ == *'-update-tweets-processados'* ]]; then update_table_tweets_processa
 fi
 
 if [[ $@ == *'-run-pipeline-twitter'* ]]; then run_pipeline_twitter "$2"
+fi
+
+if [[ $@ == *'-setup-leggo-twitter-tables'* ]]; then setup_leggo_twitter_tables
 fi
 
 # Registra a data final

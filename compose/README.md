@@ -3,7 +3,17 @@
 Este orquestrador permite que o ambiente de desenvolvimento seja executado considerando todos os módulos a nível de aplicação:
 banco de dados (leggo_data, leggo_twitter), backend(leggo-backend, leggo-twitter) e frontend(leggo-painel).
 
+## Comece por aqui
+
+Se esta for a sua primeira execução, recomendamos que:
+
+ 1. Baixe os repositórios necessários;
+ 2. Execute o `build-painel` usando o make;
+ 3. [Crie as tabelas do leggo-twiiter-dados](https://github.com/parlametria/leggo-geral/wiki/leggo-twitter-dados).
+
 ## Como usar:
+
+### 1. Baixe os repositórios necessários
 
 Você deve ter clonado os repositórios dentro do mesmo diretório que também contém este repositório do leggo-geral. 
 
@@ -25,7 +35,9 @@ Existem duas stacks possíveis para execução:
 - `twitter-dados`: executa apenas o módulo do leggo-twitter-dados
 
 
-### Com make
+### 2. Execute o build dos containers
+
+#### Com make
 
 Temos alguns comandos definidos que podem facilitar caso seja a sua primeira execução ou deseje apenas gerenciar os containers que levantam o `painel`. As opções são:
 
@@ -43,7 +55,7 @@ Estando neste diretório é possível executar:
 make build-painel
 ```
 
-### Com helper
+#### Com helper
 
 De dentro do diretório `compose` é possível executar:
 
@@ -71,16 +83,16 @@ Então execute em um terminal local: `docker volume create --name=backup_data`.
 
 O mesmo vale para o volume leggo_data.
 
-### Sem helper
+#### Sem helper
 
 De dentro do diretório `compose` é possível executar (apesar de não ser recomendado):
 
-#### Painel:
+##### Painel:
 ```
 docker-compose -f docker-compose.yml -f ../../leggo-painel/docker-compose.yml -f ../../leggo-backend/docker-compose.yml -f ../../leggo-backend/docker-compose.override.yml -f ../../leggo-twitter-dados/docker-compose.yml -f ../../leggo-twitter/docker-compose.yml -f ../../leggo-twitter-dados/docker-compose.override.yml up
 ```
 
-#### Twitter-dados:
+##### Twitter-dados:
 ```
 docker-compose -f docker-compose.yml -f ../../leggo-twitter-dados/docker-compose.yml -f ../../leggo-twitter-dados/docker-compose.override.yml up
 ```
