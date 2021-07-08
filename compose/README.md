@@ -63,8 +63,9 @@ De dentro do diretório `compose` é possível executar:
 ```
 python3.6 run painel up
 ```
-A API estará disponível em http://localhost:8000/.
-O frontend estará disponível em http://localhost:4200/.
+- A API do leggo-backend estará disponível em http://localhost:8000/.
+- O frontend estará disponível em http://localhost:4200/.
+- A API do leggo-twitter estará disponível em http://localhost:5001/.
 
 #### Twitter-dados (banco PostgreSQL)
 ```

@@ -1,10 +1,32 @@
 # Leggo - Documentação geral
 
-Repositório para documentação e ferramentas de uso geral do projeto.
+Repositório para documentação e ferramentas de uso geral do projeto. Atualmente possui dois principais módulos:
 
-- [Rodar Aplicação Leggo localmente](compose/README.md)
+- [1. Executar a captura de dados](https://github.com/parlametria/leggo-geral#como-executar-a-captura-dos-dados-atrav%C3%A9s-do-m%C3%B3dulo-de-dados)
+- [2. Rodar aplicação Leggo localmente](compose/README.md)
 
-## Como executar a captura dos dados através do Módulo de Dados
+Na [**wiki**](https://github.com/parlametria/leggo-geral/wiki) adicionamos algumas explicações sobre cada módulo.
+
+## Visão geral dos repositórios utilizados
+
+Abaixo levantamos uma descrição resumida sobre cada repositório utilizado pelo leggo-geral:
+
+- [`leggoR`](https://github.com/parlametria/leggoR): Responsável por baixar dados das APIs da Câmara e Senado mais direcionados ao contexto do Painel (como proposições apensadas, por exemplo) e de outras bibliotecas R, como [rcongresso](https://github.com/analytics-ufcg/rcongresso) e [perfil-parlamentarR](https://github.com/parlametria/perfil-parlamentarR), além de processar os dados utilizados pela aplicação, como progresso, proposições em destaque, atuação, etc.
+
+- [`rcongresso`](https://github.com/analytics-ufcg/rcongresso): Responsável por baixar os dados das APIs da Câmara e do Senado relacionados às proposições: autores, relatores, proposições, tramitações, agenda, etc. Deve ser clonado dentro da pasta do leggoR para ser usado no build do pacote R.
+
+- [`leggoTrends`](https://github.com/parlametria/leggoTrends): Responsável por baixar os dados de atividade no twitter servidos pela API do [leggo-twitter](https://github.com/parlametria/leggo-twitter) e processá-los para gerar a pressão do Painel.
+
+- [`leggo-twitter`](https://github.com/parlametria/leggo-twitter): Responsável por disponibilizar os dados processados pelo módulo do [leggo-twitter-dados](https://github.com/parlametria/leggo-twitter-dados) via API.
+
+- [`leggo-twitter-dados`](https://github.com/parlametria/leggo-twitter-dados): Responsável por baixar os dados de tweets para um conjunto de usuários e processá-los, gerando um mapeamento de tweets sobre as proposições monitoradas (os dados das proposições são disponibilizadas pela API do [leggo-backend](https://github.com/parlametria/leggo-backend)). Este módulo também faz as atualizações no banco do leggo-twiiter.
+
+- [`leggo-backend`](https://github.com/parlametria/leggo-backend): Responsável por atualizar os dados de proposições no banco de dados leggo e disponibilizar esses dados via API, que são utilizados tanto pelo [leggo-twitter-dados](https://github.com/parlametria/leggo-twitter-dados) quanto pelo [leggo-painel](https://github.com/parlametria/leggo-painel).
+
+- [`leggo-painel`](https://github.com/parlametria/leggo-painel): Responsável pelo front-end da aplicação [Painel Parlametria](https://painel.parlametria.org.br/). Acessa as APIs do [leggo-backend](https://github.com/parlametria/leggo-backend), [leggo-twitter](https://github.com/parlametria/leggo-twitter) e [perfil-parlamentar](https://github.com/parlametria/perfil-parlamentar).
+
+
+## 1. Como executar a captura dos dados através do Módulo de Dados
 
 O script `update_leggo_data.sh` possui as funções necessárias para realizar a captura e atualização de todos os dados obtidos e capturados pelo módulo de dados.
 Para que o script funcione corretamente, os seguintes repositórios devem ser clonados dentro de uma mesma pasta raiz, cujo caminho será passado como variável de ambiente:
