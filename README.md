@@ -42,8 +42,8 @@ Além disso, o repositório [`rcongresso`](https://github.com/analytics-ufcg/rco
 ### Passo 1
 Para executá-lo é preciso configurar as variáveis de ambiente por ele utilizadas. Para isto, **crie uma cópia do arquivo .env.sample** e o renomeie para `.env`. Em seguida preencha as variáveis com os valores adequados para execução.
 
-- ***URL_INTERESSES***: URL para planilha com lista de interesses analisados pelo Leggo. Consulte um membro da equipe para obter essa URL. 
-Exemplo: URL_INTERESSES="<url_para_planilha>"
+- ***URL_INTERESSES***: URL para planilha com lista de interesses analisados pelo Leggo. No sample temos uma versão dev desta planilha. 
+Exemplo: URL_INTERESSES="https://docs.google.com/spreadsheets/d/e/2PACX-1vTOdLk1wxJsekjGF5alyD0AP25wVtpnq0QTy6IZTebY_WSiiAF6Any-_BWRTpcerTHHW4zJL3Y9hHpf/pub?gid=0&single=true&output=csv".
 
 - ***PLS_FILEPATH***: caminho para o arquivo csv com a lista de Proposições que irão ter seus dados capturados e processados. Esse caminho é referenciado dentro do container rmod e por este motivo geralmente está ligado ao diretório `leggo_data`. 
 Exemplo: PLS_FILEPATH=./leggo_data/tabela_geral_ids_casa_new.csv ou PLS_FILEPATH=./leggo_data/pls_interesses.csv (caso você queira capturar todos os interesses).
@@ -72,17 +72,24 @@ Exemplo: LEGGOTWITTER_FOLDERPATH=./leggo-twitter-dados
 - ***LOG_FOLDERPATH***: caminho para o arquivo de log a ser escrito durante a execução do pipeline de processamento dos dados.
 Exemplo: LOG_FILEPATH=./logs/
 
+- ***BACKUP_FOLDERPATH***: caminho para o diretório onde são armazenados os arquivos de backup dos dados.
+Exemplo: BACKUP_FOLDERPATH=./backups/
+
 - ***PROD_BACK_APP***: nome da aplicação do backend na versão de produção no Heroku.
 Exemplo: PROD_BACK_APP=production_app_name
 
 - ***DEV_BACK_APP***: nome da aplicação do backend na versão de desenvolvimento no Heroku.
 Exemplo: DEV_BACK_APP=development_app_name
 
-- ***BACKUP_FOLDERPATH***: caminho para o diretório onde são armazenados os arquivos de backup dos dados.
-Exemplo: BACKUP_FOLDERPATH=./backups/
+- ***URL_LISTA_ANOTACOES***: URL ou caminho para os insights de especialistas sobre determinadas proposições. Abaixo temos um link para uma versão de teste.
+Exemplo: URL_LISTA_ANOTACOES="https://docs.google.com/spreadsheets/d/e/2PACX-1vQIC9sm_jTojACKqzF17nPU8qiQRmWSeaKDOeRuxkLnhSZwOwdx0GpgGflpJigM3-N_KOPBz85-wR_u/pub?gid=0&single=true&output=csv"
+
 
 - ***URL_TWITTER_API***: Endereço da URL da API do [leggo twitter]("https://github.com/parlametria/leggo-twitter).
 Exemplo: URL_TWITTER_API="https://leggo-twitter.herokuapp.com/api"
+
+- ***URL_API_PARLAMETRIA***: URL da API do painel Parlametria.
+Exemplo: URL_API_PARLAMETRIA="https://api.leggo.org.br"
 
 - ***URL_USERNAMES_TWITTER***: URL para lista de usernames para a recuperação e processamentos dos tweets
 Exemplo: URL_USERNAMES_TWITTER="https://docs.google.com/spreadsheets/d/e/2PACX-1vR1Dh6vN_cCzpPqtY1nfZU90W5nghlesAFAE3-uqMgw8tOn0UpKJjW-eNd_g-BAs-nhrXLBTDCL8IvJ/pub?gid=0&single=true&output=csv"
