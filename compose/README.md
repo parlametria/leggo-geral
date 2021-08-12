@@ -61,7 +61,7 @@ De dentro do diretório `compose` é possível executar:
 
 #### Painel (backend + frontend Angular)
 ```
-python3.6 run painel up
+python3.6 run painel build
 ```
 - A API do leggo-backend estará disponível em http://localhost:8000/.
 - O frontend estará disponível em http://localhost:4200/.
